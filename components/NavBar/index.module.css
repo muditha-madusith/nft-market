@@ -1,0 +1,390 @@
+.desktop_nav{
+    background-color: #24252D;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.8rem 3rem;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+}
+.desktop_dark_logo{
+    width: 131px;
+    height: 32px;
+    cursor: pointer;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+.mobile_nav{
+    display: none;
+}
+.mobile_dark_logo{
+    display: none;
+}
+.mobile_search_box{
+    display: none;
+}
+.humburg{
+    display: none;
+}
+.search_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #1B1A21;
+    width: 40rem;
+    height: 40px;
+    padding: 0.2rem 1rem;
+    border-radius: 10px;
+    gap: 4px;
+}
+.s_input{
+    color: white;
+    width: 38rem;
+}
+.ul{
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btns{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+}
+.cr_btn{
+    font-size: 14px;
+    background: linear-gradient(101.12deg, #EB1484 27.35%, #C91CC3 99.99%, #C81CC5 100%, #C81CC5 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 30px;
+    gap: 10px;
+    border-radius: 10px;
+    color: white;
+    border: 1px solid #C91CC3;
+    cursor: pointer;
+}
+.co_btn{
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 30px;
+    gap: 10px;
+    border: 1px solid #C91CC3;
+    border-radius: 10px;
+    color: #C91CC3;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1415px) {
+    .desktop_nav{
+        background-color: #24252D;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0.8rem 1rem;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+    }
+    .desktop_dark_logo{
+        width: 131px;
+        height: 32px;
+        cursor: pointer;
+    }
+    .search_box{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #1B1A21;
+        width: 35rem;
+        height: 40px;
+        padding: 0.2rem 1rem;
+        border-radius: 10px;
+        gap: 4px;
+    }
+    .s_input{
+        color: white;
+        width: 33rem;
+    }
+    .ul{
+        display: flex;
+        list-style: none;
+        gap: 1rem;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .btns{
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        align-items: center;
+    }
+    .cr_btn{
+        font-size: 14px;
+        background: linear-gradient(101.12deg, #EB1484 27.35%, #C91CC3 99.99%, #C81CC5 100%, #C81CC5 100%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 30px;
+        gap: 10px;
+        border-radius: 10px;
+        color: white;
+        border: 1px solid #C91CC3;
+        cursor: pointer;
+    }
+    .co_btn{
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 30px;
+        gap: 10px;
+        border: 1px solid #C91CC3;
+        border-radius: 10px;
+        color: #C91CC3;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 1245px) {
+    .desktop_nav{
+        background-color: #24252D;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0.8rem 1rem;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+    }
+    .desktop_dark_logo{
+        width: 131px;
+        height: 32px;
+        cursor: pointer;
+    }
+    .search_box{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #1B1A21;
+        width: 25rem;
+        height: 40px;
+        padding: 0.2rem 1rem;
+        border-radius: 10px;
+        gap: 4px;
+    }
+    .s_input{
+        color: white;
+        width: 23rem;
+    }
+    .ul{
+        display: flex;
+        list-style: none;
+        gap: .8rem;
+        font-size: 15px;
+        cursor: pointer;
+    }
+    .btns{
+        display: flex;
+        flex-direction: row;
+        gap: rem;
+        align-items: center;
+    }
+    .cr_btn{
+        font-size: 14px;
+        background: linear-gradient(101.12deg, #EB1484 27.35%, #C91CC3 99.99%, #C81CC5 100%, #C81CC5 100%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 7px 25px;
+        gap: 10px;
+        border-radius: 10px;
+        color: white;
+        border: 1px solid #C91CC3;
+        cursor: pointer;
+    }
+    .co_btn{
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 7px 25px;
+        gap: 10px;
+        border: 1px solid #C91CC3;
+        border-radius: 10px;
+        color: #C91CC3;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .desktop_nav{
+        background-color: #24252D;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0.8rem 1rem;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+    }
+    .desktop_dark_logo{
+        width: 110px;
+        height: 29px;
+        cursor: pointer;
+        display: none;
+    }
+    .mobile_dark_logo{
+        display: block;
+    }
+    .search_box{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #1B1A21;
+        width: 18rem;
+        height: 40px;
+        padding: 0.2rem 1rem;
+        border-radius: 10px;
+        gap: 4px;
+    }
+    .s_input{
+        color: white;
+        width: 16rem;
+    }
+    .ul{
+        display: flex;
+        list-style: none;
+        gap: .5rem;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .btns{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .cr_btn{
+        font-size: 14px;
+        background: linear-gradient(101.12deg, #EB1484 27.35%, #C91CC3 99.99%, #C81CC5 100%, #C81CC5 100%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 15px;
+        border-radius: 10px;
+        color: white;
+        border: 1px solid #C91CC3;
+        cursor: pointer;
+    }
+    .co_btn{
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 5px 15px;
+        border: 1px solid #C91CC3;
+        border-radius: 10px;
+        color: #C91CC3;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 768px) {
+    .desktop_nav{
+        display: none;
+    }
+    .mobile_nav{
+        background-color: #24252D;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.8rem 3rem;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+    }
+    .desktop_dark_logo{
+        display: block;
+    }
+    .mobile_dark_logo{
+        display: none;
+    }
+    .mobile_search_box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #1B1A21;
+        width: 20rem;
+        height: 40px;
+        padding: 0.2rem 1rem;
+        border-radius: 10px;
+        gap: 4px;
+    }
+    .mobile_s_input{
+        color: white;
+        width: 16rem;
+    }
+    .humburg{
+        display: block;
+    }
+}
+@media screen and (max-width: 612px) {
+    .mobile_nav{
+        background-color: #24252D;
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+    }
+    .desktop_dark_logo{
+        display: none;
+    }
+    .mobile_dark_logo{
+        display: block;
+    }
+}
+@media screen and (max-width: 425px) {
+    .mobile_search_box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: #1B1A21;
+        width: 12rem;
+        height: 40px;
+        padding: 0.2rem 1rem;
+        border-radius: 10px;
+        gap: 4px;
+    }
+    .mobile_s_input{
+        color: white;
+        width: 10rem;
+    }
+}
+@media screen and (max-width: 361px) {
+
+}
+@media screen and (max-width: 321px) {
+
+}
