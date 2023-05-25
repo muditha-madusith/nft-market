@@ -6,7 +6,7 @@
     justify-content: space-between;
     padding: 0.8rem 3rem;
     align-items: center;
-    position: fixed;
+    position: block;
     width: 100%;
 }
 .desktop_dark_logo{
@@ -28,6 +28,7 @@
 }
 .humburg{
     display: none;
+    cursor: pointer;
 }
 .search_box{
     display: flex;
@@ -85,6 +86,62 @@
     cursor: pointer;
 }
 
+/* MenuList */
+.menulist{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0rem;
+    gap: 1.3rem;
+    height: 100vh;
+    width: 100%;
+    background-color: #24252D;
+    color: rgb(255,255,255);
+    position: fixed;
+}
+.p1{
+    font-size: 16px;
+    font-weight: 600; 
+    font-family: 'poppins';
+    padding: 0 2rem;
+}
+.btns1{
+    padding: 0 3rem;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    width: 100%;
+    justify-content: center;
+    gap: 3rem;
+    bottom: 2rem;
+}
+.cr1_btn{
+    font-size: 14px;
+    background: linear-gradient(101.12deg, #EB1484 27.35%, #C91CC3 99.99%, #C81CC5 100%, #C81CC5 100%);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 25px;
+    border-radius: 10px;
+    color: #fff;
+    border: 1px solid #C91CC3;
+    cursor: pointer;
+}
+.co1_btn{
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 25px;
+    border: 1px solid #C91CC3;
+    border-radius: 10px;
+    color: #C91CC3;
+    cursor: pointer;
+}
+
+
+
 /* Responsive Design */
 @media screen and (max-width: 1415px) {
     .desktop_nav{
@@ -95,7 +152,7 @@
         justify-content: space-around;
         padding: 0.8rem 1rem;
         align-items: center;
-        position: fixed;
+        position: block;
         width: 100%;
     }
     .desktop_dark_logo{
@@ -168,7 +225,7 @@
         justify-content: space-around;
         padding: 0.8rem 1rem;
         align-items: center;
-        position: fixed;
+        position: block;
         width: 100%;
     }
     .desktop_dark_logo{
@@ -241,7 +298,7 @@
         justify-content: space-around;
         padding: 0.8rem 1rem;
         align-items: center;
-        position: fixed;
+        position: block;
         width: 100%;
     }
     .desktop_dark_logo{
@@ -317,8 +374,9 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 0.8rem 3rem;
+        height: 68px;
         align-items: center;
-        position: fixed;
+        position: block;
         width: 100%;
     }
     .desktop_dark_logo{
@@ -345,6 +403,12 @@
     .humburg{
         display: block;
     }
+    .p1{
+        font-size: 16px;
+        font-weight: 600; 
+        font-family: 'poppins';
+        padding: 0 4rem;
+    }
 }
 @media screen and (max-width: 612px) {
     .mobile_nav{
@@ -354,8 +418,9 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 0.8rem 1rem;
+        height: 68px;
         align-items: center;
-        position: fixed;
+        position: block;
         width: 100%;
     }
     .desktop_dark_logo{
@@ -363,6 +428,12 @@
     }
     .mobile_dark_logo{
         display: block;
+    }
+    .p1{
+        font-size: 16px;
+        font-weight: 600; 
+        font-family: 'poppins';
+        padding: 0 2rem;
     }
 }
 @media screen and (max-width: 425px) {
@@ -382,3 +453,4 @@
         width: 11rem;
     }
 }
+

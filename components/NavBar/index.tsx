@@ -66,7 +66,7 @@ const NavIndex = () => {
           src={MobileDarkLogo}
           alt={"Mobile Dark Logo"}
         />
-        <div className={styles.mobile_search_box}>
+        <div className={styles.mobile_search_box} style={{ display: display === 'none' ? 'flex' : 'none' }}>
           <SearchIcon />
           <Input
             className={styles.mobile_s_input}
@@ -76,6 +76,20 @@ const NavIndex = () => {
         <div className={styles.humburg} onClick={clickBtn}>
           <MenuIcon fontSize='large' style={{ display: display === 'none' ? 'block' : 'none' }} />
           <CloseIcon fontSize='large' style={{ display: display === 'none' ? 'none' : 'block' }} />
+        </div>
+      </div>
+
+      <div className={styles.menulist} style={{ display: display === 'none' ? 'none' : 'flex' }}>
+        <p className={styles.p1}>Explore</p>
+        <p className={styles.p1}>My Items</p>
+        <p className={styles.p1}>Following</p>
+        <div className={styles.btns1}>
+          <div>
+            <button className={styles.cr1_btn}>Create</button>
+          </div>
+          <div>
+            <button className={styles.co1_btn}>Connect</button>
+          </div>
         </div>
       </div>
     </>

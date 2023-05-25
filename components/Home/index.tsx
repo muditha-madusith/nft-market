@@ -6,7 +6,7 @@ const HomeIndex = () => {
   return (
     <>
       <NavIndex/>
-      <div className={styles.div}>HomeIndex</div>
+      {/* <div className={styles.div}>HomeIndex</div> */}
     </>
   )
 }
