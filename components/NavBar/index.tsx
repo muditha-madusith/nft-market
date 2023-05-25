@@ -70,6 +70,7 @@ const NavIndex = () => {
         <div className={styles.mobile_search_box} style={{ display: display === 'none' ? 'flex' : 'none' }}>
           <SearchIcon />
           <Input
+            style={{color: '#fff'}}
             className={styles.mobile_s_input}
             placeholder="Search Item Here"
           />
