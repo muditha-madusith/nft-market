@@ -34,6 +34,7 @@ const NavIndex = () => {
         <div className={styles.search_box}>
           <SearchIcon />
           <Input
+            style={{color: '#fff'}}
             className={styles.s_input}
             placeholder="Search Item Here"
           />
