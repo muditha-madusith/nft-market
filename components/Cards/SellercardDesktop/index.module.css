@@ -1,0 +1,14 @@
+.card{
+    display: block;
+    height: 200px;
+    width: 180px;
+    /* background: #2A2D3A; */
+    background: blueviolet;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 425px) {
+    .card{
+        display: none;
+    }
+}
