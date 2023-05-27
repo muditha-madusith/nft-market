@@ -1,5 +1,5 @@
 .card{
-    display: block;
+    display: none;
     height: 212px;
     width: 145px;
     /* background: #2A2D3A; */
@@ -7,8 +7,17 @@
     border-radius: 20px;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 612px) {
     .card{
-        display: none;
+        display: block;
+    }
+}
+@media screen and (max-width: 375px) {
+    .card{
+        height: 210px;
+        width: 135px;
+        /* background: #2A2D3A; */
+        background: blueviolet;
+        border-radius: 20px;
     }
 }
