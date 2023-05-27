@@ -78,43 +78,43 @@ export const Carousel = () => {
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={1}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={2}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={3}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={4}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={5}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={6}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>
                 </Slide>
                 <Slide
-                    className={styles.slide}
+                    className={styles.m_slide}
                     index={7}
                     style={{ width: '130px', height: '165px', margin: '0rem .7rem 0rem .7rem' }}>
                     <SellercardMobile/>

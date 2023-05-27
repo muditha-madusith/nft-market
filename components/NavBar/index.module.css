@@ -7,8 +7,9 @@
     padding: 1rem 3rem;
     height: 5rem;
     align-items: center;
-    position: block;
+    position: fixed;
     width: 100%;
+    z-index: 100;
 }
 .desktop_dark_logo{
     width: 131px;
@@ -98,6 +99,7 @@
     background-color: #24252D;
     color: rgb(255,255,255);
     position: fixed;
+    z-index: 100;
 }
 .p1{
     font-size: 16px;
