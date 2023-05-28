@@ -1,10 +1,8 @@
 import React from 'react'
 import styles from './index.module.css'
-import customStyles from './customStyles.module.css'
 import { Container, Row, Col } from 'react-grid-system';
 import  NFTcardDesktop  from '../Cards/NFTcardDesktop';
 import  NFTcardMobile  from '../Cards/NFTcardMobile';
-import Button from '@mui/material/Button';
 
 const Grid = () => {
   return (
@@ -48,7 +46,7 @@ const Grid = () => {
               </Row>
           </Container>
           <div className={styles.loadButton}>
-              <Button className={styles.lm_btn}>Load More</Button>
+              <button className={styles.lm_btn}>Load More</button>
           </div>
       </div>
   )
