@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.module.css'
 
-export const NFTcardMobile = () => {
+const NFTcardMobile = () => {
   return (
       <div className={styles.back}>
           <div className={styles.card}>
@@ -10,3 +10,4 @@ export const NFTcardMobile = () => {
       </div>
   )
 }
+export default NFTcardMobile;

@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './index.module.css'
-import { Grid } from '@/components/Grid'
+import  Grid  from '@/components/Grid'
 
-export const Section3 = () => {
+const Section3 = () => {
   return (
     <>
       <div className={styles.back}>
@@ -16,3 +16,4 @@ export const Section3 = () => {
     </>
   )
 }
+export default Section3;

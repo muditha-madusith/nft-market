@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './index.module.css'
-import { Footer } from '@/components/Footer'
+import  Footer  from '@/components/Layout/Footer'
 
-export const Section4 = () => {
+const Section4 = () => {
   return (
     <Footer/>
   )
 }
+export default Section4;

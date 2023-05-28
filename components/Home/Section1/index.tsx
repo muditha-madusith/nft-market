@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './index.module.css'
 
-export const Section1 = () => {
+const Section1 = () => {
   return (
     <div className={styles.black_back}>
       <div className={styles.pink_box}>
@@ -10,3 +10,4 @@ export const Section1 = () => {
     </div>
   )
 }
+export default Section1;

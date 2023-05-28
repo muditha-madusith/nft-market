@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './index.module.css'
-import DarkLogo from '../../public/DarkLogo.png'
+import DarkLogo from '../../../public/DarkLogo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -8,7 +8,7 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 
 import Image from 'next/image'
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <div className={styles.back}>
         <div className={styles.upper_section}>
@@ -59,3 +59,5 @@ export const Footer = () => {
     </div>
   )
 }
+
+export default Footer;

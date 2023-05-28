@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
-import DarkLogo from '../../public/DarkLogo.png'
-import MobileDarkLogo from '../../public/MobileDarkLogo.png'
+import DarkLogo from '../../../public/DarkLogo.png'
+import MobileDarkLogo from '../../../public/MobileDarkLogo.png'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';

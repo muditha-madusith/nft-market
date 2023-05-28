@@ -2,15 +2,15 @@ import React from 'react'
 import styles from './index.module.css'
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import { SellercardDesktop } from '../Cards/SellercardDesktop';
-import { SellercardMobile } from '../Cards/SellercardMobile';
+import SellercardDesktop  from '../Cards/SellercardDesktop';
+import SellercardMobile  from '../Cards/SellercardMobile';
 
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 
 
-export const Carousel = () => {
+const Carousel = () => {
     return (
         <CarouselProvider
             className={styles.carousel}
@@ -132,4 +132,4 @@ export const Carousel = () => {
     )
 }
 
-
+export default Carousel;

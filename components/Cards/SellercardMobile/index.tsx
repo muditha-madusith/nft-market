@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './index.module.css'
 
-export const SellercardMobile = () => {
+const SellercardMobile = () => {
   return (
     <div className={styles.back}>
         <div className={styles.card}>
@@ -10,3 +10,4 @@ export const SellercardMobile = () => {
     </div>
   )
 }
+export default SellercardMobile;
