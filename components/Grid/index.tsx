@@ -4,6 +4,7 @@ import customStyles from './customStyles.module.css'
 import { Container, Row, Col } from 'react-grid-system';
 import { NFTcardDesktop } from '../Cards/NFTcardDesktop';
 import { NFTcardMobile } from '../Cards/NFTcardMobile';
+import Button from '@mui/material/Button';
 
 export const Grid = () => {
   return (
@@ -46,6 +47,9 @@ export const Grid = () => {
                   </Col>
               </Row>
           </Container>
+          <div className={styles.loadButton}>
+              <Button className={styles.lm_btn}>Load More</Button>
+          </div>
       </div>
   )
 }
