@@ -1,0 +1,369 @@
+.pop{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.30);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(2.6px);
+    color: white;
+    z-index: 150;
+}
+.box{
+    background-color: #24252D;
+    border-radius: 10px;
+    z-index: 150;
+    width: 586px;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+    position: absolute;
+}
+.head{
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+}
+.h{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+.p1{
+    font-weight: 500;
+}
+.b{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 0;
+}
+.img_name{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+.img{
+    width: 107px;
+    height: auto;
+    border-radius: 5px;
+}
+.p2{
+    font-size: small;
+}
+.f{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+.co_btn{
+    width: 140px;
+    height: 40px;
+    background-color: #C91CC3;
+    border: 1px solid #C91CC3;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.ca_btn{
+    width: 140px;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid #C91CC3;
+    color: #C91CC3;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .box{
+        background-color: #24252D;
+        border-radius: 10px;
+        z-index: 150;
+        width: 546px;
+        height: 460px;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        position: absolute;
+    }
+}
+@media screen and (max-width: 768px) {
+    .box{
+        background-color: #24252D;
+        border-radius: 10px;
+        z-index: 150;
+        width: 506px;
+        height: 410px;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        position: absolute;
+    }
+    .head{
+        display: flex;
+        justify-content: center;
+        padding-top: 0rem;
+    }
+    .details{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    .h{
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+    }
+    .p1{
+        font-weight: 500;
+    }
+    .b{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem 0;
+    }
+    .img_name{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .img{
+        width: 107px;
+        height: auto;
+        border-radius: 5px;
+    }
+    .p2{
+        font-size: small;
+    }
+    .f{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .co_btn{
+        width: 140px;
+        height: 40px;
+        background-color: #C91CC3;
+        border: 1px solid #C91CC3;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .ca_btn{
+        width: 140px;
+        height: 40px;
+        background-color: transparent;
+        border: 1px solid #C91CC3;
+        color: #C91CC3;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 612px) {
+    .box{
+        background-color: #24252D;
+        border-radius: 10px;
+        z-index: 150;
+        width: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 2rem;
+        position: absolute;
+    }
+    .head{
+        display: flex;
+        justify-content: center;
+        padding-top: 0rem;
+    }
+    .details{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    .h{
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 0;
+    }
+    .p1{
+        font-weight: 500;
+    }
+    .b{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+    .img_name{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .5rem;
+    }
+    .img{
+        width: 107px;
+        height: auto;
+        border-radius: 5px;
+    }
+    .p2{
+        font-size: small;
+    }
+    .f{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .co_btn{
+        width: 140px;
+        height: 40px;
+        background-color: #C91CC3;
+        border: 1px solid #C91CC3;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .ca_btn{
+        width: 140px;
+        height: 40px;
+        background-color: transparent;
+        border: 1px solid #C91CC3;
+        color: #C91CC3;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 425px) {
+    .pop{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.30);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(1.5px);
+        -webkit-backdrop-filter: blur(2.6px);
+        color: white;
+        z-index: 150;
+    }
+    .box{
+        background-color: #24252D;
+        border-radius: 10px;
+        z-index: 150;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 1rem;
+        position: absolute;
+        margin-bottom: -10px;
+    }
+    .head{
+        display: flex;
+        justify-content: center;
+        padding-top: 0rem;
+    }
+    .h2{
+        font-size: 20px;
+    }
+    .details{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0;
+    }
+    .h{
+        display: flex;
+        justify-content: space-between;
+        padding: .5rem 0;
+    }
+    .p1{
+        font-weight: 500;
+        font-size: small;
+    }
+    .b{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem 0;
+        gap: 1rem;
+    }
+    .img_name{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: .5rem;
+    }
+    .img{
+        width: 95px;
+        height: auto;
+        border-radius: 5px;
+    }
+    .p2{
+        font-size: x-small;
+    }
+    .f{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .co_btn{
+        width: 135px;
+        height: 35px;
+        background-color: #C91CC3;
+        border: 1px solid #C91CC3;
+        color: white;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .ca_btn{
+        width: 135px;
+        height: 35px;
+        background-color: transparent;
+        border: 1px solid #C91CC3;
+        color: #C91CC3;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+}
