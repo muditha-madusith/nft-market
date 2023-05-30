@@ -2,9 +2,58 @@
     display: none;
     height: 212px;
     width: 145px;
-    /* background: #2A2D3A; */
-    background: blueviolet;
+    background: #2A2D3A;
+    /* background: blueviolet; */
     border-radius: 20px;
+    padding: .5rem;
+}
+.im{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.img{
+    width: 131px;
+    height: 143px;
+    border-radius: 20px;
+}
+.nft_name{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: .1rem;
+}
+.p{
+    font-size: x-small;
+    line-height: 30px;
+    font-weight: 600;
+}
+.price_likes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+.price{
+    display: flex;
+    flex-direction: row;
+    gap: .1rem;
+}
+.likes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: .1rem;
+}
+.icon{
+    font-size: medium;
+    color: #24252D;
+}
+.p1{
+    font-size: x-small;
+    line-height: 0;
 }
 
 @media screen and (max-width: 612px) {
@@ -16,17 +65,15 @@
     .card{
         height: 212px;
         width: 145px;
-        /* background: #2A2D3A; */
-        background: blueviolet;
+        background: #2A2D3A;
         border-radius: 20px;
     }
 }
 @media screen and (max-width: 328px) {
     .card{
-        height: 210px;
-        width: 135px;
-        /* background: #2A2D3A; */
-        background: blueviolet;
+        height: 212px;
+        width: 140px;
+        background: #2A2D3A;
         border-radius: 20px;
     }
 }
