@@ -47,6 +47,12 @@
     color: rgb(255,255,255);
     width: 38rem;
 }
+.li:hover{
+    text-decoration: underline;
+    text-underline-position: under;
+    text-decoration-color: #B4BCC6;
+    text-decoration-thickness: 1.5px;
+}
 .ul{
     display: flex;
     list-style: none;

@@ -47,9 +47,9 @@ const NavIndex = () => {
         </div>
         <div>
           <ul className={styles.ul}>
-            <li>Explore</li>
-            <li>My Items</li>
-            <li>Following</li>
+            <li className={styles.li}>Explore</li>
+            <li className={styles.li}>My Items</li>
+            <li className={styles.li}>Following</li>
           </ul>
         </div>
         <div className={styles.btns}>
