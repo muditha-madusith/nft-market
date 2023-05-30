@@ -2,9 +2,72 @@
     display: block;
     height: 200px;
     width: 180px;
-    /* background: #2A2D3A; */
-    background: blueviolet;
+    background: #2A2D3A;
     border-radius: 20px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.numbdiv{
+}
+.number{
+    border: 1px solid #C91CC3;
+    background-color: #C91CC3;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    align-items: center;
+}
+.propic{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.img{
+    width: 77px;
+    height: 77px;
+    border-radius: 50%;
+}
+.checkdiv{
+    width: 70px;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    margin-top: 4rem;
+}
+.check{
+    border: 1px solid #00B247;
+    background-color: #00B247;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+.checkicon{
+    font-size: 13.5px;
+}
+.name_revenue{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: .5rem;
+}
+.name{
+    font-weight: 600;
+}
+.revenue{
+    display: flex;
+    flex-direction: row;
+    gap: .2rem;
+}
+.p1{
+    font-size: small;
 }
 
 @media screen and (max-width: 425px) {
