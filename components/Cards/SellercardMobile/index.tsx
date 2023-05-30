@@ -20,7 +20,8 @@ const SellercardMobile = () => {
           <div className={styles.checkdiv}>
             <div className={styles.check}>
               <CheckIcon
-                className={styles.checkicon} />
+                className={styles.checkicon} 
+                style={{fontSize: '13.5px'}}/>
             </div>
           </div>
         </div>
