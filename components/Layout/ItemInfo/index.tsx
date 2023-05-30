@@ -5,6 +5,8 @@ import NFT from '../../../public/images/NFT.png'
 import profile from '../../../public/images/profile.png'
 import { useState } from 'react';
 import CheckoutPop from '../PopUp/CheckoutPop';
+import Link from 'next/link';
+
 
 const ItemInfo = () => {
 
@@ -33,14 +35,16 @@ const ItemInfo = () => {
                     </div>
                     <div className={styles.content2}>
                         <p className={styles.p2}>Creator</p>
-                        <div className={styles.c_details}>
-                            <Image
-                                src={profile}
-                                alt='pro-pic'
-                                className={styles.small_pro}>
-                            </Image>
-                            <p className={styles.name}>Mia Ayana</p>
-                        </div>
+                        <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}>
+                            <div className={styles.c_details}>
+                                <Image
+                                    src={profile}
+                                    alt='pro-pic'
+                                    className={styles.small_pro}>
+                                </Image>
+                                <p className={styles.name}>Mia Ayana</p>
+                            </div>
+                        </Link>
                     </div>
                     <div className={styles.content3}>
 

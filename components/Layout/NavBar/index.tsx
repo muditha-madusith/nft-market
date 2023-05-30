@@ -5,6 +5,8 @@ import MobileDarkLogo from '../../../public/MobileDarkLogo.png'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Link from 'next/link';
+
 
 import Image from "next/image";
 import { Input } from '@mui/material';
@@ -21,16 +23,20 @@ const NavIndex = () => {
   return (
     <>
       <div className={styles.desktop_nav}>
-        <Image
-          className={styles.desktop_dark_logo}
-          src={DarkLogo}
-          alt={"Desktop Dark Logo"}
-        />
-        <Image
-          className={styles.mobile_dark_logo}
-          src={MobileDarkLogo}
-          alt={"Mobile Dark Logo"}
-        />
+        <Link href="/" style={{ textDecoration: 'inherit' }}>
+          <Image
+            className={styles.desktop_dark_logo}
+            src={DarkLogo}
+            alt={"Desktop Dark Logo"}
+          />
+        </Link>
+        <Link href="/" style={{ textDecoration: 'inherit' }}>
+          <Image
+            className={styles.mobile_dark_logo}
+            src={MobileDarkLogo}
+            alt={"Mobile Dark Logo"}
+          />
+        </Link>
         <div className={styles.search_box}>
           <SearchIcon />
           <Input
@@ -48,7 +54,9 @@ const NavIndex = () => {
         </div>
         <div className={styles.btns}>
           <div>
-            <button className={styles.cr_btn}>Create</button>
+            <Link href="/create-item" style={{ textDecoration: 'inherit' }}>
+              <button className={styles.cr_btn}>Create</button>
+            </Link>
           </div>
           <div>
             <button className={styles.co_btn}>Connect</button>
@@ -57,16 +65,20 @@ const NavIndex = () => {
       </div>
 
       <div className={styles.mobile_nav}>
-        <Image
-          className={styles.desktop_dark_logo}
-          src={DarkLogo}
-          alt={"Desktop Dark Logo"}
-        />
-        <Image
-          className={styles.mobile_dark_logo}
-          src={MobileDarkLogo}
-          alt={"Mobile Dark Logo"}
-        />
+        <Link href="/" style={{ textDecoration: 'inherit' }}>
+          <Image
+            className={styles.desktop_dark_logo}
+            src={DarkLogo}
+            alt={"Desktop Dark Logo"}
+          />
+        </Link>
+        <Link href="/" style={{ textDecoration: 'inherit' }}>
+          <Image
+            className={styles.mobile_dark_logo}
+            src={MobileDarkLogo}
+            alt={"Mobile Dark Logo"}
+          />
+        </Link>
         <div className={styles.mobile_search_box} style={{ display: display === 'none' ? 'flex' : 'none' }}>
           <SearchIcon />
           <Input
@@ -87,7 +99,9 @@ const NavIndex = () => {
         <p className={styles.p1}>Following</p>
         <div className={styles.btns1}>
           <div>
-            <button className={styles.cr1_btn}>Create</button>
+            <Link href="/create-item" style={{ textDecoration: 'inherit' }}>
+              <button className={styles.cr1_btn}>Create</button>
+            </Link>
           </div>
           <div>
             <button className={styles.co1_btn}>Connect</button>

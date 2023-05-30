@@ -17,7 +17,7 @@ const Carousel = () => {
             naturalSlideWidth={180}
             naturalSlideHeight={200}
             isIntrinsicHeight={true}
-            totalSlides={3}
+            totalSlides={2}
         >
             <Slider className={styles.slider}>
                 <Slide
