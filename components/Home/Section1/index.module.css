@@ -12,11 +12,29 @@
     width: 992px;
     color: #fff;
     display: flex;
+    flex-direction: column;
     border-radius: 25px;
+}
+.bg{
+    object-fit: cover;
+    color: #fff;
+    display: flex;
+    border-radius: 25px;
+    max-width: 100%;
+    max-height: 100%;
+}
+.content{
+    position: absolute;
+    height: 300px;
+    width: max-content;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    padding: 1rem;
 }
 .h1{
     margin: auto 0;
-    padding: 2rem;
     font-size: 48px;
     line-height: 3.2rem;
 }
@@ -40,11 +58,18 @@
         display: flex;
         border-radius: 25px;
     }
+    .content{
+        position: absolute;
+        height: 280px;
+        width: fit-content;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 25px;
+    }
     .h1{
-        margin: auto 0;
-        padding: 2rem;
-        font-size: 44px;
-        line-height: 3.2rem;
+        font-size: 30px;
+        line-height: 3rem;
     }
 }
 @media screen and (max-width: 612px) {
@@ -64,11 +89,18 @@
         display: flex;
         border-radius: 25px;
     }
+    .content{
+        position: absolute;
+        height: 260px;
+        width: auto;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 25px;
+    }
     .h1{
-        margin: auto 0;
-        padding: 1.6rem;
-        font-size: 38px;
-        line-height: 3.2rem;
+        font-size: 25px;
+        line-height: 2.5rem;
     }
 }
 @media screen and (max-width: 425px) {
@@ -88,10 +120,30 @@
         display: flex;
         border-radius: 25px;
     }
+    .content{
+        position: absolute;
+        height: 143px;
+        width: 299px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
     .h1{
-        margin: auto 0;
-        padding: 1.6rem;
         font-size: 20px;
+        line-height: 25px;
+    }
+}
+@media screen and (max-width: 365px) {
+    .content{
+        position: absolute;
+        height: 143px;
+        width: 250px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
+    .h1{
+        font-size: 18px;
         line-height: 25px;
     }
 }
