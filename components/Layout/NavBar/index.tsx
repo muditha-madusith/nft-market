@@ -23,14 +23,14 @@ const NavIndex = () => {
   return (
     <>
       <div className={styles.desktop_nav}>
-        <Link href="/" style={{ textDecoration: 'inherit' }}>
+        <Link href="/" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}} className={styles.desktop_dark_logo}>
           <Image
             className={styles.desktop_dark_logo}
             src={DarkLogo}
             alt={"Desktop Dark Logo"}
           />
         </Link>
-        <Link href="/" style={{ textDecoration: 'inherit' }}>
+        <Link href="/" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}} className={styles.mobile_dark_logo}>
           <Image
             className={styles.mobile_dark_logo}
             src={MobileDarkLogo}
@@ -54,7 +54,7 @@ const NavIndex = () => {
         </div>
         <div className={styles.btns}>
           <div>
-            <Link href="/create-item" style={{ textDecoration: 'inherit' }}>
+            <Link href="/create-item" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}}>
               <button className={styles.cr_btn}>Create</button>
             </Link>
           </div>
@@ -65,14 +65,14 @@ const NavIndex = () => {
       </div>
 
       <div className={styles.mobile_nav}>
-        <Link href="/" style={{ textDecoration: 'inherit' }}>
+        <Link href="/" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}} className={styles.desktop_dark_logo}>
           <Image
             className={styles.desktop_dark_logo}
             src={DarkLogo}
             alt={"Desktop Dark Logo"}
           />
         </Link>
-        <Link href="/" style={{ textDecoration: 'inherit' }}>
+        <Link href="/" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}} className={styles.mobile_dark_logo}>
           <Image
             className={styles.mobile_dark_logo}
             src={MobileDarkLogo}
@@ -99,7 +99,7 @@ const NavIndex = () => {
         <p className={styles.p1}>Following</p>
         <div className={styles.btns1}>
           <div>
-            <Link href="/create-item" style={{ textDecoration: 'inherit' }}>
+            <Link href="/create-item" style={{ textDecoration: 'inherit' }} >
               <button className={styles.cr1_btn}>Create</button>
             </Link>
           </div>
