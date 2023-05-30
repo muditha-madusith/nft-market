@@ -46,10 +46,8 @@
     height: 15px;
     display: flex;
     justify-content: center;
+    align-items: center;
     border-radius: 50%;
-}
-.checkicon{
-    font-size: 13.5px;
 }
 .name_revenue{
     display: flex;

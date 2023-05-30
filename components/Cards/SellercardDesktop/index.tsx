@@ -20,7 +20,7 @@ const SellercardDesktop = () => {
                 <div className={styles.checkdiv}>
                   <div className={styles.check}>
                     <CheckIcon 
-                    className={styles.checkicon}/>
+                    style={{fontSize: 'small'}}/>
                   </div>
                 </div>
             </div>
