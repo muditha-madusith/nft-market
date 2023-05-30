@@ -52,6 +52,9 @@
 .p2{
     font-size: 18px;
 }
+.li:hover{
+    color: #D9DCE0;
+}
 .l_set{
     display: flex;
     flex-direction: column;
@@ -62,6 +65,8 @@
     flex-direction: column;
     gap: .3rem;
     padding-top: 1rem;
+    color: #7A828E;
+    cursor: pointer;
 }
 .r_set{
     display: flex;
@@ -73,6 +78,8 @@
     flex-direction: column;
     gap: .3rem;
     padding-top: 1rem;
+    color: #7A828E;
+    cursor: pointer;
 }
 .down_section{
     display: flex;

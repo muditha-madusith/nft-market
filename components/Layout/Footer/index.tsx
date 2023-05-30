@@ -30,18 +30,18 @@ const Footer = () => {
                       <div className={styles.l_set}>
                           <p className={styles.p1}>CryptoKet</p>
                           <ul className={styles.l_ul}>
-                              <li>Explore</li>
-                              <li>How it Works</li>
-                              <li>Contact Us</li>
+                              <li className={styles.li}>Explore</li>
+                              <li className={styles.li}>How it Works</li>
+                              <li className={styles.li}>Contact Us</li>
                           </ul>
                       </div>
                       <div className={styles.r_set}>
                           <p className={styles.p1}>Support</p>
                           <ul className={styles.r_ul}>
-                              <li>Help center</li>
-                              <li>Terms of service</li>
-                              <li>Legal</li>
-                              <li>Privacy policy</li>
+                              <li className={styles.li}>Help center</li>
+                              <li className={styles.li}>Terms of service</li>
+                              <li className={styles.li}>Legal</li>
+                              <li className={styles.li}>Privacy policy</li>
                           </ul>
                       </div>
                   </div>
