@@ -1,7 +1,8 @@
 import NftComp from '@/components/NftComp';
+import { NextPage } from 'next';
 import React from 'react'
 
-const NftItem = () => {
+const NftItem: NextPage = () => {
   return (
     <>
         <NftComp/>

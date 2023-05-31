@@ -48,19 +48,13 @@
     width: 38rem;
 }
 .activeLink {
-    text-decoration: underline;
-    text-underline-position: under;
-    text-decoration-color: white;
-    text-decoration-thickness: 1.5px;
+    color: #fff;
 } 
 .li{
-    color: #B4B7BC;
+    color: #9c9fa3;
 }
 .li:hover{
-    text-decoration: underline;
-    text-underline-position: under;
-    text-decoration-color: #B4B7BC;
-    text-decoration-thickness: 1.5px;
+    color: #d6dae3;
 }
 .ul{
     display: flex;

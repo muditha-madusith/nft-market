@@ -1,7 +1,8 @@
 import  ProfileComp  from '@/components/ProfileComp';
+import { NextPage } from 'next';
 import React from 'react'
 
-const Profile = () => {
+const Profile: NextPage = () => {
   return (
     <>
       <ProfileComp/>
