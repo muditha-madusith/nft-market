@@ -19,7 +19,6 @@ const ItemInfo = () => {
                     <CheckoutPop setIsOpen={setIsOpen} isOpen={isOpen}/>
                 </>
             )}
-
             <div className={styles.back}>
                 <div className={styles.left_side}>
                     <Image

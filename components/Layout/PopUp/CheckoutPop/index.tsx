@@ -23,7 +23,12 @@ const CheckoutPop = ({setIsOpen, isOpen}: any) => {
   return (
       <>
           {paymentSuccess ? (
-              <PaysuccesPop setPaymentSuccess={setPaymentSuccess} paymentSuccess={paymentSuccess} isOpen={isOpen} setIsOpen={setIsOpen}/>
+              <PaysuccesPop 
+              setPaymentSuccess={setPaymentSuccess} 
+              paymentSuccess={paymentSuccess} 
+              isOpen={isOpen} 
+              setIsOpen={setIsOpen}
+              />
           ) : (
               <div className={styles.pop} >
                   <div className={styles.box}>

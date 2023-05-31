@@ -6,18 +6,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link';
-
-
+import { useRouter } from 'next/router';
 import Image from "next/image";
 import { Input } from '@mui/material';
 
-const NavIndex = () => {
 
-  const [display, setDisplay] = useState('none');
+const NavIndex: any = () => {
+
+  const [display, setDisplay]: any = useState('none');
 
   const clickBtn = () => {
-      setDisplay((prevDisplay) => (prevDisplay === 'none' ? 'flex' : 'none'));
+      setDisplay((prevDisplay: any) => (prevDisplay === 'none' ? 'flex' : 'none'));
   }
+
+  const router = useRouter();
 
 
   return (
@@ -47,7 +49,9 @@ const NavIndex = () => {
         </div>
         <div>
           <ul className={styles.ul}>
-            <li className={styles.li}>Explore</li>
+            <Link href="/" style={{ color: 'white', textDecoration: 'none' ,padding: 0, margin: 0}} >
+              <li  className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
+            </Link>
             <li className={styles.li}>My Items</li>
             <li className={styles.li}>Following</li>
           </ul>
@@ -94,7 +98,9 @@ const NavIndex = () => {
       </div>
 
       <div className={styles.menulist} style={{ display: display === 'none' ? 'none' : 'flex' }}>
-        <p className={styles.p1}>Explore</p>
+        <Link href="/" style={{ color: 'white', textDecoration: 'none' ,padding: 0, margin: 0}} >
+          <p className={router.asPath === '/' ? styles.activeP1 : styles.p1}>Explore</p>
+        </Link>
         <p className={styles.p1}>My Items</p>
         <p className={styles.p1}>Following</p>
         <div className={styles.btns1}>
