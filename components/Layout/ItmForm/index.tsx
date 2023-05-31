@@ -11,8 +11,8 @@ const ItmForm = () => {
         <h3 className={styles.h3}>Create new Item</h3>
         <div className={styles.sect1}>
           <label className={styles.p}>Upload File</label>
-          {/* <input type="file" name="image" className={styles.filebox} /> */}
           <div className={styles.filebox}>
+            {/* <input type="file" name="" id="" /> */}
             <p className={styles.ptags}>JPG, PNG, GIF, SVG, WEBM, MP3, MP4. Max 100mb.</p>
             <Image
             src={Fileicon}

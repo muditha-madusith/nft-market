@@ -35,7 +35,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
                 </div>
                 <div className={styles.sect}>
                     <label className={styles.label}>Last Name</label>
-                    <input type="text" name="name2" id="name" className={styles.inp_box} />
+                    <input type="text" name="name2" id="name2" className={styles.inp_box} />
                 </div>
                 <div className={styles.sect}>
                     <label className={styles.label}>Email</label>
