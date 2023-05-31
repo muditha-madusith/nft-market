@@ -6,11 +6,33 @@ import profile from '../../../public/images/profile.png'
 import { useState } from 'react';
 import CheckoutPop from '../PopUp/CheckoutPop';
 import Link from 'next/link';
+import DetailsComp from './DetailsComp';
+import HistoryComp from './HistoryComp';
+import OffersComp from './OffersComp';
 
 
 const ItemInfo = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen]: any = useState(false);
+    const [detailsOpen, setDetailsOpen]: any = useState(true);
+    const [offersOpen, setOffersOpen]: any = useState(false);
+    const [historyOpen, setHistoryOpen]: any = useState(false);
+
+    const clickDetails: any = () => {
+        setDetailsOpen(true);
+        setHistoryOpen(false);
+        setOffersOpen(false);
+    }
+    const clickOffers: any = () => {
+        setDetailsOpen(false);
+        setHistoryOpen(false);
+        setOffersOpen(true);
+    }
+    const clickHistory: any = () => {
+        setDetailsOpen(false);
+        setHistoryOpen(true);
+        setOffersOpen(false);
+    }
 
     return (
         <>
@@ -48,14 +70,31 @@ const ItemInfo = () => {
                     <div className={styles.content3}>
 
                         <ul className={styles.ul}>
-                            <li>Details</li>
-                            <li>Offers</li>
-                            <li>History</li>
+                            <li className={ detailsOpen ? styles.activeDetails : styles.li}
+                            onClick={clickDetails}>
+                                Details
+                            </li>
+                            <li className={offersOpen ? styles.activeOffers : styles.li}
+                            onClick={clickOffers}>
+                                Offers
+                            </li>
+                            <li className={historyOpen ? styles.activeHistory : styles.li}
+                            onClick={clickHistory}>
+                                History
+                            </li>
                         </ul>
 
-                        <hr className={styles.hr} />
+                        {detailsOpen && (
+                            <DetailsComp/>
+                        )}
+                        
+                        {historyOpen && (
+                            <HistoryComp/>
+                        )}
 
-                        <p className={styles.p3}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, magnam in eaque iusto ab dolorem, nostrum dicta explicabo eos quia soluta fuga molestiae accusamus itaque rem debitis labore placeat quasi quam, alias quos! Suscipit, ullam consequuntur deserunt pariatur, autem esse quod aut necessitatibus assumenda fugit qui dolore reiciendis, minus tempora.</p>
+                        {offersOpen && (
+                            <OffersComp/>
+                        )}
 
                         <div className={styles.btns}>
                             <div>
