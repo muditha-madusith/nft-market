@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
 import DarkLogo from '../../../public/DarkLogo.png'
-import MobileDarkLogo from '../../../public/MobileDarkLogo.png'
+import MobileDarkLogo from '../../../public/MobileDarkLogo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,13 +9,23 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from "next/image";
 import { Input } from '@mui/material';
+import ConnectPop from '../PopUp/ConnectPop';
 
 
 const NavIndex: any = () => {
 
   const [display, setDisplay]: any = useState('none');
+  const [showConnectPop, setShowConnectPop]: any = useState(false);
 
-  const clickBtn = () => {
+  const clickConnect : any = () => {
+    setShowConnectPop(true);
+  }
+  const clickMobileConnect : any = () => {
+    setShowConnectPop(true);
+    setDisplay('none');
+  }
+
+  const clickBtn : any = () => {
       setDisplay((prevDisplay: any) => (prevDisplay === 'none' ? 'flex' : 'none'));
   }
 
@@ -24,6 +34,9 @@ const NavIndex: any = () => {
 
   return (
     <>
+      {showConnectPop && (
+        <ConnectPop showConnectPop={showConnectPop} setShowConnectPop={setShowConnectPop}/>
+      )}
       <div className={styles.desktop_nav}>
         <Link href="/" style={{ textDecoration: 'inherit' ,padding: 0, margin: 0}} className={styles.desktop_dark_logo}>
           <Image
@@ -63,7 +76,10 @@ const NavIndex: any = () => {
             </Link>
           </div>
           <div>
-            <button className={styles.co_btn}>Connect</button>
+            <button className={styles.co_btn}
+            onClick={clickConnect}>
+              Connect
+            </button>
           </div>
         </div>
       </div>
@@ -110,7 +126,10 @@ const NavIndex: any = () => {
             </Link>
           </div>
           <div>
-            <button className={styles.co1_btn}>Connect</button>
+            <button className={styles.co1_btn}
+            onClick={clickMobileConnect}>
+              Connect
+            </button>
           </div>
         </div>
       </div>
