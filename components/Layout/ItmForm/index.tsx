@@ -11,8 +11,8 @@ const ItmForm = () => {
         <h3 className={styles.h3}>Create new Item</h3>
         <div className={styles.sect1}>
           <label className={styles.p}>Upload File</label>
-          <div className={styles.filebox}>
-            {/* <input type="file" name="" id="" /> */}
+          <label className={styles.filebox}>
+            <input type="file" name="" id="file-upload" className={styles.input}/>
             <p className={styles.ptags}>JPG, PNG, GIF, SVG, WEBM, MP3, MP4. Max 100mb.</p>
             <Image
             src={Fileicon}
@@ -22,7 +22,7 @@ const ItmForm = () => {
               <p className={styles.p1}>Drag and Drop Files</p>
               <p className={styles.p2}>or browse media on your device</p>
             </div>
-          </div>
+          </label>
         </div>
         <div className={styles.sect2}>
           <label className={styles.p}>Name</label>
