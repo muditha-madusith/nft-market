@@ -30,11 +30,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
             <h2 className={styles.h2}>Create an Account</h2>
             <form action="post" className={styles.form}>
                 <div className={styles.sect}>
-                    <label className={styles.label}>First Name</label>
-                    <input type="text" name="name" id="name" className={styles.inp_box} />
-                </div>
-                <div className={styles.sect}>
-                    <label className={styles.label}>Last Name</label>
+                    <label className={styles.label}>Name</label>
                     <input type="text" name="name2" id="name2" className={styles.inp_box} />
                 </div>
                 <div className={styles.sect}>

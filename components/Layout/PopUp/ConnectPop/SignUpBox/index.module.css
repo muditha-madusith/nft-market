@@ -3,7 +3,7 @@
     border-radius: 10px;
     z-index: 150;
     width: 586px;
-    height: 680px;
+    height: 580px;
     display: flex;
     flex-direction: column;
     padding: 1rem 2rem;
@@ -76,7 +76,7 @@
         border-radius: 10px;
         z-index: 150;
         width: 546px;
-        height: 680px;
+        height: 580px;
         display: flex;
         flex-direction: column;
         padding: 1rem 2rem;
@@ -89,7 +89,7 @@
         border-radius: 10px;
         z-index: 150;
         width: 506px;
-        height: 680px;
+        height: 550px;
         display: flex;
         flex-direction: column;
         padding: 1rem 2rem;
