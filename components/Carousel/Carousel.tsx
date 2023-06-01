@@ -80,7 +80,7 @@ const Carousel = () => {
             naturalSlideWidth={180}
             naturalSlideHeight={200}
             isIntrinsicHeight={true}
-            totalSlides={2}
+            totalSlides={ window.innerWidth > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
         >
             <Slider className={styles.slider}>
                 {cardDetails.map((card) => (
