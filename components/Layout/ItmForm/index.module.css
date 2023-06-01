@@ -22,7 +22,7 @@
     flex-direction: column;
     gap: .5rem;
 }
-.filebox{
+/* .filebox{
     border: 2px dashed gray;
     display: flex;
     flex-direction: column;
@@ -46,7 +46,7 @@
 }
 .p2{
     font-size: small;
-}
+} */
 .sect2{
     display: flex;
     flex-direction: column;
@@ -60,6 +60,7 @@
     border-radius: 5px;
     border: none;
     outline: none;
+    width: 500px;
     padding: 0 1rem;
 }
 .sect3{
@@ -84,15 +85,28 @@
     padding-top: 2rem;
     gap: .5rem;
 }
+.sect4{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1rem;
+    gap: .5rem;
+    justify-content: space-between;
+}
 .pricecbox{
     height: 40px;
-    width: 90%;
+    width: 150px;
     color: white;
     background-color: #2D2E36;
     border-radius: 5px;
     border: none;
     outline: none;
     padding: 0 1rem;
+}
+.flex_row{
+    display: flex;
+    flex-direction: column;
+    width: auto;
 }
 .selector{
     position: absolute;
@@ -132,6 +146,9 @@
         flex-direction: column;
         color: white;
     }
+    .namebox{
+        width: 500px;
+    }
 }
 @media screen and (max-width: 612px) {
     .form{
@@ -157,7 +174,7 @@
         flex-direction: column;
         gap: .5rem;
     }
-    .filebox{
+    /* .filebox{
         border: 2px dashed gray;
         display: flex;
         flex-direction: column;
@@ -178,11 +195,11 @@
     }
     .p2{
         font-size: small;
-    }
-    .ptags{
+    } */
+    /* .ptags{
         text-align: center;
         font-size: small;
-    }
+    } */
     .sect2{
         display: flex;
         flex-direction: column;
@@ -198,12 +215,6 @@
         border: none;
         outline: none;
         padding: 0 1rem;
-    }
-    .sect3{
-        display: flex;
-        flex-direction: column;
-        padding-top: 2rem;
-        gap: .5rem;
     }
     .descbox{
         height: 100px;
@@ -224,7 +235,7 @@
     }
     .pricecbox{
         height: 40px;
-        width: 85%;
+        width: 100px;
         color: white;
         background-color: #2D2E36;
         border-radius: 5px;
@@ -270,7 +281,7 @@
         flex-direction: column;
         gap: .5rem;
     }
-    .filebox{
+    /* .filebox{
         border: 2px dashed gray;
         display: flex;
         flex-direction: column;
@@ -295,7 +306,7 @@
     .ptags{
         text-align: center;
         font-size: small;
-    }
+    } */
     .sect2{
         display: flex;
         flex-direction: column;
@@ -337,7 +348,7 @@
     }
     .pricecbox{
         height: 40px;
-        width: 82%;
+        width: 100px;
         color: white;
         background-color: #2D2E36;
         border-radius: 5px;
