@@ -5,6 +5,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import SellercardDesktop from '../Cards/SellercardDesktop';
 import SellercardMobile from '../Cards/SellercardMobile';
 import Profile from '../../public/images/profile.png';
+import { useState, useEffect } from 'react';
 
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -74,13 +75,34 @@ const cardDetails = [
 
 
 const Carousel = () => {
+
+    const [width, setWidth]: any = useState(0);
+
+
+    useEffect(() => {
+        const handleResize = () => {
+          setWidth(window.innerWidth);
+        };
+      
+        // Set initial width on component mount
+        setWidth(window.innerWidth);
+      
+        // Add event listener for window resize
+        window.addEventListener('resize', handleResize);
+      
+        // Clean up the event listener on component unmount
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <CarouselProvider
             className={styles.carousel}
             naturalSlideWidth={180}
             naturalSlideHeight={200}
             isIntrinsicHeight={true}
-            totalSlides={ window.innerWidth > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
+            totalSlides={ width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
         >
             <Slider className={styles.slider}>
                 {cardDetails.map((card) => (
