@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './index.module.css'
 import { useState, useEffect, useRef } from 'react';
 import SignUpBox from './SignUpBox';
+import axios from "axios";
 
 
 const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
@@ -26,6 +27,29 @@ const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
     };
   }, [setShowConnectPop]);
 
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e: any) {
+
+    e.preventDefault(); // prevent page from refreshing
+
+    const newUser = {
+        email,
+        password,
+    }
+
+    setEmail('');
+    setPassword('');
+
+    axios.post("http://localhost:5000/api/user/login", newUser).then(() => {
+        alert("User login successful...")
+    }).catch((err) => {
+        alert(err)
+    })
+};
+
   return (
     <div className={styles.pop} >
       {showSignUpBox ? (
@@ -33,14 +57,14 @@ const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
       ) : (
       <div className={styles.box} ref={popRef}>
         <h2 className={styles.h2}>Login or Signup</h2>
-        <form action="post" className={styles.form}>
+        <form action="post" onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.sect}>
             <label className={styles.label}>Email</label>
-            <input type="email" name="email" id="email" className={styles.inp_box} />
+            <input type="email" name="email" id="email" className={styles.inp_box} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
           </div>
           <div className={styles.sect}>
             <label className={styles.label}>Password</label>
-            <input type="password" name="password" id="password" className={styles.inp_box} />
+            <input type="password" name="password" id="password" className={styles.inp_box} value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
           </div>
           <div className={styles.btn_div}>
             <button type="submit" className={styles.submit_btn}>Login</button>

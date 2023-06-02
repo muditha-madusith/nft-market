@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './index.module.css'
-import NFT from '../../../public/images/NFT.png'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Link from 'next/link';
 import Image from 'next/image';
