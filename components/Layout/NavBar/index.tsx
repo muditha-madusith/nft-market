@@ -27,7 +27,7 @@ const NavIndex: any = () => {
   const handleLogout = () => {
     // Perform logout logic
     setIsLoggedIn(false);
-    axios.post('http://localhost:5000/api/user/logout').then(() => {
+    axios.post('https://nft-market-api-production.up.railway.app/api/user/logout').then(() => {
       // console.log("Login out successfully.")
     }).catch((err) => { console.log(err) })
   };

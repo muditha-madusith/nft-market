@@ -48,7 +48,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
         setPassword('');
         setPassword2('');
 
-        axios.post("http://localhost:5000/api/user/register", newUser).then(() => {
+        axios.post("https://nft-market-api-production.up.railway.app/api/user/register", newUser).then(() => {
             // alert("User registration successful...")
             // console.log("User registration successful...");
         }).catch((err) => {
