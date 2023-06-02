@@ -5,7 +5,7 @@ import SignUpBox from './SignUpBox';
 import axios from "axios";
 
 
-const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
+const ConnectPop = ({ setShowConnectPop, setIsLoggedIn }: any) => {
 
   const [showSignUpBox, setShowSignUpBox]: any = useState(false);
   const popRef: any = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  
+
   function handleSubmit(e: any) {
 
     e.preventDefault(); // prevent page from refreshing
@@ -45,11 +45,28 @@ const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
     setPassword('');
 
     axios.post("http://localhost:5000/api/user/login", newUser).then(() => {
-        alert("User login successful...")
+        // alert("User login successful...")
+        // localStorage.setItem('isLoggedIn', 'true');
+        // console.log("User login successful...");
+        setShowConnectPop(false);
+        setIsLoggedIn(true);
     }).catch((err) => {
         alert(err)
     })
-};
+  };
+
+
+
+  // useEffect(() => {
+  //   // Check if user is logged in
+  //   const isLoggedIn = localStorage.getItem('isLoggedIn');
+  //   if (isLoggedIn) {
+  //     console.log('User is logged in.');
+  //   } else {
+  //     console.log('User is not logged in.');
+  //   }
+  // }, []);
+
 
   return (
     <div className={styles.pop} >

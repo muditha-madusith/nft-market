@@ -6,7 +6,6 @@ import axios from "axios";
 
 const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
     
-
     const popRef: any = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -50,7 +49,8 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
         setPassword2('');
 
         axios.post("http://localhost:5000/api/user/register", newUser).then(() => {
-            alert("User registration successful...")
+            // alert("User registration successful...")
+            // console.log("User registration successful...");
         }).catch((err) => {
             alert(err)
         })
