@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 
-const NFTcardMobile = () => {
+const NFTcardMobile = ({src, name, price, likes}:any) => {
   return (
     <Link href="/nft-item" style={{ textDecoration: 'inherit', color: 'white' }}>
       <div className={styles.back}>
@@ -14,22 +14,22 @@ const NFTcardMobile = () => {
           <div className={styles.im}>
             <Image
               className={styles.img}
-              src={NFT}
+              src={src}
               alt='NFT'>
             </Image>
           </div>
           <div className={styles.nft_name}>
-            <p className={styles.p}>Abstact Smoke Red Blue</p>
+            <p className={styles.p}>{name}</p>
           </div>
           <div className={styles.price_likes}>
             <div className={styles.price}>
-              <p className={styles.p1}><b>1.25</b></p>
+              <p className={styles.p1}><b>{price}</b></p>
               <p className={styles.p1}>ETH</p>
             </div>
             <div className={styles.likes}>
               <FavoriteIcon
                 className={styles.icon} />
-              <p className={styles.p1}>92</p>
+              <p className={styles.p1}>{likes}</p>
             </div>
           </div>
         </div>
