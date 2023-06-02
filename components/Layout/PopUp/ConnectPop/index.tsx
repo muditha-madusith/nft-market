@@ -31,6 +31,7 @@ const ConnectPop = ({ showConnectPop, setShowConnectPop }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  
   function handleSubmit(e: any) {
 
     e.preventDefault(); // prevent page from refreshing
