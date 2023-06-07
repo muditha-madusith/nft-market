@@ -1,13 +1,22 @@
 import React from 'react'
 import styles from './index.module.css'
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const NFTcardDesktop = ({src, name, price, likes}:any) => {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push({
+      pathname: '/nft-item',
+      query: { src, name, price }
+    });
+  };
+
   return (
-    <Link href="/nft-item" style={{ textDecoration: 'inherit', color: 'white' }}>
-      <div className={styles.back}>
+      <div className={styles.back} onClick={handleClick}>
         <div className={styles.card}>
           <div className={styles.im}>
             <Image
@@ -32,7 +41,6 @@ const NFTcardDesktop = ({src, name, price, likes}:any) => {
           </div>
         </div>
       </div>
-    </Link>
   )
 }
 export default NFTcardDesktop;

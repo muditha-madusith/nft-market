@@ -9,6 +9,7 @@ import Link from 'next/link';
 import DetailsComp from './DetailsComp';
 import HistoryComp from './HistoryComp';
 import OffersComp from './OffersComp';
+import { useRouter } from 'next/router';
 
 
 const ItemInfo = () => {
@@ -34,6 +35,15 @@ const ItemInfo = () => {
         setOffersOpen(false);
     }
 
+
+    const router = useRouter();
+
+    const { src, name, price }:any = router.query;
+    
+    const imageUrl = src || NFT;
+    
+    
+
     return (
         <>
             {isOpen && (
@@ -44,15 +54,15 @@ const ItemInfo = () => {
             <div className={styles.back}>
                 <div className={styles.left_side}>
                     <Image
-                        src={NFT}
+                        src={imageUrl}
                         alt='NFT'
                         className={styles.img}>
                     </Image>
                 </div>
                 <div className={styles.right_side}>
                     <div className={styles.content1}>
-                        <p className={styles.p}>Abstact Smoke Red Blue</p>
-                        <p className={styles.p1}>From <b>4.5 ETH</b> - 20 of 25 available</p>
+                        <p className={styles.p}>{name}</p>
+                        <p className={styles.p1}>From <b>{price} ETH</b> - 20 of 25 available</p>
                     </div>
                     <div className={styles.content2}>
                         <p className={styles.p2}>Creator</p>

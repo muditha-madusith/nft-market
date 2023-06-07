@@ -4,6 +4,14 @@ import { Container, Row, Col } from 'react-grid-system';
 import NFTcardDesktop from '../Cards/NFTcardDesktop';
 import NFTcardMobile from '../Cards/NFTcardMobile';
 import NFT from '../../public/images/NFT.png'
+import NFT1 from '../../public/images/NFT1.png'
+import NFT2 from '../../public/images/NFT2.png'
+import NFT3 from '../../public/images/NFT3.png'
+import NFT4 from '../../public/images/NFT4.png'
+import NFT5 from '../../public/images/NFT5.png'
+import NFT6 from '../../public/images/NFT6.png'
+import NFT7 from '../../public/images/NFT7.png'
+
 
 
 const nftCardDetails = [
@@ -16,50 +24,50 @@ const nftCardDetails = [
     },
     {
         index: 2,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT1,
+        name: "Mountain Landscape",
         price: 40,
         likes: 10
     },
     {
         index: 3,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT2,
+        name: "Paint Color on Wall",
         price: 10,
         likes: 10
     },
     {
         index: 4,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT3,
+        name: "Abstract Patern",
         price: 50,
         likes: 10
     },
     {
         index: 5,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT4,
+        name: "White Line Grafiti",
         price: 10,
         likes: 10
     },
     {
         index: 6,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT5,
+        name: "Abstract Triangle",
         price: 80,
         likes: 10
     },
     {
         index: 7,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT6,
+        name: "Lake Landscape",
         price: 10,
         likes: 10
     },
     {
         index: 8,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
+        src: NFT7,
+        name: "Blue Red Art",
         price: 20,
         likes: 10
     }
