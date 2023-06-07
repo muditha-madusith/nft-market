@@ -44,7 +44,7 @@ const ConnectPop = ({ setShowConnectPop, setIsLoggedIn }: any) => {
     setEmail('');
     setPassword('');
 
-    axios.post("http://localhost:8000/api/user/login", newUser).then((response) => {
+    axios.post("https://nft-market-api-production.up.railway.app/api/user/login", newUser).then((response) => {
         // alert("User login successful...")
         // console.log("User login successful...");
         const { token } = response.data;
