@@ -44,10 +44,12 @@ const ConnectPop = ({ setShowConnectPop, setIsLoggedIn }: any) => {
     setEmail('');
     setPassword('');
 
-    axios.post("https://nft-market-api-production.up.railway.app/api/user/login", newUser).then(() => {
+    axios.post("https://nft-market-api-production.up.railway.app/api/user/login", newUser).then((response) => {
         // alert("User login successful...")
-        // localStorage.setItem('isLoggedIn', 'true');
         // console.log("User login successful...");
+        const { token } = response.data;
+        // Store token 
+        localStorage.setItem('token', token);
         setShowConnectPop(false);
         setIsLoggedIn(true);
     }).catch((err) => {
@@ -55,17 +57,6 @@ const ConnectPop = ({ setShowConnectPop, setIsLoggedIn }: any) => {
     })
   };
 
-
-
-  // useEffect(() => {
-  //   // Check if user is logged in
-  //   const isLoggedIn = localStorage.getItem('isLoggedIn');
-  //   if (isLoggedIn) {
-  //     console.log('User is logged in.');
-  //   } else {
-  //     console.log('User is not logged in.');
-  //   }
-  // }, []);
 
 
   return (

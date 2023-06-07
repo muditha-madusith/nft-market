@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import styles from './index.module.css'
-import DarkLogo from '../../../public/DarkLogo.png'
+import React, { useState, useEffect, useContext } from 'react';
+import styles from './index.module.css';
+import DarkLogo from '../../../public/DarkLogo.png';
 import MobileDarkLogo from '../../../public/MobileDarkLogo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -17,19 +17,25 @@ const NavIndex: any = () => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<any>(false);
+
 
   useEffect(() => {
-    // Check if user is logged in
-    setIsLoggedIn(true);
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Set the login state to true if a token is present
+      setIsLoggedIn(true);
+    }
   }, []);
 
-  const handleLogout = () => {
-    // Perform logout logic
-    setIsLoggedIn(false);
-    axios.post('https://nft-market-api-production.up.railway.app/api/user/logout').then(() => {
-      // console.log("Login out successfully.")
-    }).catch((err) => { console.log(err) })
+  const handleLogout = async () => {
+    try {
+      await axios.post('https://nft-market-api-production.up.railway.app/api/user/logout');
+      setIsLoggedIn(false);
+      localStorage.clear();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const clickConnect: any = () => {
@@ -80,7 +86,7 @@ const NavIndex: any = () => {
             <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
               <li className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
             </Link>
-            <li className={styles.li}>My Items</li>
+            <li className={styles.li} >My Items</li>
             <li className={styles.li}>Following</li>
           </ul>
         </div>
