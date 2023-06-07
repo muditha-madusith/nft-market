@@ -28,6 +28,7 @@ const NavIndex: any = () => {
     }
   }, []);
 
+
   const handleLogout = async () => {
     try {
       await axios.post('https://nft-market-api-production.up.railway.app/api/user/logout');
