@@ -12,6 +12,8 @@ import { Input } from '@mui/material';
 import ConnectPop from '../PopUp/ConnectPop';
 import axios from 'axios';
 
+import jwtDecode from 'jwt-decode';
+
 
 const NavIndex: any = () => {
 
@@ -19,13 +21,32 @@ const NavIndex: any = () => {
   const [showConnectPop, setShowConnectPop]: any = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<any>(false);
 
-
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      // Set the login state to true if a token is present
-      setIsLoggedIn(true);
-    }
+    const checkTokenExpiration = () => {
+      const token = localStorage.getItem('token');
+      
+      if (token) {
+        const decodedToken = jwtDecode(token) as { [key: string]: any };
+        const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
+        const isExpired = decodedToken.exp < currentTime;
+
+        if (isExpired) {
+          // Token has expired, perform necessary actions (e.g., log out)
+          setIsLoggedIn(false);
+          localStorage.clear();
+          // alert("Token has expired login again...")
+        } else {
+          // Token is still valid, continue with the app
+          setIsLoggedIn(true);
+        }
+      } else {
+        // Token doesn't exist in localStorage, handle accordingly
+        setIsLoggedIn(false);
+        localStorage.clear();
+      }
+    };
+
+    checkTokenExpiration();
   }, []);
 
 
