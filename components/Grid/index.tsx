@@ -13,7 +13,6 @@ import NFT6 from '../../public/images/NFT6.png'
 import NFT7 from '../../public/images/NFT7.png'
 
 
-
 const nftCardDetails = [
     {
         index: 1,
