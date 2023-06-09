@@ -38,9 +38,11 @@ const ItemInfo = () => {
 
     const router = useRouter();
 
-    const { src, name, price }:any = router.query;
+    const { src, name, price } = router.query;
     
-    const imageUrl = src || NFT;
+    const imageUrl = `/images/${src}`;
+
+    console.log(src)
     
     
 
@@ -56,8 +58,11 @@ const ItemInfo = () => {
                     <Image
                         src={imageUrl}
                         alt='NFT'
+                        width={300} 
+                        height={300}
                         className={styles.img}>
                     </Image>
+                    {/* <img src={imageUrl} alt="NFT" className={styles.image} /> */}
                 </div>
                 <div className={styles.right_side}>
                     <div className={styles.content1}>
