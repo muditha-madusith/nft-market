@@ -10,6 +10,15 @@ import HistoryComp from './HistoryComp';
 import OffersComp from './OffersComp';
 import { useRouter } from 'next/router';
 import NFT from '../../../public/images/NFT.png'
+import NFT1 from '../../../public/images/NFT1.png'
+import NFT2 from '../../../public/images/NFT2.png'
+import NFT3 from '../../../public/images/NFT3.png'
+import NFT4 from '../../../public/images/NFT4.png'
+import NFT5 from '../../../public/images/NFT5.png'
+import NFT6 from '../../../public/images/NFT6.png'
+import NFT7 from '../../../public/images/NFT7.png'
+import cover from '../../../public/images/cover.png'
+
 
 
 const ItemInfo = () => {
@@ -39,11 +48,36 @@ const ItemInfo = () => {
     const router = useRouter();
 
     const { name, price }:any = router.query;
+    console.log(name);
 
-    const imageUrl = NFT;
-
-    // console.log(imageUrl)
-    
+    let imageUrl;
+    if (name === 'Abstact Smoke Red Blue') {
+        imageUrl = NFT;
+    }    
+    else if (name === 'Mountain Landscape') {
+        imageUrl = NFT1;
+    }
+    else if (name === 'Paint Color on Wall') {
+        imageUrl = NFT2;
+    }
+    else if (name === 'Abstract Patern') {
+        imageUrl = NFT3;
+    }
+    else if (name === 'White Line Grafiti') {
+        imageUrl = NFT4;
+    }
+    else if (name === 'Abstract Triangle') {
+        imageUrl = NFT5;
+    }
+    else if (name === 'Lake Landscape') {
+        imageUrl = NFT6;
+    }
+    else if (name === 'Blue Red Art') {
+        imageUrl = NFT7;
+    }
+    else{
+        imageUrl = cover;
+    }
 
     return (
         <>
