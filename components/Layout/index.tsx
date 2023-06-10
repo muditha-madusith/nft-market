@@ -3,10 +3,11 @@ import styles from './index.module.css';
 import NavIndex from './NavBar';
 import Footer from './Footer';
 
-
 const Layout = ({children}:any) => {
+
   return (
     <div className={styles.mainDiv}>
+
       <div className={styles.topNav}>
         <NavIndex />
       </div>

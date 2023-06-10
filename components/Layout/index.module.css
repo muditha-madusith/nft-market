@@ -1,0 +1,6 @@
+.toastMas{
+    display: flex;
+    position: fixed;
+    z-index: 300;
+    right: 0;
+}

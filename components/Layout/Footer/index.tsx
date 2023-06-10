@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.css'
 import DarkLogo from '../../../public/DarkLogo.png';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -9,7 +9,9 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import Image from 'next/image'
 
 const Footer = () => {
+
   return (
+    <>
     <div className={styles.back}>
         <div className={styles.upper_section}>
             <div className={styles.l_side}>
@@ -21,7 +23,7 @@ const Footer = () => {
                       <p className={styles.p}>Get the latest Updates</p>
                       <div className={styles.email_box}>
                           <input type="email" className={styles.input} placeholder='Your Email' />
-                          <button className={styles.email_btn}>Email Me!</button>
+                          <button className={styles.email_btn} >Email Me!</button>
                       </div>
                   </div>
             </div>
@@ -57,6 +59,7 @@ const Footer = () => {
             </div>
         </div>
     </div>
+    </>
   )
 }
 

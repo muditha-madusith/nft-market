@@ -5,12 +5,13 @@ import styles from '@/styles/Home.module.css'
 import HomeIndex from '../components/Home'
 import NavIndex from '@/components/Layout/NavBar'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div>
-      <HomeIndex />
-    </div>
+      <div>
+        <HomeIndex />
+      </div>
   )
 }

@@ -1,3 +1,4 @@
+
 .back{
     background: #24252D;
     height: auto;
@@ -14,6 +15,7 @@
     border: none;
     position: absolute;
     margin-left: -4rem;
+    cursor: pointer;
 }
 .input{
     height: 40px;

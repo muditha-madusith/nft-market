@@ -5,14 +5,18 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 import PaysuccesPop from '../PaysuccesPop';
+import TostMessage from '../../Common/ToastMessage';
+import { toast } from 'react-toastify';
 
 const CheckoutPop = ({setIsOpen, isOpen}: any) => {
 
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
-
+  const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
   const handleClick: any = () => {
     setPaymentSuccess(true);
+    toast.success('Payment Success!', {
+        position: toast.POSITION.TOP_RIGHT,
+    })
   }
 
   const handleCancel: any = () => {
@@ -23,12 +27,15 @@ const CheckoutPop = ({setIsOpen, isOpen}: any) => {
   return (
       <>
           {paymentSuccess ? (
+              <>
               <PaysuccesPop 
               setPaymentSuccess={setPaymentSuccess} 
               paymentSuccess={paymentSuccess} 
               isOpen={isOpen} 
               setIsOpen={setIsOpen}
               />
+              <TostMessage/>
+              </>
           ) : (
               <div className={styles.pop} >
                   <div className={styles.box}>
