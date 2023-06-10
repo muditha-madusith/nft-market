@@ -5,6 +5,11 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import SellercardDesktop from '../Cards/SellercardDesktop';
 import SellercardMobile from '../Cards/SellercardMobile';
 import Profile from '../../public/images/profile.png';
+import Profile1 from '../../public/images/profile1.png';
+import Profile2 from '../../public/images/profile2.png';
+import Profile3 from '../../public/images/profile3.png';
+import Profile4 from '../../public/images/profile4.png';
+
 import { useState, useEffect } from 'react';
 
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -19,26 +24,26 @@ const cardDetails = [
     },
     {
         index: 2,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile1,
+        name: "Rian Leon",
         revenue: 40
     },
     {
         index: 3,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile2,
+        name: "Lady Young",
         revenue: 10
     },
     {
         index: 4,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile3,
+        name: "Black Glass",
         revenue: 50
     },
     {
         index: 5,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile4,
+        name: "Budhiman",
         revenue: 10
     },
     {
@@ -49,26 +54,26 @@ const cardDetails = [
     },
     {
         index: 7,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile2,
+        name: "Lady Young",
         revenue: 10
     },
     {
         index: 8,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile3,
+        name: "Black Glass",
         revenue: 20
     },
     {
         index: 9,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile4,
+        name: "Budhiman",
         revenue: 30
     },
     {
         index: 10,
-        src: Profile,
-        name: "Mia Ayana",
+        src: Profile2,
+        name: "Lady Young",
         revenue: 50
     }
 ]

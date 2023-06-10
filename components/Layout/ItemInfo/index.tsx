@@ -48,7 +48,7 @@ const ItemInfo = () => {
     const router = useRouter();
 
     const { name, price }:any = router.query;
-    // console.log(name);
+    // console.log(src);
 
     let imageUrl;
     if (name === 'Abstact Smoke Red Blue') {
@@ -79,6 +79,7 @@ const ItemInfo = () => {
         imageUrl = cover;
     }
 
+    
     return (
         <>
             {isOpen && (
@@ -91,8 +92,6 @@ const ItemInfo = () => {
                     <Image
                         src={imageUrl}
                         alt='NFT'
-                        width={300} 
-                        height={300}
                         className={styles.img}>
                     </Image>
                 </div>

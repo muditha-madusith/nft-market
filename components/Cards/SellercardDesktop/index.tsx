@@ -1,14 +1,24 @@
 import React from 'react'
 import styles from './index.module.css'
-// import Profile from '../../../public/images/profile.png'
 import CheckIcon from '@mui/icons-material/Check';
 import Link from 'next/link';
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 
 const SellercardDesktop = ({index, src, name, revenue}: any) => {
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push({
+      pathname: 'profile',
+      query: { name: name },
+    });
+  };
+
+
   return (
-    <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}>
-      <div className={styles.back}>
+      <div className={styles.back} onClick={handleClick}>
         <div className={styles.card}>
           <div className={styles.numbdiv}>
             <div className={styles.number}>{index}</div>
@@ -35,7 +45,6 @@ const SellercardDesktop = ({index, src, name, revenue}: any) => {
           </div>
         </div>
       </div>
-    </Link>
   )
 }
 export default SellercardDesktop;

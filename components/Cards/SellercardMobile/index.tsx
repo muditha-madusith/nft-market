@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.module.css'
-import Profile from '../../../public/images/profile.png'
 import CheckIcon from '@mui/icons-material/Check';
 import Link from 'next/link';
 import Image from 'next/image'
