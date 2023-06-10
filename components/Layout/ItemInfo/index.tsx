@@ -48,7 +48,7 @@ const ItemInfo = () => {
     const router = useRouter();
 
     const { name, price }:any = router.query;
-    console.log(name);
+    // console.log(name);
 
     let imageUrl;
     if (name === 'Abstact Smoke Red Blue') {
