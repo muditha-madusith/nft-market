@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './index.module.css'
 import Image from 'next/image';
-import NFT from '../../../public/images/NFT.png'
 import profile from '../../../public/images/profile.png'
 import { useState } from 'react';
 import CheckoutPop from '../PopUp/CheckoutPop';
@@ -10,6 +9,7 @@ import DetailsComp from './DetailsComp';
 import HistoryComp from './HistoryComp';
 import OffersComp from './OffersComp';
 import { useRouter } from 'next/router';
+import NFT from '../../../public/images/NFT.png'
 
 
 const ItemInfo = () => {
@@ -38,12 +38,11 @@ const ItemInfo = () => {
 
     const router = useRouter();
 
-    const { src, name, price } = router.query;
-    
-    const imageUrl = `/images/${src}`;
+    const { name, price }:any = router.query;
 
-    console.log(src)
-    
+    const imageUrl = NFT;
+
+    // console.log(imageUrl)
     
 
     return (
@@ -62,7 +61,6 @@ const ItemInfo = () => {
                         height={300}
                         className={styles.img}>
                     </Image>
-                    {/* <img src={imageUrl} alt="NFT" className={styles.image} /> */}
                 </div>
                 <div className={styles.right_side}>
                     <div className={styles.content1}>

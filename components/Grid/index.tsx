@@ -11,6 +11,7 @@ import NFT4 from '../../public/images/NFT4.png'
 import NFT5 from '../../public/images/NFT5.png'
 import NFT6 from '../../public/images/NFT6.png'
 import NFT7 from '../../public/images/NFT7.png'
+import ItemInfo from '../Layout/ItemInfo';
 
 
 const nftCardDetails = [

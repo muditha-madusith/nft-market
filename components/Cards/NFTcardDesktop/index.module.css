@@ -9,6 +9,7 @@
     padding: 1rem;
     gap: 0rem;
     cursor: pointer;
+    color: white;
 }
 .im{
     display: flex;
