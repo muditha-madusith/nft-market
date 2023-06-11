@@ -16,7 +16,7 @@ import axios from 'axios';
 const Carousel = () => {
 
     const [width, setWidth]: any = useState(0);
-    const [cardDetails, setCardDetails] = useState<Array<{ index: number; name: string; src: string; }>>([]);
+    const [cardDetails, setCardDetails] = useState<Array<{ id: number;  index: number; name: string; src: string; }>>([]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -43,9 +43,10 @@ const Carousel = () => {
             const users = response.data;
     
             // Create the cardDetails array from the users data
-            const updatedCardDetails = users.map((user: { username: any; }, index: number) => ({
+            const updatedCardDetails = users.map((user: {_id: any; username: any; profileUrl: any; }, index: number) => ({
+              id: user._id,
               index: index + 1,
-              src: userPro, 
+              src: user.profileUrl, 
               name: user.username,
             }));
     
@@ -79,6 +80,7 @@ const Carousel = () => {
                             index={card.index}
                             src={card.src}
                             name={card.name}
+                            id={card.id}
                         />
                     </Slide>
                 ))}
@@ -96,6 +98,7 @@ const Carousel = () => {
                             index={card.index}
                             src={card.src}
                             name={card.name}
+                            id={card.id}
                         />
                     </Slide>
                 ))}

@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './index.module.css'
 import CheckIcon from '@mui/icons-material/Check';
-import Link from 'next/link';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
-const SellercardDesktop = ({index, src, name, revenue}: any) => {
+const SellercardDesktop = ({index, src, name}: any) => {
 
   const router = useRouter();
 
@@ -27,7 +26,9 @@ const SellercardDesktop = ({index, src, name, revenue}: any) => {
             <Image
               src={src}
               alt='profile'
-              className={styles.img}>
+              className={styles.img}
+              width={400}
+              height={300}>
             </Image>
             <div className={styles.checkdiv}>
               <div className={styles.check}>

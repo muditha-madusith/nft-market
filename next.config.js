@@ -3,8 +3,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    loader: "default",
-    domains: ["localhost"],
+    domains: ['drive.google.com']
   },
 }
 

@@ -27,7 +27,9 @@ const SellercardMobile = ({index, src, name, revenue}: any) => {
             <Image
               src={src}
               alt='profile'
-              className={styles.img}>
+              className={styles.img}
+              width={400}
+              height={300}>
             </Image>
             <div className={styles.checkdiv}>
               <div className={styles.check}>
