@@ -30,6 +30,9 @@
 .pro4to{
     border-radius: 50%;
     border: 3px solid #24252D;
+    width: 210px;
+    height: auto;
+    background: white;
 }
 
 

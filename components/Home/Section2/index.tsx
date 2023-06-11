@@ -7,7 +7,7 @@ const Section2 = () => {
     <>
       <div className={styles.back}>
         <div className={styles.content}>
-          <h3 className={styles.h3}>Top Sellers</h3>
+          <h3 className={styles.h3}>Users</h3>
           <Carousel />
         </div>
       </div>
