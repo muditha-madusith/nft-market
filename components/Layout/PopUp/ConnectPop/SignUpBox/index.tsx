@@ -30,6 +30,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [profileUrl, setProfileUrl] = useState("");
 
 
     function handleSubmit(e: any) {
@@ -40,13 +41,15 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
             username,
             email,
             password,
-            password2
+            password2,
+            profileUrl
         }
 
         setUserName('');
         setEmail('');
         setPassword('');
         setPassword2('');
+        setProfileUrl('');
 
         axios.post("https://nft-market-api-production.up.railway.app/api/user/register", newUser).then(() => {
             // alert("User registration successful...")
@@ -83,6 +86,13 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
                     <label className={styles.label}>Confirm Password</label>
                     <input type="password" name="password2" id="password2" value={password2} onChange={(e) => {
                         setPassword2(e.target.value)
+                    }} className={styles.inp_box} />
+                </div>
+                <div className={styles.sect}>
+                    <label className={styles.label}>Upload your profile Image-Url</label>
+                    <p className={styles.instructions}>Upload your profile to Google drive and create it public. After that copy the image id and upload it like this <u>"https://drive.google.com/uc?id=YOUR-IMAGE-ID"</u> or any other public image link</p>
+                    <input type="text" name="profileUrl" id="profileUrl" value={profileUrl} onChange={(e) => {
+                        setProfileUrl(e.target.value)
                     }} className={styles.inp_box} />
                 </div>
                 <div className={styles.btn_div}>

@@ -3,11 +3,14 @@
     border-radius: 10px;
     z-index: 150;
     width: 586px;
-    height: 580px;
+    height: 690px;
     display: flex;
     flex-direction: column;
     padding: 1rem 2rem;
     position: absolute;
+}
+.instructions{
+    font-size: x-small;
 }
 .h2{
     text-align: center;
@@ -76,7 +79,7 @@
         border-radius: 10px;
         z-index: 150;
         width: 546px;
-        height: 580px;
+        height: 700px;
         display: flex;
         flex-direction: column;
         padding: 1rem 2rem;
@@ -89,7 +92,7 @@
         border-radius: 10px;
         z-index: 150;
         width: 506px;
-        height: 550px;
+        height: 690px;
         display: flex;
         flex-direction: column;
         padding: 1rem 2rem;
@@ -142,8 +145,16 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        padding: 2rem 1rem;
+        padding: 1rem 1rem;
         position: absolute;
         margin-bottom: -10px;
+    }
+    .h2{
+        text-align: center;
+        padding: 0rem;
+        font-weight: 600;
+    }
+    .instructions{
+        font-size: xx-small;
     }
 }
