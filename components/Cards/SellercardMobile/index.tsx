@@ -5,14 +5,14 @@ import Link from 'next/link';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
-const SellercardMobile = ({index, src, name, revenue}: any) => {
+const SellercardMobile = ({index, src, name, id}: any) => {
 
   const router = useRouter();
 
   const handleClick = () => {
     router.push({
       pathname: 'profile',
-      query: { name: name },
+      query: { name: name, id: id },
     });
   };
 

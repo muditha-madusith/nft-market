@@ -4,10 +4,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import SellercardDesktop from '../Cards/SellercardDesktop';
 import SellercardMobile from '../Cards/SellercardMobile';
-import userPro from '../../public/images/user.png';
-
 import { useState, useEffect } from 'react';
-
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import axios from 'axios';
@@ -51,7 +48,7 @@ const Carousel = () => {
             }));
     
             setCardDetails(updatedCardDetails);
-            // console.log(cardDetails)
+            console.log(cardDetails)
           } catch (error) {
             console.error('Error fetching users:', error);
           }
