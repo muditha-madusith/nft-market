@@ -50,6 +50,8 @@ const ConnectPop = ({ setShowConnectPop, setIsLoggedIn }: any) => {
         const { token } = response.data;
         // Store token 
         localStorage.setItem('token', token);
+        // Store token in cookies
+        document.cookie = `token=${token}; path=/;`;
         setShowConnectPop(false);
         setIsLoggedIn(true);
     }).catch((err) => {

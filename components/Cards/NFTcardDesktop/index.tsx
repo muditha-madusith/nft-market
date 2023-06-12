@@ -41,7 +41,7 @@ const NFTcardDesktop = ({ src, name, price, likes}:any) => {
               <p className={styles.p1}><b>{price}</b></p>
               <p className={styles.p1}>ETH</p>
             </div>
-            <div className={styles.likes}>
+            {/* <div className={styles.likes}>
               <FavoriteIcon
                 className={styles.icon} 
                 onClick={handleLike}
@@ -49,7 +49,7 @@ const NFTcardDesktop = ({ src, name, price, likes}:any) => {
                   color: isLiked ? 'red' : '#24252D',
                 }}/>
               <p className={styles.p1}>{likes}</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
