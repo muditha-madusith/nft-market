@@ -90,7 +90,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
                 </div>
                 <div className={styles.sect}>
                     <label className={styles.label}>Upload your profile Image-Url</label>
-                    <p className={styles.instructions}>Upload your profile to Google drive and create it public. After that copy the image id and upload it like this <u>"https://drive.google.com/uc?id=YOUR-IMAGE-ID"</u> or any other public image link</p>
+                    <p className={styles.instructions}>Upload your profile to Google drive and create it public. After that copy the image id and upload it like this <u>"https://drive.google.com/uc?id=YOUR-IMAGE-ID"</u> or any other public image link (if don't have link use this <u>"https://drive.google.com/uc?id=1fwuIWzc76IShNnJJVw0mnqA0Y1jhKRSK")</u></p>
                     <input type="text" name="profileUrl" id="profileUrl" value={profileUrl} onChange={(e) => {
                         setProfileUrl(e.target.value)
                     }} className={styles.inp_box} />

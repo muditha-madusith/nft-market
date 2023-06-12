@@ -4,14 +4,14 @@ import CheckIcon from '@mui/icons-material/Check';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
-const SellercardDesktop = ({index, src, name}: any) => {
+const SellercardDesktop = ({index, src, name, id}: any) => {
 
   const router = useRouter();
 
   const handleClick = () => {
     router.push({
       pathname: 'profile',
-      query: { name: name },
+      query: { name: name, id: id },
     });
   };
 
