@@ -8,7 +8,7 @@ const Section3 = () => {
       <div className={styles.back}>
         <div className={styles.content}>
           <div className={styles.h3_div}>
-            <h3 className={styles.h3}>Hot Bids</h3>
+            <h3 className={styles.h3}>All NFT'S</h3>
           </div>
           <Grid/>
         </div>

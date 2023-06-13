@@ -1,0 +1,38 @@
+.main{
+    background-color: #24252D;
+    padding: 0rem;
+    padding-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+    /* border: 1px solid blue; */
+}
+.head{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    color: white;
+}
+.body{
+    width: auto;
+}
+.loadingdiv{
+    height: 80vh;
+    background-color: #24252D;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 479px) {
+    .body { 
+        width: 310px;
+    }
+}

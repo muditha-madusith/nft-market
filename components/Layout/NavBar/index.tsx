@@ -75,6 +75,14 @@ const NavIndex: any = () => {
 
   const router = useRouter();
 
+  const navigateToMyItems = () => {
+    if (isLoggedIn) {
+      router.push('/my-items');
+    } else {
+      alert("To view Your items login first..")
+    }
+  };
+
 
   return (
     <>
@@ -109,7 +117,7 @@ const NavIndex: any = () => {
             <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
               <li className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
             </Link>
-            <li className={styles.li} >My Items</li>
+            <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
             <li className={styles.li}>Following</li>
           </ul>
         </div>
@@ -163,7 +171,7 @@ const NavIndex: any = () => {
         <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
           <p className={router.asPath === '/' ? styles.activeP1 : styles.p1}>Explore</p>
         </Link>
-        <p className={styles.p1}>My Items</p>
+        <p className={styles.p1} onClick={navigateToMyItems}>My Items</p>
         <p className={styles.p1}>Following</p>
         <div className={styles.btns1}>
           <div>

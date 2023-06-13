@@ -25,7 +25,9 @@ const NFTcardMobile = ({src, name, price, likes}:any) => {
             <Image
               className={styles.img}
               src={src}
-              alt='NFT'>
+              alt='NFT'
+              width={300}
+              height={300}>
             </Image>
           </div>
           <div className={styles.nft_name}>
