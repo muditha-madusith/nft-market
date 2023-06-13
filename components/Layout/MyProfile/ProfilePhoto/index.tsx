@@ -13,7 +13,7 @@ const ProfilePhoto = ({id}:any) => {
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/user/users/${id}`)
+    axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${id}`)
     .then((response) => {
         if(!userDetails){
             setUserDetails(response.data);
