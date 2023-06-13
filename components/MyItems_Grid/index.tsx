@@ -22,7 +22,7 @@ const MyItemGrid = ({ id }: any) => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/nft/my-nfts', {
+      .get('https://nft-market-api-production.up.railway.app/api/nft/my-nfts', {
         headers: {
           Authorization: `Bearer ${id}`,
         },

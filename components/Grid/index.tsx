@@ -21,7 +21,7 @@ const Grid = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/nft/all-nfts', {})
+      .get('https://nft-market-api-production.up.railway.app/api/nft/all-nfts', {})
       .then((response) => {
         setNfts(response.data);
         setVisibleNfts(response.data.slice(0, 8)); // Show the first 8 items
