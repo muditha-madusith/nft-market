@@ -58,7 +58,9 @@
 
 @media screen and (max-width: 612px) {
     .card{
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: .3rem;
     }
 }
 @media screen and (max-width: 375px) {

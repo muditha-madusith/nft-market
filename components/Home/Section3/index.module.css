@@ -58,11 +58,11 @@
 }
 @media screen and (max-width: 612px) {
     .content{
-        width: 410px;
+        width: auto;
         margin: 0 auto
     }
     .h3_div{
-        width: 410px;
+        width: 100%;
         display: flex;
     }
 }

@@ -171,7 +171,7 @@ const NavIndex: any = () => {
         <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
           <p className={router.asPath === '/' ? styles.activeP1 : styles.p1}>Explore</p>
         </Link>
-        <p className={styles.p1}>My Items</p>
+        <p className={styles.p1} onClick={navigateToMyItems}>My Items</p>
         <p className={styles.p1}>Following</p>
         <div className={styles.btns1}>
           <div>

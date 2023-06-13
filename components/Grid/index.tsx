@@ -1,160 +1,100 @@
-import React from 'react'
-import styles from './index.module.css'
-import { Container, Row, Col } from 'react-grid-system';
+import React, { useEffect, useState } from 'react';
+import styles from './index.module.css';
 import NFTcardDesktop from '../Cards/NFTcardDesktop';
 import NFTcardMobile from '../Cards/NFTcardMobile';
-import NFT from '../../public/images/NFT.png'
-import NFT1 from '../../public/images/NFT1.png'
-import NFT2 from '../../public/images/NFT2.png'
-import NFT3 from '../../public/images/NFT3.png'
-import NFT4 from '../../public/images/NFT4.png'
-import NFT5 from '../../public/images/NFT5.png'
-import NFT6 from '../../public/images/NFT6.png'
-import NFT7 from '../../public/images/NFT7.png'
-import ItemInfo from '../Layout/ItemInfo';
+import axios from 'axios';
 
-
-const nftCardDetails = [
-    {
-        index: 1,
-        src: NFT,
-        name: "Abstact Smoke Red Blue",
-        price: 10,
-        likes: 10
-    },
-    {
-        index: 2,
-        src: NFT1,
-        name: "Mountain Landscape",
-        price: 40,
-        likes: 10
-    },
-    {
-        index: 3,
-        src: NFT2,
-        name: "Paint Color on Wall",
-        price: 10,
-        likes: 10
-    },
-    {
-        index: 4,
-        src: NFT3,
-        name: "Abstract Patern",
-        price: 50,
-        likes: 10
-    },
-    {
-        index: 5,
-        src: NFT4,
-        name: "White Line Grafiti",
-        price: 10,
-        likes: 10
-    },
-    {
-        index: 6,
-        src: NFT5,
-        name: "Abstract Triangle",
-        price: 80,
-        likes: 10
-    },
-    {
-        index: 7,
-        src: NFT6,
-        name: "Lake Landscape",
-        price: 10,
-        likes: 10
-    },
-    {
-        index: 8,
-        src: NFT7,
-        name: "Blue Red Art",
-        price: 20,
-        likes: 10
-    }
-]
-
+type NFT = {
+  image: string;
+  name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  creator: string;
+  _id: string;
+};
 
 const Grid = () => {
+  const [nfts, setNfts] = useState<NFT[]>([]);
+  const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
+  const [showLoadMore, setShowLoadMore] = useState(true);
 
-    const firstRowCards = nftCardDetails.slice(0, 4);
-    const secondRowCards = nftCardDetails.slice(4, 8);
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/api/nft/all-nfts', {})
+      .then((response) => {
+        setNfts(response.data);
+        setVisibleNfts(response.data.slice(0, 8)); // Show the first 8 items
+        setShowLoadMore(response.data.length > 8); // Check if there are more items to show
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    return (
-        <div className={styles.div}>
-            <Container className={styles.grid_container} fluid>
-                {/* First Row */}
-                <Row
-                    debug
-                    className={styles.row}
-                    justify="center"
-                    style={{ backgroundColor: 'transparent', margin: '0' }}
-                >
-                    {firstRowCards.map((card) => (
-                        <Col
-                            key={card.index}
-                            debug
-                            xs={6}
-                            sm={5}
-                            md={5}
-                            lg={3}
-                            className={styles.col}
-                            style={{ outline: 'none', backgroundColor: 'transparent' }}
-                        >
-                            <NFTcardDesktop
-                                src={card.src}
-                                name={card.name}
-                                price={card.price}
-                                likes={card.likes}
-                            />
-                            <NFTcardMobile
-                                src={card.src}
-                                name={card.name}
-                                price={card.price}
-                                likes={card.likes}
-                            />
-                        </Col>
-                    ))}
-                </Row>
+  const handleLoadMore = () => {
+    const currentlyVisible = visibleNfts.length;
+    const nextVisible = currentlyVisible + 8; // Increase the visible items by 8
+    setVisibleNfts(nfts.slice(0, nextVisible));
+    setShowLoadMore(nextVisible < nfts.length); // Check if there are more items to show
+  };
+  const [isClient, setIsClient] = useState(false);
 
-                {/* Second Row */}
-                <Row
-                    debug
-                    className={styles.row}
-                    justify="center"
-                    style={{ backgroundColor: 'transparent', margin: '0' }}
-                >
-                    {secondRowCards.map((card) => (
-                        <Col
-                            key={card.index}
-                            debug
-                            xs={6}
-                            sm={5}
-                            md={5}
-                            lg={3}
-                            className={styles.col}
-                            style={{ outline: 'none', backgroundColor: 'transparent' }}
-                        >
-                            <NFTcardDesktop
-                                src={card.src}
-                                name={card.name}
-                                price={card.price}
-                                likes={card.likes}
-                            />
-                            <NFTcardMobile
-                                src={card.src}
-                                name={card.name}
-                                price={card.price}
-                                likes={card.likes}
-                            />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-            <div className={styles.loadButton}>
-                <button className={styles.lm_btn}>Load More</button>
-            </div>
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const windowInnerWidth = isClient ? window.innerWidth : undefined;
+
+  return (
+    <>
+      {isClient && windowInnerWidth && windowInnerWidth > 612 && (
+        <div className={styles.wrapper}>
+          {visibleNfts.map((nft) => (
+            <React.Fragment key={nft._id}>
+              <NFTcardDesktop
+                id={nft._id}
+                className={styles.card}
+                src={nft.image}
+                name={nft.name}
+                price={nft.price}
+                quantity={nft.quantity}
+                description={nft.description}
+                creator={nft.creator}
+              />
+            </React.Fragment>
+          ))}
         </div>
-    )
-}
+      )}
+
+      {isClient && windowInnerWidth && windowInnerWidth < 612 && (
+        <div className={styles.wrapper}>
+          {visibleNfts.map((nft) => (
+            <React.Fragment key={nft._id}>
+              <NFTcardMobile
+                id={nft._id}
+                className={styles.card}
+                src={nft.image}
+                name={nft.name}
+                price={nft.price}
+                quantity={nft.quantity}
+                description={nft.description}
+                creator={nft.creator}
+              />
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+
+      {isClient && showLoadMore && (
+        <div className={styles.load_button}>
+          <button className={styles.lm_btn} onClick={handleLoadMore}>
+            Load More
+          </button>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default Grid;

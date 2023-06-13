@@ -11,7 +11,7 @@ type NFT = {
   quantity: number;
   description: string;
   creator: string;
-  id: string;
+  _id: string;
 };
 
 const MyItemGrid = ({ id }: any) => {
@@ -58,10 +58,11 @@ const MyItemGrid = ({ id }: any) => {
     <>
       <div className={styles.wrapper}>
         {visibleNfts.map((nft) => (
-          <React.Fragment key={nft.id}>
+          <React.Fragment key={nft._id}>
             {innerWidth > 612 && (
             <NFTcardDesktop
             className={styles.card}
+            _id={nft._id}
             src={nft.image}
             name={nft.name}
             price={nft.price}
@@ -72,6 +73,7 @@ const MyItemGrid = ({ id }: any) => {
             {innerWidth < 612 && (
               <NFTcardMobile
                 className={styles.card}
+                _id={nft._id}
                 src={nft.image}
                 name={nft.name}
                 price={nft.price}

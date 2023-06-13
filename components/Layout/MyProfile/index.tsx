@@ -28,7 +28,7 @@ const MyProfile = () => {
   }, []);
 
   if (!user) {
-    return <div>Loading...</div>;
+    return <div className={styles.loadingdiv}>Loading...</div>;
   }
 
   const { id, name }:any = user;
