@@ -12,7 +12,7 @@ const MyProfile = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    axios.get('http://localhost:8000/api/user/profile', {
+    axios.get('https://nft-market-api-production.up.railway.app/api/user/profile', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
