@@ -54,6 +54,14 @@ const ItemInfo = () => {
 
     const router = useRouter();
 
+    const handleClick = () => {
+      router.push({
+        pathname: '/profile',
+        query: { id: creatorId, name: creatorDetails?.username },
+      });
+      // console.log(id);
+    };
+
     const { id }: any = router.query;
     // console.log(src);
 
@@ -69,18 +77,22 @@ const ItemInfo = () => {
                     setNftDetails(response.data);
                 }
                 // console.log(userDetails);
+
+                if(nftDetails) {
+                    axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${creatorId}`)
+                    .then((response) => {
+                        setCreatorDetails(response.data)
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                }
             })
             .catch((error) => {
                 console.log(error);
             });
 
-        axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${creatorId}`)
-            .then((response) => {
-                setCreatorDetails(response.data)
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+
     }, [id, nftDetails])
 
     return (
@@ -115,14 +127,14 @@ const ItemInfo = () => {
                     </div>
                     <div className={styles.content2}>
                         <p className={styles.p2}>Creator</p>
-                        <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}>
+                        {/* <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}> */}
                         {creatorDetails && (
-                            <div className={styles.c_details}>
+                            <div className={styles.c_details} onClick={handleClick}>
                                 <Image src={creatorDetails.profileUrl} alt="pro-pic" className={styles.small_pro} width={100} height={100} />
                                 <p className={styles.name}>{creatorDetails.username}</p>
                             </div>
                         )}
-                        </Link>
+                        {/* </Link> */}
                     </div>
                     <div className={styles.content3}>
                         <ul className={styles.ul}>
