@@ -6,14 +6,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 
-const NFTcardMobile = ({src, name, price, likes}:any) => {
+const NFTcardMobile = ({ id, src, name, price, likes}:any) => {
   
   const router = useRouter();
 
   const handleClick = () => {
     router.push({
       pathname: '/nft-item',
-      query: { name: name, price: price },
+      query: { id: id, name: name, price: price },
     });
   };
 

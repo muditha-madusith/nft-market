@@ -62,7 +62,7 @@ const MyItemGrid = ({ id }: any) => {
             {innerWidth > 612 && (
             <NFTcardDesktop
             className={styles.card}
-            _id={nft._id}
+            id={nft._id}
             src={nft.image}
             name={nft.name}
             price={nft.price}
