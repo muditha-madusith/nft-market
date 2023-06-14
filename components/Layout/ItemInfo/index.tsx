@@ -21,6 +21,11 @@ interface NftDetails {
     quantity: number;
 }
 
+interface CreatorDetails{
+    username: string;
+    profileUrl: string;
+}
+
 
 
 const ItemInfo = () => {
@@ -53,6 +58,9 @@ const ItemInfo = () => {
     // console.log(src);
 
     const [nftDetails, setNftDetails] = useState<NftDetails | null>(null);
+    const [creatorDetails, setCreatorDetails] = useState<CreatorDetails | null>(null);
+
+    const creatorId = nftDetails?.creator;
 
     useEffect(() => {
         axios.get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/${id}`)
@@ -61,6 +69,14 @@ const ItemInfo = () => {
                     setNftDetails(response.data);
                 }
                 // console.log(userDetails);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+        axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${creatorId}`)
+            .then((response) => {
+                setCreatorDetails(response.data)
             })
             .catch((error) => {
                 console.log(error);
@@ -100,10 +116,12 @@ const ItemInfo = () => {
                     <div className={styles.content2}>
                         <p className={styles.p2}>Creator</p>
                         <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}>
+                        {creatorDetails && (
                             <div className={styles.c_details}>
-                                <Image src={profile} alt="pro-pic" className={styles.small_pro} />
-                                <p className={styles.name}>Mia Ayana</p>
+                                <Image src={creatorDetails.profileUrl} alt="pro-pic" className={styles.small_pro} width={100} height={100} />
+                                <p className={styles.name}>{creatorDetails.username}</p>
                             </div>
+                        )}
                         </Link>
                     </div>
                     <div className={styles.content3}>
