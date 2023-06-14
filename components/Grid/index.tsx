@@ -15,6 +15,7 @@ type NFT = {
 };
 
 const Grid = () => {
+  
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
   const [showLoadMore, setShowLoadMore] = useState(true);
