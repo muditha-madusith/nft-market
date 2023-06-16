@@ -165,7 +165,7 @@ const ItemInfo = () => {
                         <div className={styles.btns}>
                             <div>
                                 <button className={styles.buybtn} onClick={() => setIsOpen(true)}>
-                                    Buy for 4.5 ETH
+                                    Buy for {nftDetails?.price} ETH
                                 </button>
                             </div>
                             <div>
