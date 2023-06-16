@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './index.module.css';
-import NFT from '../../../../public/images/NFT.png';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
@@ -8,9 +7,10 @@ import { useEffect, useRef } from 'react';
 
 import Image from 'next/image';
 
-const PaysuccesPop = ({paymentSuccess, setPaymentSuccess, isOpen, setIsOpen}: any) => {
+const PaysuccesPop = ({ setPaymentSuccess, setIsOpen, imgUrl, nftName, creator}: any) => {
 
     const popRef = useRef<HTMLDivElement>(null);
+    const image = imgUrl;
 
     useEffect(() => {
       const handleClickOutside: any = (event: MouseEvent) => {
@@ -34,12 +34,14 @@ const PaysuccesPop = ({paymentSuccess, setPaymentSuccess, isOpen, setIsOpen}: an
             </div>
             <div className={styles.img_name}>
                 <Image
-                src={NFT}
+                src={image}
                 alt='NFT'
-                className={styles.img}>
+                className={styles.img}
+                width={200}
+                height={200}>
                 </Image>
                 <div className={styles.b1}>
-                    <p className={styles.p1}>You successfully purchased <b>Abstact Smoke Red Blue</b> from <b>Mia Ayana</b></p>
+                    <p className={styles.p1}>You successfully purchased <b>{nftName}</b> from <b>{creator}</b></p>
                 </div>
             </div>
             <div className={styles.foot}>
