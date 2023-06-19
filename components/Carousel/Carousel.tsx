@@ -54,6 +54,7 @@ const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
 
     useEffect(() => {
         GetAllUsers()
+
             // Create the cardDetails array from the users data
             const updatedCardDetails = users.map((user: {_id: any; username: any; profileUrl: any; }, index: number) => ({
               id: user._id,
@@ -63,7 +64,7 @@ const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
             }));
     
             setCardDetails(updatedCardDetails);
-      }, []);
+      }, [users]);
 
     return (
         <CarouselProvider
