@@ -14,9 +14,9 @@ export const USER_GET_SUCCESS = "USER_GET_SUCCESS"
 export const USER_GET_ERROR = "USER_GET_ERROR"
 
 //use logout types
-export const USER_LOGOUT_LOADING = "USER_LOGOUT_LOADING";
-export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR";
-export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
+export const USER_LOGOUT_LOADING = "USER_LOGOUT_LOADING"
+export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR"
+export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS"
 
 //user state interface
 export interface IUser{
@@ -48,6 +48,7 @@ export type UserRegisterSuccess ={
     }
 }
 
+
 //user login 
 export type userLoginLoading = {
     type : typeof USER_LOGIN_LOADING
@@ -64,6 +65,7 @@ export type UserLoginSuccess = {
         userName:string
     }
 }
+
 
 //user logout 
 export type userLogoutLoading = {
@@ -100,9 +102,10 @@ export type UserGetSuccess = {
     }
 }
 
+
 //export types
 export type AuthDispatchTypes =
-userRegisterLoading
+     userRegisterLoading
    | userRegisterError
    | UserRegisterSuccess
    | userLoginLoading 
