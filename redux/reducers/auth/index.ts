@@ -28,6 +28,7 @@ const authReducer = (
   action: AuthDispatchTypes
 ) => {
   switch (action.type) {
+    
     case USER_LOGIN_LOADING:
       return {
         ...state,
@@ -46,9 +47,11 @@ const authReducer = (
         token: action.payload.token,
       };
 
+
     case USER_LOGOUT_LOADING:
       return {
         ...state,
+        loading: true,
       };
     case USER_LOGOUT_ERROR:
       return {
@@ -58,6 +61,7 @@ const authReducer = (
     case USER_LOGOUT_SUCCESS:
       return {
         ...state,
+        loading: false,
         userDetails: {
           id: "",
           name: "",
@@ -66,9 +70,11 @@ const authReducer = (
         },
       };
 
+
     case USER_GET_LOADING:
       return {
         ...state,
+        loading: true,
       };
     case USER_GET_ERROR:
       return {
@@ -78,6 +84,7 @@ const authReducer = (
     case USER_GET_SUCCESS:
       return {
         ...state,
+        loading: false,
         userDetails: {
           id: action.payload._id,
           name: action.payload.username,

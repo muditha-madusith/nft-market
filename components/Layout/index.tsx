@@ -49,7 +49,7 @@ const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { us
     if (cookies.access_token) {
       getUserDetails(cookies.access_token)
     }
-  }, [])
+  }, [cookies])
 
   return (
     <div className={styles.mainDiv}>
