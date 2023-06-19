@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './index.module.css';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -7,10 +7,30 @@ import SellercardMobile from '../Cards/SellercardMobile';
 import { useState, useEffect } from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import axios from 'axios';
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetAllUsers } from '@/redux/actions/users';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 
-const Carousel = () => {
+
+interface LinkStateProps {
+    users: any[];
+}
+
+interface LinkDispatchProps {
+  GetAllUsers: () => any
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
 
     const [width, setWidth]: any = useState(0);
     const [cardDetails, setCardDetails] = useState<Array<{ id: number;  index: number; name: string; src: string; }>>([]);
@@ -33,12 +53,7 @@ const Carousel = () => {
     }, []);
 
     useEffect(() => {
-        // Fetch users data from the server
-        const fetchUsers = async () => {
-          try {
-            const response = await axios.get('https://nft-market-api-production.up.railway.app/api/user/users'); 
-            const users = response.data;
-    
+        GetAllUsers()
             // Create the cardDetails array from the users data
             const updatedCardDetails = users.map((user: {_id: any; username: any; profileUrl: any; }, index: number) => ({
               id: user._id,
@@ -48,13 +63,6 @@ const Carousel = () => {
             }));
     
             setCardDetails(updatedCardDetails);
-            console.log(cardDetails)
-          } catch (error) {
-            console.error('Error fetching users:', error);
-          }
-        };
-    
-        fetchUsers();
       }, []);
 
     return (
@@ -112,4 +120,15 @@ const Carousel = () => {
     )
 }
 
-export default Carousel;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+    users: state.user.users
+});
+  
+  const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+  ): LinkDispatchProps => ({
+    GetAllUsers: bindActionCreators(GetAllUsers, dispatch)
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Carousel);
