@@ -23,8 +23,6 @@ interface LinkDispatchProps {
 }
 
 interface ComponentsProps {
-  setShowSignUpBox: any
-  setShowConnectPop: any
   children: any
 }
 
