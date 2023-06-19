@@ -81,6 +81,12 @@
     color: #fff;
 }
 
+.error{
+    color: rgb(206, 44, 44);
+    font-weight: 300;
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
     .box{

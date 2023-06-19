@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, FunctionComponent } from 'react';
 import styles from './index.module.css';
 import DarkLogo from '../../../public/DarkLogo.png';
 import MobileDarkLogo from '../../../public/MobileDarkLogo.png';
@@ -13,18 +13,51 @@ import ConnectPop from '../PopUp/ConnectPop';
 import axios from 'axios';
 
 import jwtDecode from 'jwt-decode';
+import { useCookies } from 'react-cookie';
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetUserDetails, LogoutUser } from '@/redux/actions/auth';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+
+interface LinkStateProps {
+}
+
+interface LinkDispatchProps {
+  LogoutUser:() => any
+}
+
+interface ComponentsProps {
+}
 
 
+interface searchedNft {
+  _id: string;
+  image: string;
+  name: string;
+  price: number;
+  description: string;
+  creator: string;
+  quantity: number;
+}
 
-const NavIndex: any = () => {
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<any>(false);
 
+  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+
   useEffect(() => {
+
     const checkTokenExpiration = () => {
-      const token = localStorage.getItem('token');
+      const token = cookies.access_token;
       
       if (token) {
         const decodedToken = jwtDecode(token) as { [key: string]: any };
@@ -32,33 +65,22 @@ const NavIndex: any = () => {
         const isExpired = decodedToken.exp < currentTime;
 
         if (isExpired) {
-          // Token has expired, perform necessary actions (e.g., log out)
           setIsLoggedIn(false);
-          localStorage.clear();
-          // alert("Token has expired login again...")
+          removeCookie("access_token");
         } else {
-          // Token is still valid, continue with the app
           setIsLoggedIn(true);
         }
       } else {
-        // Token doesn't exist in localStorage, handle accordingly
         setIsLoggedIn(false);
-        localStorage.clear();
       }
-    };
-
-    checkTokenExpiration();
-  }, []);
-
-
-  const handleLogout = async () => {
-    try {
-      await axios.post('https://nft-market-api-production.up.railway.app/api/user/logout');
-      setIsLoggedIn(false);
-      localStorage.clear();
-    } catch (error) {
-      console.log(error);
     }
+    
+    checkTokenExpiration();
+  }, [cookies]);
+
+  const handleLogout = () => {
+    LogoutUser();
+    removeCookie("access_token");
   };
 
   const clickConnect: any = () => {
@@ -84,6 +106,25 @@ const NavIndex: any = () => {
   };
 
 
+  const [searchingName, setSearchingName] = useState('');
+  const [searchedNft, setSearchedNft] = useState<searchedNft | null>(null);
+
+
+  const handleSearch = () => {
+    axios.get(`http://localhost:8000/api/nft/search-nfts?name=${searchingName}`)
+    .then((response) => {
+      setSearchedNft(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
+  }
+
+  console.log(searchedNft)
+
+
+
   return (
     <>
       {showConnectPop && (
@@ -105,11 +146,14 @@ const NavIndex: any = () => {
           />
         </Link>
         <div className={styles.search_box}>
-          <SearchIcon />
+          <div className={styles.s_icon} onClick={handleSearch}><SearchIcon /></div>
+          {/* <SearchIcon /> */}
           <Input
             style={{ color: '#fff' }}
             className={styles.s_input}
             placeholder="Search Item Here"
+            value={searchingName}
+            onChange={(e) => setSearchingName(e.target.value)}
           />
         </div>
         <div>
@@ -198,4 +242,15 @@ const NavIndex: any = () => {
   )
 }
 
-export default NavIndex;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+  LogoutUser: bindActionCreators(LogoutUser, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavIndex);

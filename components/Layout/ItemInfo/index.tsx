@@ -71,7 +71,9 @@ const ItemInfo = () => {
     const creatorId = nftDetails?.creator;
 
     useEffect(() => {
-        axios.get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/${id}`)
+        //check if id is available
+        // if(id && creatorId){
+            axios.get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/${id}`)
             .then((response) => {
                 if (!nftDetails) {
                     setNftDetails(response.data);
@@ -92,7 +94,11 @@ const ItemInfo = () => {
                 console.log(error);
             });
 
-
+   
+        // }else{
+        //     //cannot get Ids at this time, please check your internet connection
+        // }
+ 
     }, [id, nftDetails])
 
     return (

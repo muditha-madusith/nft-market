@@ -37,13 +37,9 @@ const Grid = () => {
     const currentlyVisible = visibleNfts.length;
     const nextVisible = currentlyVisible + 8; // Increase the visible items by 8
     setVisibleNfts(nfts.slice(0, nextVisible));
-    setShowLoadMore(nextVisible < nfts.length); // Check if there are more items to show
+    setShowLoadMore(nextVisible < nfts.length); // Check if there are more items to show 101 < 100
   };
   const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
   const windowInnerWidth = isClient ? window.innerWidth : undefined;
 
@@ -87,7 +83,7 @@ const Grid = () => {
         </div>
       )}
 
-      {isClient && showLoadMore && (
+      { showLoadMore && (
         <div className={styles.load_button}>
           <button className={styles.lm_btn} onClick={handleLoadMore}>
             Load More

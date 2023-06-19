@@ -19,7 +19,6 @@ const NFTcardDesktop = ({ id, src, name, price, likes}:any) => {
       pathname: '/nft-item',
       query: { id: id, name: name, price: price },
     });
-    // console.log(id);
   };
 
   return (
@@ -42,15 +41,6 @@ const NFTcardDesktop = ({ id, src, name, price, likes}:any) => {
               <p className={styles.p1}><b>{price}</b></p>
               <p className={styles.p1}>ETH</p>
             </div>
-            {/* <div className={styles.likes}>
-              <FavoriteIcon
-                className={styles.icon} 
-                onClick={handleLike}
-                style={{
-                  color: isLiked ? 'red' : '#24252D',
-                }}/>
-              <p className={styles.p1}>{likes}</p>
-            </div> */}
           </div>
         </div>
       </div>

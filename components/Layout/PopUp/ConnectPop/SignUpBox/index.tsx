@@ -1,10 +1,32 @@
-import React from 'react';
+import React,{FunctionComponent} from 'react';
 import styles from './index.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from "axios";
 
+//redux imports
+import { AppState } from "../../../../../redux/store";
+import { ThunkDispatch } from "redux-thunk";
+import { connect } from "react-redux";
+import { AppActions } from "../../../../../redux/actions/AppActions";
+import { bindActionCreators } from "redux";
+import {RegisterUser} from "../../../../../redux/actions/auth/index"
+interface LinkStateProps {
 
-const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
+  }
+  
+  interface LinkDispatchProps {
+    RegisterUser:(name:string, email:string, password: string, password2:string, profileUrl:string)=>void
+  }
+  
+  interface ComponentsProps {
+    setShowSignUpBox:any
+    setShowConnectPop:any
+  }
+  
+  type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+  
+
+const SignUpBox : FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnectPop,RegisterUser }) => {
     
     const popRef: any = useRef<HTMLDivElement>(null);
 
@@ -31,33 +53,16 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [profileUrl, setProfileUrl] = useState("");
+    const [emailError,setEmailError] = useState("")
 
 
     function handleSubmit(e: any) {
 
         e.preventDefault(); // prevent page from refreshing
-
-        const newUser = {
-            username,
-            email,
-            password,
-            password2,
-            profileUrl
+        if(!email){
+            setEmailError("Please enter email to continue")
         }
-
-        setUserName('');
-        setEmail('');
-        setPassword('');
-        setPassword2('');
-        setProfileUrl('');
-
-        axios.post("https://nft-market-api-production.up.railway.app/api/user/register", newUser).then(() => {
-            // alert("User registration successful...")
-            // console.log("User registration successful...");
-            setShowSignUpBox(false);
-        }).catch((err) => {
-            alert(err)
-        })
+        RegisterUser(username,email,password,password2,profileUrl)
     };
 
     return (
@@ -75,6 +80,7 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
                     <input type="email" name="email" id="email" value={email} onChange={(e) => {
                         setEmail(e.target.value)
                     }} className={styles.inp_box} />
+                    {emailError && <>{emailError}</>}
                 </div>
                 <div className={styles.sect}>
                     <label className={styles.label}>Password</label>
@@ -107,4 +113,14 @@ const SignUpBox = ({ setShowSignUpBox, setShowConnectPop }: any) => {
     )
 }
 
-export default SignUpBox;
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+
+  });
+  
+  const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+  ): LinkDispatchProps => ({
+    RegisterUser:bindActionCreators(RegisterUser,dispatch)
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpBox);
