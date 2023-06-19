@@ -44,6 +44,13 @@
     border-radius: 10px;
     gap: 4px;
 } 
+.s_icon{
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid red; */
+    height: 20px;
+    cursor: pointer;
+}
 .s_input{
     color: rgb(255,255,255);
     width: 38rem;

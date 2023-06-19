@@ -58,6 +58,7 @@ const ItmForm = () => {
           <h3 className={styles.h3}>Create new Item</h3>
           <div className={styles.sect1}>
             <label className={styles.p}>Upload Link</label>
+            <p className={styles.p1}>Upload your NFT to Google drive and create it public. <br /> After that copy the image id and upload it like this "https://drive.google.com/uc?id=YOUR-IMAGE-ID" <br />or any other public image link.</p>
             <input
               type="text"
               name="nftLink"

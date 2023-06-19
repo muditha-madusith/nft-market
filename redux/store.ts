@@ -1,19 +1,16 @@
-import { createStore } from 'redux';
-import { RootState } from './types';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk, { ThunkMiddleware } from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { RootReducer } from "./reducers/index";
+import { AppActions } from "./actions/AppActions";
 
-const initialState: RootState = {
-    showToast: false,
-};
+export type AppState = ReturnType<typeof RootReducer>;
 
-const reducer = (state: RootState = initialState, action: any) => {
-  switch (action.type) {
-    case 'SHOW_TOAST':
-      return { ...state, showToast: true };
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
+const store = createStore(
+  RootReducer,
+  composeWithDevTools(
+    applyMiddleware(thunk as ThunkMiddleware<AppState, AppActions>)
+  )
+);
 
 export default store;
