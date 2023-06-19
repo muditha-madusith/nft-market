@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styles from './index.module.css';
 import NFTcardDesktop from '../Cards/NFTcardDesktop';
 import NFTcardMobile from '../Cards/NFTcardMobile';
 import axios from 'axios';
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetUserDetails } from '@/redux/actions/auth';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { GetAllUsers } from '@/redux/actions/users';
 
 type NFT = {
   image: string;
@@ -13,6 +20,19 @@ type NFT = {
   creator: string;
   _id: string;
 };
+
+// interface LinkStateProps {
+// }
+
+// interface LinkDispatchProps {
+//   GetAllUsers: () => any
+// }
+
+// interface ComponentsProps {
+// }
+
+// type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
 
 const Grid = () => {
   
@@ -95,3 +115,15 @@ const Grid = () => {
 };
 
 export default Grid;
+
+// const mapStateToProps = (state: AppState): LinkStateProps => ({
+//   auth: state.auth
+// });
+
+// const mapDispatchToProps = (
+//   dispatch: ThunkDispatch<any, any, AppActions>
+// ): LinkDispatchProps => ({
+//   GetAllUsers: bindActionCreators(GetAllUsers, dispatch)
+// });
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Grid);

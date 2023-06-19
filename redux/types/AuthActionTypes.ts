@@ -18,6 +18,7 @@ export const USER_LOGOUT_LOADING = "USER_LOGOUT_LOADING"
 export const USER_LOGOUT_ERROR = "USER_LOGOUT_ERROR"
 export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS"
 
+
 //user state interface
 export interface IUser{
     id: string,
@@ -37,11 +38,10 @@ export interface IAuth{
 export type userRegisterLoading = {
     type : typeof USER_REGISTER_LOADING
 }
-
 export type userRegisterError = {
     type : typeof USER_REGISTER_ERROR
 }
-export type UserRegisterSuccess ={
+export type UserRegisterSuccess = {
     type : typeof USER_REGISTER_SUCCESS;
     payload: {
         token:string
@@ -53,7 +53,6 @@ export type UserRegisterSuccess ={
 export type userLoginLoading = {
     type : typeof USER_LOGIN_LOADING
 }
-
 export type userLoginError = {
     type : typeof USER_LOGIN_ERROR
 }
@@ -81,7 +80,7 @@ export type UserLogoutSuccess = {
         username:string,
         email:string,
         profileUrl:string
-      }
+    }
 }
 
 

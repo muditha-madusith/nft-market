@@ -23,12 +23,13 @@ const initialState: IAuth = {
   },
 };
 
+
 const authReducer = (
   state: IAuth = initialState,
   action: AuthDispatchTypes
 ) => {
   switch (action.type) {
-    
+
     case USER_LOGIN_LOADING:
       return {
         ...state,
@@ -39,7 +40,6 @@ const authReducer = (
         ...state,
         loading: false,
       };
-      break;
     case USER_LOGIN_SUCCESS:
       return {
         ...state,
