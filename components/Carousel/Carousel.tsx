@@ -21,7 +21,7 @@ interface LinkStateProps {
 }
 
 interface LinkDispatchProps {
-  GetAllUsers: () => any
+    GetAllUsers: () => any
 }
 
 interface ComponentsProps {
@@ -30,41 +30,46 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
+const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
 
     const [width, setWidth]: any = useState(0);
-    const [cardDetails, setCardDetails] = useState<Array<{ id: number;  index: number; name: string; src: string; }>>([]);
+    const [cardDetails, setCardDetails] = useState<Array<{ id: number; index: number; name: string; src: string; }>>([]);
 
     useEffect(() => {
         const handleResize = () => {
-          setWidth(window.innerWidth);
+            setWidth(window.innerWidth);
         };
-      
+
         // Set initial width on component mount
         setWidth(window.innerWidth);
-      
+
         // Add event listener for window resize
         window.addEventListener('resize', handleResize);
-      
+
         // Clean up the event listener on component unmount
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
     useEffect(() => {
-        GetAllUsers()
+        // Create the cardDetails array from the users data
+        const updatedCardDetails = users.map((user: { _id: any; username: any; profileUrl: any; }, index: number) => ({
+            id: user._id,
+            index: index + 1,
+            src: user.profileUrl,
+            name: user.username,
+        }));
 
-            // Create the cardDetails array from the users data
-            const updatedCardDetails = users.map((user: {_id: any; username: any; profileUrl: any; }, index: number) => ({
-              id: user._id,
-              index: index + 1,
-              src: user.profileUrl, 
-              name: user.username,
-            }));
-    
-            setCardDetails(updatedCardDetails);
-      }, [users]);
+        setCardDetails(updatedCardDetails);
+
+    }, [users]);
+
+    useEffect(() => {
+        if (cardDetails.length === 0) {
+            GetAllUsers();
+        }
+    }, [cardDetails, GetAllUsers]);
 
     return (
         <CarouselProvider
@@ -72,7 +77,7 @@ const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
             naturalSlideWidth={180}
             naturalSlideHeight={200}
             isIntrinsicHeight={true}
-            totalSlides={ width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
+            totalSlides={width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
         >
             <Slider className={styles.slider}>
                 {cardDetails.map((card) => (
@@ -125,11 +130,11 @@ const Carousel: FunctionComponent<Props> = ({GetAllUsers, users}) => {
 const mapStateToProps = (state: AppState): LinkStateProps => ({
     users: state.user.users
 });
-  
-  const mapDispatchToProps = (
+
+const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
-  ): LinkDispatchProps => ({
+): LinkDispatchProps => ({
     GetAllUsers: bindActionCreators(GetAllUsers, dispatch)
-  });
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Carousel);
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Carousel);
