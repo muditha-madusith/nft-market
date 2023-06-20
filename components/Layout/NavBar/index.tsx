@@ -142,7 +142,7 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
               <li className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
             </Link>
             <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
-            <li className={styles.li}>Following</li>
+            <li className={styles.li}>OwnNFT's</li>
           </ul>
         </div>
         <div className={styles.btns}>
@@ -196,7 +196,7 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
           <p className={router.asPath === '/' ? styles.activeP1 : styles.p1}>Explore</p>
         </Link>
         <p className={styles.p1} onClick={navigateToMyItems}>My Items</p>
-        <p className={styles.p1}>Following</p>
+        <p className={styles.p1}>OwnNFT's</p>
         <div className={styles.btns1}>
           <div>
             <Link href="/create-item" style={{ textDecoration: 'inherit' }} >
