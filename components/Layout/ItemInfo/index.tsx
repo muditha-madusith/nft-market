@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import styles from './index.module.css'
 import Image from 'next/image';
-import profile from '../../../public/images/profile.png'
 import { useState } from 'react';
 import CheckoutPop from '../PopUp/CheckoutPop';
-import Link from 'next/link';
 import DetailsComp from './DetailsComp';
 import HistoryComp from './HistoryComp';
 import OffersComp from './OffersComp';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetSelectedNftDetails } from '@/redux/actions/selectednft';
+import { GetSelectedUserDetails } from '@/redux/actions/selecteduser';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 
 interface NftDetails {
@@ -21,14 +26,29 @@ interface NftDetails {
     quantity: number;
 }
 
-interface CreatorDetails{
-    username: string;
-    profileUrl: string;
+interface CreatorDetails {
+    name: string;
+    profile_pic: string;
 }
 
 
+interface LinkStateProps {
+    snftD: any;
+    susrD: any;
+}
 
-const ItemInfo = () => {
+interface LinkDispatchProps {
+    GetSelectedNftDetails: (id: string) => void
+    GetSelectedUserDetails: (id: string) => void
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelectedUserDetails, snftD, susrD }) => {
 
     const [isOpen, setIsOpen]: any = useState(false);
     const [detailsOpen, setDetailsOpen]: any = useState(true);
@@ -55,11 +75,10 @@ const ItemInfo = () => {
     const router = useRouter();
 
     const handleClick = () => {
-      router.push({
-        pathname: '/profile',
-        query: { id: creatorId, name: creatorDetails?.username },
-      });
-      // console.log(id);
+        router.push({
+            pathname: '/profile',
+            query: { id: creatorId, name: creatorDetails?.name },
+        });
     };
 
     const { id }: any = router.query;
@@ -71,35 +90,21 @@ const ItemInfo = () => {
     const creatorId = nftDetails?.creator;
 
     useEffect(() => {
-        //check if id is available
-        // if(id && creatorId){
-            axios.get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/${id}`)
-            .then((response) => {
-                if (!nftDetails) {
-                    setNftDetails(response.data);
-                }
-                // console.log(userDetails);
+        GetSelectedNftDetails(id);
+    },[]);
 
-                if(nftDetails) {
-                    axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${creatorId}`)
-                    .then((response) => {
-                        setCreatorDetails(response.data)
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    useEffect(() => {
+        setNftDetails(snftD);
+    },[snftD]);
 
-   
-        // }else{
-        //     //cannot get Ids at this time, please check your internet connection
-        // }
- 
-    }, [id, nftDetails])
+    useEffect(() => {
+        GetSelectedUserDetails(snftD.creator)
+    },[snftD])
+
+    useEffect(() => {
+        setCreatorDetails(susrD);
+    },[susrD])
+
 
     return (
         <>
@@ -133,14 +138,12 @@ const ItemInfo = () => {
                     </div>
                     <div className={styles.content2}>
                         <p className={styles.p2}>Creator</p>
-                        {/* <Link href="/profile" style={{ textDecoration: 'inherit', color: 'white' }}> */}
                         {creatorDetails && (
                             <div className={styles.c_details} onClick={handleClick}>
-                                <Image src={creatorDetails.profileUrl} alt="pro-pic" className={styles.small_pro} width={100} height={100} />
-                                <p className={styles.name}>{creatorDetails.username}</p>
+                                <Image src={creatorDetails.profile_pic} alt="pro-pic" className={styles.small_pro} width={100} height={100} />
+                                <p className={styles.name}>{creatorDetails.name}</p>
                             </div>
                         )}
-                        {/* </Link> */}
                     </div>
                     <div className={styles.content3}>
                         <ul className={styles.ul}>
@@ -164,7 +167,7 @@ const ItemInfo = () => {
                             </li>
                         </ul>
 
-                        {detailsOpen && nftDetails && <DetailsComp desc={nftDetails.description}/>}
+                        {detailsOpen && nftDetails && <DetailsComp desc={nftDetails.description} />}
                         {historyOpen && <HistoryComp />}
                         {offersOpen && <OffersComp />}
 
@@ -186,4 +189,17 @@ const ItemInfo = () => {
     )
 }
 
-export default ItemInfo;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+    snftD: state.selectedNft.nftDetails,
+    susrD: state.selectedUser.userDetails
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    GetSelectedNftDetails: bindActionCreators(GetSelectedNftDetails, dispatch),
+    GetSelectedUserDetails: bindActionCreators(GetSelectedUserDetails, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemInfo);
