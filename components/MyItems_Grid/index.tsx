@@ -1,8 +1,14 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import NFTcardDesktop from '../Cards/NFTcardDesktop';
 import styles from './index.module.css';
 import NFTcardMobile from '../Cards/NFTcardMobile';
+import { AppActions } from '@/redux/actions/AppActions';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { GetUserNfts } from "../../redux/actions/auth/index"
+
 
 type NFT = {
   image: string;
@@ -14,38 +20,49 @@ type NFT = {
   _id: string;
 };
 
-const MyItemGrid = ({ id }: any) => {
+interface LinkStateProps {
+  myNfts: any[];
+  id: string;
+}
+
+interface LinkDispatchProps {
+  GetUserNfts: (id: string) => void
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
   const [showLoadMore, setShowLoadMore] = useState(true);
   const [innerWidth, setInnerWidth] = useState(window.innerWidth); // Initial inner width
 
-  useEffect(() => {
-    axios
-      .get('https://nft-market-api-production.up.railway.app/api/nft/my-nfts', {
-        headers: {
-          Authorization: `Bearer ${id}`,
-        },
-      })
-      .then((response) => {
-        setNfts(response.data);
-        setVisibleNfts(response.data.slice(0, 8)); // Show the first 8 items
-        setShowLoadMore(response.data.length > 8); // Check if there are more items to show
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const [isClient, setIsClient] = useState(false);
 
-      const handleResize = () => {
-        setInnerWidth(window.innerWidth); // Update inner width on window resize
-      };
-  
-      window.addEventListener('resize', handleResize);
-  
-      return () => {
-        window.removeEventListener('resize', handleResize); // Cleanup event listener on component unmount
-      };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setInnerWidth(window.innerWidth); // Set the initial inner width
+      setIsClient(true);
+    }
   }, []);
+
+  useEffect(() => {
+    if (nfts.length === 0) {
+      GetUserNfts(id);
+    }
+  }, [nfts.length, GetUserNfts, id]);
+
+  useEffect(() => {
+    if (myNfts.length > 0) {
+      setNfts(myNfts);
+      setVisibleNfts(myNfts.slice(0, 8));
+      setShowLoadMore(myNfts.length > 8);
+    }
+  }, [myNfts]);
 
   const handleLoadMore = () => {
     const currentlyVisible = visibleNfts.length;
@@ -59,18 +76,18 @@ const MyItemGrid = ({ id }: any) => {
       <div className={styles.wrapper}>
         {visibleNfts.map((nft) => (
           <React.Fragment key={nft._id}>
-            {innerWidth > 612 && (
-            <NFTcardDesktop
-            className={styles.card}
-            id={nft._id}
-            src={nft.image}
-            name={nft.name}
-            price={nft.price}
-            quantity={nft.quantity}
-            description={nft.description}
-            creator={nft.creator} />
+            {isClient && innerWidth > 612 && (
+              <NFTcardDesktop
+                className={styles.card}
+                id={nft._id}
+                src={nft.image}
+                name={nft.name}
+                price={nft.price}
+                quantity={nft.quantity}
+                description={nft.description}
+                creator={nft.creator} />
             )}
-            {innerWidth < 612 && (
+            {isClient && innerWidth < 612 && (
               <NFTcardMobile
                 className={styles.card}
                 _id={nft._id}
@@ -96,5 +113,16 @@ const MyItemGrid = ({ id }: any) => {
   );
 };
 
-export default MyItemGrid;
 
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  myNfts: state.auth.userNfts,
+  id: state.auth.userDetails.id
+});
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+  GetUserNfts: bindActionCreators(GetUserNfts, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyItemGrid);
