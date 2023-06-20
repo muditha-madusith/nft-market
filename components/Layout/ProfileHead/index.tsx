@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styles from './index.module.css';
 import Image from 'next/image';
 import cover from '../../../public/images/cover.png';
-import userPro from '../../../public/images/user.png';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetSelectedUserDetails } from "../../../redux/actions/selecteduser/index"
 
-const ProfileHead = () => {
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
-  interface user {
-    profileUrl: string;
-  }
+interface LinkStateProps {
+  userDet: any;
+}
 
+interface LinkDispatchProps {
+  GetSelectedUserDetails: (id: string) => void
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const ProfileHead: FunctionComponent<Props> = ({GetSelectedUserDetails, userDet}) => {
+
+  
   const router = useRouter();
-  const { name, id }:any = router.query;
-  // console.log(id);
+  const { id }:any = router.query;
 
-  const [user, setUser] = useState<user | null>(null);
   
   useEffect(() => {
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${id}`);
-        setUser(response.data);
-        console.log(user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    fetchUserDetails();
+    GetSelectedUserDetails(id);
   }, [id]);
 
   return (
@@ -44,17 +48,28 @@ const ProfileHead = () => {
         <div className={styles.prsect}>
             <div className={styles.prnm}>
                   <Image
-                  src={user && user.profileUrl ? user.profileUrl : userPro}
+                  src={userDet.profile_pic}
                   alt='ProfileImage'
                   className={styles.pro4to}
                   width={300}
                   height={300}>
                   </Image>
-                  <h2>{name}</h2>
+                  <h2>{userDet.name}</h2>
             </div>
         </div>
     </div>
   )
 }
 
-export default ProfileHead;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  userDet: state.selectedUser.userDetails
+});
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+  GetSelectedUserDetails: bindActionCreators(GetSelectedUserDetails, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileHead);

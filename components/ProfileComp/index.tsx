@@ -1,10 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styles from './index.module.css'
 import ProfileHead from '../Layout/ProfileHead'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import NFTcardMobile from '../Cards/NFTcardMobile'
 import NFTcardDesktop from '../Cards/NFTcardDesktop'
+
+import { AppActions } from '@/redux/actions/AppActions'
+import { GetSelectedUserNfts } from "../../redux/actions/selecteduser/index"
+import { AppState } from '@/redux/store'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 
 type NFT = {
   image: string;
@@ -16,8 +23,21 @@ type NFT = {
   _id: string;
 };
 
+interface LinkStateProps {
+  userNf: any[];
+}
 
-const ProfileComp = () => {
+interface LinkDispatchProps {
+  GetSelectedUserNfts: (id: string) => void
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const ProfileComp: FunctionComponent<Props> = ({GetSelectedUserNfts, userNf}) => {
 
 
   const router = useRouter();
@@ -29,17 +49,16 @@ const ProfileComp = () => {
   const [showLoadMore, setShowLoadMore] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/creator/${id}`, {})
-      .then((response) => {
-        setNfts(response.data);
-        setVisibleNfts(response.data.slice(0, 8)); // Show the first 8 items
-        setShowLoadMore(response.data.length > 8); // Check if there are more items to show
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (nfts.length === 0) {
+      GetSelectedUserNfts(id);
+    }
   }, []);
+
+  useEffect(() => {
+    setNfts(userNf);
+    setVisibleNfts(userNf.slice(0, 8)); // Show the first 8 items
+    setShowLoadMore(userNf.length > 8); // Check if there are more items to show
+  },[userNf])
 
   const handleLoadMore = () => {
     const currentlyVisible = visibleNfts.length;
@@ -109,4 +128,15 @@ const ProfileComp = () => {
     </>
   )
 }
-export default ProfileComp;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  userNf: state.selectedUser.userNfts
+});
+
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+  GetSelectedUserNfts: bindActionCreators(GetSelectedUserNfts, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileComp);

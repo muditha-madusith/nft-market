@@ -11,7 +11,7 @@ const SellercardDesktop = ({index, src, name, id}: any) => {
   const handleClick = () => {
     router.push({
       pathname: 'profile',
-      query: { name: name, id: id },
+      query: { id: id },
     });
   };
 
