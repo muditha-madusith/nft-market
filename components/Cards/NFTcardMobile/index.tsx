@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './index.module.css'
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
@@ -12,7 +11,7 @@ const NFTcardMobile = ({ id, src, name, price, likes}:any) => {
   const handleClick = () => {
     router.push({
       pathname: '/nft-item',
-      query: { id: id, name: name, price: price },
+      query: { id: id },
     });
   };
   return (

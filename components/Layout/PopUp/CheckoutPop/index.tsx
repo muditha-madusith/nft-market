@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import styles from './index.module.css';
-import NFT from '../../../../public/images/NFT.png';
 import { useState } from 'react';
 import Image from 'next/image';
 import PaysuccesPop from '../PaysuccesPop';
 import TostMessage from '../../Common/ToastMessage';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+
+import { AppActions } from '@/redux/actions/AppActions';
+import { GetSelectedNftDetails } from '@/redux/actions/selectednft';
+import { GetSelectedUserDetails } from '@/redux/actions/selecteduser';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 
 
 interface NftDetails {
@@ -20,12 +26,29 @@ interface NftDetails {
 }
 
 interface CreatorDetails {
-    username: string;
+    name: string;
     profileUrl: string;
 }
 
+interface LinkStateProps {
+    snftD: any;
+    susrD: any;
+}
 
-const CheckoutPop = ({ setIsOpen, isOpen }: any) => {
+interface LinkDispatchProps {
+    GetSelectedNftDetails: (id: string) => void
+    GetSelectedUserDetails: (id: string) => void
+}
+
+interface ComponentsProps {
+    setIsOpen: any;
+    isOpen: any;
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedNftDetails, GetSelectedUserDetails, snftD, susrD }) => {
 
     const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
@@ -49,28 +72,20 @@ const CheckoutPop = ({ setIsOpen, isOpen }: any) => {
     const creatorId = nftDetails?.creator;
 
     useEffect(() => {
-        axios.get(`https://nft-market-api-production.up.railway.app/api/nft/nfts/${id}`)
-            .then((response) => {
-                if (!nftDetails) {
-                    setNftDetails(response.data);
-                }
-                // console.log(userDetails);
+        GetSelectedNftDetails(id);
+    },[]);
 
-                if (nftDetails) {
-                    axios.get(`https://nft-market-api-production.up.railway.app/api/user/users/${creatorId}`)
-                        .then((response) => {
-                            setCreatorDetails(response.data)
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    useEffect(() => {
+        setNftDetails(snftD);
+    },[snftD]);
 
-    }, [id, nftDetails])
+    useEffect(() => {
+        GetSelectedUserDetails(snftD.creator)
+    },[snftD])
+
+    useEffect(() => {
+        setCreatorDetails(susrD);
+    },[snftD])
 
     return (
         <>
@@ -81,7 +96,7 @@ const CheckoutPop = ({ setIsOpen, isOpen }: any) => {
                         setIsOpen={setIsOpen}
                         imgUrl={nftDetails?.image}
                         nftName={nftDetails?.name}
-                        creator={creatorDetails?.username}
+                        creator={creatorDetails?.name}
                     />
                     <TostMessage />
                 </>
@@ -100,7 +115,7 @@ const CheckoutPop = ({ setIsOpen, isOpen }: any) => {
                                 <div className={styles.img_name}>
                                     <Image src={nftDetails?.image ?? ''} alt='NFT' className={styles.img} width={200} height={200}/>
                                     <div className={styles.b1}>
-                                        <p className={styles.p1}>{creatorDetails?.username ?? 'Loading..'}</p>
+                                        <p className={styles.p1}>{creatorDetails?.name ?? 'Loading..'}</p>
                                         <p className={styles.p2}>{nftDetails?.name ?? 'Loading..'}</p>
                                     </div>
                                 </div>
@@ -128,4 +143,17 @@ const CheckoutPop = ({ setIsOpen, isOpen }: any) => {
     )
 }
 
-export default CheckoutPop;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+    snftD: state.selectedNft.nftDetails,
+    susrD: state.selectedUser.userDetails
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+    GetSelectedNftDetails: bindActionCreators(GetSelectedNftDetails, dispatch),
+    GetSelectedUserDetails: bindActionCreators(GetSelectedUserDetails, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutPop);

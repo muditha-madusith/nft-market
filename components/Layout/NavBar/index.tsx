@@ -105,26 +105,6 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
     }
   };
 
-
-  // const [searchingName, setSearchingName] = useState('');
-  // const [searchedNft, setSearchedNft] = useState<searchedNft | null>(null);
-
-
-  // const handleSearch = () => {
-  //   axios.get(`http://localhost:8000/api/nft/search-nfts?name=${searchingName}`)
-  //   .then((response) => {
-  //     setSearchedNft(response.data)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
-
-  // }
-
-  // console.log(searchedNft)
-
-
-
   return (
     <>
       {showConnectPop && (
