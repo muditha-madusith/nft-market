@@ -17,7 +17,7 @@ const NFTcardDesktop = ({ id, src, name, price, likes}:any) => {
   const handleClick = () => {
     router.push({
       pathname: '/nft-item',
-      query: { id: id, name: name, price: price },
+      query: { id: id },
     });
   };
 
