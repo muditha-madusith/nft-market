@@ -24,7 +24,6 @@ const ItmForm = () => {
 
     // Get the token from localStorage
     const token = localStorage.getItem('token');
-    // console.log(token);
 
     // Create an object with the form data
     const formData = {

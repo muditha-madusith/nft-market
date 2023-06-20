@@ -1,7 +1,6 @@
-import React,{FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './index.module.css';
 import { useState, useEffect, useRef } from 'react';
-import axios from "axios";
 
 //redux imports
 import { AppState } from "../../../../../redux/store";
@@ -9,25 +8,27 @@ import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import { AppActions } from "../../../../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
-import {RegisterUser} from "../../../../../redux/actions/auth/index"
+import { RegisterUser } from "../../../../../redux/actions/auth/index"
+
+
 interface LinkStateProps {
 
-  }
-  
-  interface LinkDispatchProps {
-    RegisterUser:(name:string, email:string, password: string, password2:string, profileUrl:string)=>void
-  }
-  
-  interface ComponentsProps {
-    setShowSignUpBox:any
-    setShowConnectPop:any
-  }
-  
-  type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
-  
+}
 
-const SignUpBox : FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnectPop,RegisterUser }) => {
-    
+interface LinkDispatchProps {
+    RegisterUser: (name: string, email: string, password: string, password2: string, profileUrl: string) => void
+}
+
+interface ComponentsProps {
+    setShowSignUpBox: any
+    setShowConnectPop: any
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+
+const SignUpBox: FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnectPop, RegisterUser }) => {
+
     const popRef: any = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -53,16 +54,16 @@ const SignUpBox : FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnect
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [profileUrl, setProfileUrl] = useState("");
-    const [emailError,setEmailError] = useState("")
+    const [emailError, setEmailError] = useState("")
 
 
     function handleSubmit(e: any) {
 
         e.preventDefault(); // prevent page from refreshing
-        if(!email){
+        if (!email) {
             setEmailError("Please enter email to continue")
         }
-        RegisterUser(username,email,password,password2,profileUrl)
+        RegisterUser(username, email, password, password2, profileUrl)
     };
 
     return (
@@ -106,7 +107,7 @@ const SignUpBox : FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnect
                 </div>
             </form>
             <p className={styles.p}>Back to<span className={styles.sup_btn}
-            onClick={clickLoginBtn}>
+                onClick={clickLoginBtn}>
                 Login
             </span></p>
         </div>
@@ -115,12 +116,12 @@ const SignUpBox : FunctionComponent<Props> = ({ setShowSignUpBox, setShowConnect
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
 
-  });
-  
-  const mapDispatchToProps = (
+});
+
+const mapDispatchToProps = (
     dispatch: ThunkDispatch<any, any, AppActions>
-  ): LinkDispatchProps => ({
-    RegisterUser:bindActionCreators(RegisterUser,dispatch)
-  });
+): LinkDispatchProps => ({
+    RegisterUser: bindActionCreators(RegisterUser, dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpBox);
