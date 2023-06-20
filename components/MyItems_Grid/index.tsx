@@ -76,7 +76,7 @@ const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
       <div className={styles.wrapper}>
         {visibleNfts.map((nft) => (
           <React.Fragment key={nft._id}>
-            {innerWidth > 612 && (
+            {isClient && innerWidth > 612 && (
               <NFTcardDesktop
                 className={styles.card}
                 id={nft._id}
@@ -87,7 +87,7 @@ const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
                 description={nft.description}
                 creator={nft.creator} />
             )}
-            {innerWidth < 612 && (
+            {isClient && innerWidth < 612 && (
               <NFTcardMobile
                 className={styles.card}
                 _id={nft._id}
