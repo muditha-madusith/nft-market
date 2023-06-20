@@ -32,7 +32,6 @@ const ProfileHead = () => {
     fetchUserDetails();
   }, [id]);
 
-
   return (
     <div className={styles.back}>
         <div className={styles.cover4to}>

@@ -45,24 +45,29 @@ const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
     if (nfts.length === 0) {
       GetUserNfts(id);
     }
-  })
+  }, [nfts.length, GetUserNfts, id]);
+  
 
   useEffect(() => {
-    setNfts(myNfts);
-    setVisibleNfts(myNfts.slice(0, 8)); // Show the first 8 items
-    setShowLoadMore(myNfts.length > 8); // Check if there are more items to show
+    if (myNfts.length > 0) {
+      setNfts(myNfts);
+      setVisibleNfts(myNfts.slice(0, 8));
+      setShowLoadMore(myNfts.length > 8);
+    }
+  }, [myNfts]);
 
 
+  useEffect(() => {
     const handleResize = () => {
-      setInnerWidth(window.innerWidth); // Update inner width on window resize
+      setInnerWidth(window.innerWidth);
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize); // Cleanup event listener on component unmount
+      window.removeEventListener('resize', handleResize);
     };
-  }, [myNfts]);
+  }, []);
 
   const handleLoadMore = () => {
     const currentlyVisible = visibleNfts.length;
