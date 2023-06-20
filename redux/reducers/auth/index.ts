@@ -10,6 +10,9 @@ import {
   USER_LOGOUT_LOADING,
   USER_LOGOUT_ERROR,
   USER_LOGOUT_SUCCESS,
+  USER_GETNFTS_ERROR,
+  USER_GETNFTS_LOADING,
+  USER_GETNFTS_SUCCESS,
 } from "../../types/AuthActionTypes";
 
 const initialState: IAuth = {
@@ -21,6 +24,7 @@ const initialState: IAuth = {
     email: "",
     profile_pic: "",
   },
+  userNfts: []
 };
 
 
@@ -92,6 +96,23 @@ const authReducer = (
           profile_pic: action.payload.profileUrl,
         },
       };
+
+      case USER_GETNFTS_LOADING:
+        return {
+          ...state,
+          loading: true,
+        };
+      case USER_GETNFTS_ERROR:
+        return {
+          ...state,
+          loading: false,
+        };
+      case USER_GETNFTS_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          userNfts: action.payload
+        };
     default:
       return state;
   }

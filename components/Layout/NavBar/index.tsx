@@ -106,22 +106,22 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
   };
 
 
-  const [searchingName, setSearchingName] = useState('');
-  const [searchedNft, setSearchedNft] = useState<searchedNft | null>(null);
+  // const [searchingName, setSearchingName] = useState('');
+  // const [searchedNft, setSearchedNft] = useState<searchedNft | null>(null);
 
 
-  const handleSearch = () => {
-    axios.get(`http://localhost:8000/api/nft/search-nfts?name=${searchingName}`)
-    .then((response) => {
-      setSearchedNft(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  // const handleSearch = () => {
+  //   axios.get(`http://localhost:8000/api/nft/search-nfts?name=${searchingName}`)
+  //   .then((response) => {
+  //     setSearchedNft(response.data)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
 
-  }
+  // }
 
-  console.log(searchedNft)
+  // console.log(searchedNft)
 
 
 
@@ -146,14 +146,14 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
           />
         </Link>
         <div className={styles.search_box}>
-          <div className={styles.s_icon} onClick={handleSearch}><SearchIcon /></div>
+          <div className={styles.s_icon} ><SearchIcon /></div>
           {/* <SearchIcon /> */}
           <Input
             style={{ color: '#fff' }}
             className={styles.s_input}
             placeholder="Search Item Here"
-            value={searchingName}
-            onChange={(e) => setSearchingName(e.target.value)}
+            // value={searchingName}
+            // onChange={(e) => setSearchingName(e.target.value)}
           />
         </div>
         <div>

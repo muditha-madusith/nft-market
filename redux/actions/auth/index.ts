@@ -5,7 +5,10 @@ import {AuthDispatchTypes,USER_REGISTER_LOADING,USER_REGISTER_ERROR,USER_LOGIN_L
     USER_GET_SUCCESS,
     USER_LOGOUT_LOADING,
     USER_LOGOUT_ERROR,
-    USER_LOGOUT_SUCCESS
+    USER_LOGOUT_SUCCESS,
+    USER_GETNFTS_ERROR,
+    USER_GETNFTS_LOADING,
+    USER_GETNFTS_SUCCESS
 } from "../../types/AuthActionTypes"
 import axios from "axios"
 
@@ -82,6 +85,30 @@ export const GetUserDetails = (id:string) => async(dispatch: Dispatch<AuthDispat
     } catch (error) {
         dispatch({
             type:USER_GET_ERROR
+        })
+    }
+}
+
+
+export const GetUserNfts = (id:string) => async(dispatch: Dispatch<AuthDispatchTypes>)=>{
+    console.log("GetUserNfts Action called")
+    try {
+        dispatch({
+            type:USER_GETNFTS_LOADING
+        })
+         await axios.get(`${process.env.BACKEND_BASE_URL}/api/nft/nfts/creator/${id}`).then((res)=>{
+            dispatch({
+                type:USER_GETNFTS_SUCCESS,
+                payload:res.data
+            })
+        }).catch((error)=>{
+            dispatch({
+                type:USER_GETNFTS_ERROR
+            })  
+        })
+    } catch (error) {
+        dispatch({
+            type:USER_GETNFTS_ERROR
         })
     }
 }

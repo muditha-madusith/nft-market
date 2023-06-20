@@ -5,10 +5,7 @@ export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
 
 
 export interface User {
-  id: number;
-  name: string;
-  email: string;
-  profileUrl: string;
+
 }
 
 export interface Users {

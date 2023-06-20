@@ -5,12 +5,7 @@ export const GET_ALL_NFTS_SUCCESS = "GET_ALL_NFTS_SUCCESS";
 
 
 export interface Nft {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  creator: string;
-  quantity: number;
+
 }
 
 export interface Nfts {

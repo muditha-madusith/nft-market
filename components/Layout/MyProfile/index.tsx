@@ -1,50 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styles from './index.module.css';
-import Image from 'next/image';
-import axios from 'axios';
 import MyItemGrid from '@/components/MyItems_Grid';
-import ProfileComp from '@/components/ProfileComp';
 import ProfilePhoto from './ProfilePhoto';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
 
-const MyProfile = () => {
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+interface LinkStateProps {
+  name: string;
+  id: string;
+}
 
-    axios.get('https://nft-market-api-production.up.railway.app/api/user/profile', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        const { user } = response.data;
-        setUser(user);
-        console.log(user);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+interface LinkDispatchProps {
+}
 
-  if (!user) {
-    return <div className={styles.loadingdiv}>Loading...</div>;
-  }
+interface ComponentsProps {
+}
 
-  const { id, name }:any = user;
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
+
+const MyProfile: FunctionComponent<Props> = ({name, id}) => {
 
   return (
     <div className={styles.main}>
       <div className={styles.head}>
-        <ProfilePhoto id={id}/>
+        <ProfilePhoto/>
         <h2>{name}</h2>
       </div>
       <div className={styles.body}>
-        <MyItemGrid id={id}/>
+        <MyItemGrid/>
       </div>
     </div>
   );
 };
 
-export default MyProfile;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  name: state.auth.userDetails.name,
+  id: state.auth.userDetails.id
+});
+
+
+export default connect(mapStateToProps)(MyProfile);
