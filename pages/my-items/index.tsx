@@ -3,11 +3,13 @@ import { NextPage } from 'next'
 import React from 'react'
 
 const MyItems: NextPage = () => {
+  const isClient = typeof window !== 'undefined';
+
   return (
     <>
-    <MyProfile/>
+      {isClient && <MyProfile />}
     </>
-  )
+  );
 }
 
 export default MyItems;
