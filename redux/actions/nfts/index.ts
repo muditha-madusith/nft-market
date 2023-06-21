@@ -1,6 +1,15 @@
 import { Dispatch } from "redux"
-import { NftsDispatchTypes,GET_ALL_NFTS_LOADING,GET_ALL_NFTS_ERROR,GET_ALL_NFTS_SUCCESS } from "@/redux/types/NftsActionTypes"
+import { 
+    NftsDispatchTypes,
+    GET_ALL_NFTS_LOADING,
+    GET_ALL_NFTS_ERROR,
+    GET_ALL_NFTS_SUCCESS,
+    NFT_CREATE_LOADING,
+    NFT_CREATE_ERROR,
+    NFT_CREATE_SUCCESS
+} from "@/redux/types/NftsActionTypes"
 import axios from "axios"
+
 
 export const GetAllNfts = () => async(dispatch: Dispatch<NftsDispatchTypes>) => {
     console.log("GetAllNfts action called")
@@ -23,4 +32,30 @@ export const GetAllNfts = () => async(dispatch: Dispatch<NftsDispatchTypes>) => 
             type:GET_ALL_NFTS_ERROR
         })
     }
+}
+
+
+export const CreateNft = (formData: {}, token:string) => async(dispatch: Dispatch<NftsDispatchTypes>)=>{
+    console.log("CreateNft action called")
+ try {
+    dispatch({
+        type:NFT_CREATE_LOADING
+    })
+    const response = await axios.post(
+        'https://nft-market-api-production.up.railway.app/api/nft/create',
+        formData,
+        {
+          headers: {
+            Authorization: token
+          }
+        }
+    );
+
+    console.log(response.data,"response in CreateNft")
+ } catch (error) {
+    console.log(error,"error in CreateNft")
+    dispatch({
+        type:NFT_CREATE_ERROR
+    })
+ }
 }

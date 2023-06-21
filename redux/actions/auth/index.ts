@@ -19,7 +19,7 @@ export const RegisterUser = (name:string, email:string, password: string, passwo
     dispatch({
         type:USER_REGISTER_LOADING
     })
-    const response = await axios.post(`${process.env.BACKEND_BASE_URL!}/api/user/register`,{
+    const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/user/register`,{
         username:name,
         email:email,
         password:password,
@@ -41,7 +41,7 @@ export const LoginUser = ( email:string, password: string ) => async(dispatch: D
     dispatch({
         type:USER_LOGIN_LOADING
     })
-    const response = await axios.post(`${process.env.BACKEND_BASE_URL!}/api/user/login`,{
+    const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/user/login`,{
         email:email,
         password:password,
     })

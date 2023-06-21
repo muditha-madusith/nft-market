@@ -1,8 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import styles from './index.module.css';
+import { useCookies } from 'react-cookie';
 
-const ItmForm = () => {
+import { AppActions } from '@/redux/actions/AppActions';
+import { AppState } from '@/redux/store';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { CreateNft } from '@/redux/actions/nfts';
+
+interface LinkStateProps {
+
+}
+
+interface LinkDispatchProps {
+  CreateNft: (formData: {}, token: string) => void
+}
+
+interface ComponentsProps {
+}
+
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+
+const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
 
   const [image, setImage] = useState('');
   const [name, setName] = useState('');
@@ -18,36 +38,26 @@ const ItmForm = () => {
     setQuantity('');
   };
 
+  const [cookies, setCookie] = useCookies(['access_token']);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const token = cookies.access_token;
 
-    // Get the token from localStorage
-    const token = localStorage.getItem('token');
+        // Create an object with the form data
+        const formData = {
+          image,
+          name,
+          description,
+          price,
+          quantity
+        };
 
-    // Create an object with the form data
-    const formData = {
-      image,
-      name,
-      description,
-      price,
-      quantity
-    };
 
-    try {
-      // Make an API call to create the NFT
-      const response = await axios.post('https://nft-market-api-production.up.railway.app/api/nft/create', formData, {
-        headers: {
-          Authorization: `${token}` // Send the token in the Authorization header
-        }
-      });
-      // Handle the response
-      console.log(response.data);
-      resetForm(); 
-    } catch (error) {
-      // Handle the error
-      console.error(error);
-    }
+    CreateNft(formData, token)
+
+    resetForm(); 
   };
 
   return (
@@ -127,4 +137,15 @@ const ItmForm = () => {
   );
 };
 
-export default ItmForm;
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+
+});
+
+const mapDispatchToProps = (
+    dispatch: ThunkDispatch<any, any, AppActions>
+): LinkDispatchProps => ({
+  CreateNft: bindActionCreators(CreateNft, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItmForm);
