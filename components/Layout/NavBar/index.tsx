@@ -10,7 +10,6 @@ import { useRouter } from 'next/router';
 import Image from "next/image";
 import { Input } from '@mui/material';
 import ConnectPop from '../PopUp/ConnectPop';
-import axios from 'axios';
 
 import jwtDecode from 'jwt-decode';
 import { useCookies } from 'react-cookie';
@@ -22,6 +21,7 @@ import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 interface LinkStateProps {
+  auth: {};
 }
 
 interface LinkDispatchProps {
@@ -46,7 +46,7 @@ interface searchedNft {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
+const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
@@ -132,8 +132,6 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
             style={{ color: '#fff' }}
             className={styles.s_input}
             placeholder="Search Item Here"
-            // value={searchingName}
-            // onChange={(e) => setSearchingName(e.target.value)}
           />
         </div>
         <div>
@@ -141,15 +139,37 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser}) => {
             <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
               <li className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
             </Link>
-            <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
-            <li className={styles.li}>OwnNFT's</li>
+            { isLoggedIn ? 
+            (
+              <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
+            ) :
+             (
+              <li className={styles.notlogedLink}>My Items</li>
+             )
+            }
+
+            { isLoggedIn ? 
+            (
+              <li className={styles.li}>OwnNFT's</li>
+            ) :
+             (
+              <li className={styles.notlogedLink}>OwnNFT's</li>
+             )
+            }
           </ul>
         </div>
         <div className={styles.btns}>
           <div>
+            { isLoggedIn ? 
+            (
             <Link href="/create-item" style={{ textDecoration: 'inherit', padding: 0, margin: 0 }}>
               <button className={styles.cr_btn}>Create</button>
             </Link>
+            ) :
+             (
+              <button className={styles.notLogedcr_btn}>Create</button>
+             )
+            }
           </div>
           <div>
             {isLoggedIn ?

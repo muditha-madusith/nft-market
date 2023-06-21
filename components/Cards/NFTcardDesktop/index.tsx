@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-const NFTcardDesktop = ({ id, src, name, price, likes}:any) => {
+const NFTcardDesktop = ({ id, src, name, price }:any) => {
 
-  const [isLiked, setIsLiked] = useState(false);
 
-  const handleLike = () => {
-    setIsLiked(!isLiked);
-  };
 
   const router = useRouter();
 
