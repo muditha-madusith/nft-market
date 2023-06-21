@@ -57,9 +57,11 @@
 }
 .activeLink {
     color: #fff;
+    cursor: pointer;
 } 
 .li{
     color: #9c9fa3;
+    cursor: pointer;
 }
 .notlogedLink{
     color: #9c9fa3;
