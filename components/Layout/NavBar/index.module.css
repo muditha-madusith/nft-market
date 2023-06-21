@@ -73,7 +73,6 @@
     list-style: none;
     gap: 2rem;
     font-size: 16px;
-    cursor: pointer;
 }
 .btns{
     display: flex;
