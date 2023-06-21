@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, FunctionComponent } from 'react';
 import styles from './index.module.css';
 import SignUpBox from './SignUpBox';
-import axios from 'axios';
+
 import { AppState } from '@/redux/store';
 import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux';

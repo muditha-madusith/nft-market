@@ -39,10 +39,6 @@ const SellercardDesktop = ({index, src, name, id}: any) => {
           </div>
           <div className={styles.name_revenue}>
             <p className={styles.name}>{name}</p>
-            {/* <div className={styles.revenue}>
-              <p className={styles.p1}><b>{revenue}</b></p>
-              <p className={styles.p1}>ETH</p>
-            </div> */}
           </div>
         </div>
       </div>

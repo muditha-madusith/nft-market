@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './index.module.css'
 import CheckIcon from '@mui/icons-material/Check';
-import Link from 'next/link';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
@@ -40,10 +39,6 @@ const SellercardMobile = ({index, src, name, id}: any) => {
           </div>
           <div className={styles.name_revenue}>
             <p className={styles.name}>{name}</p>
-            {/* <div className={styles.revenue}>
-              <p className={styles.p1}><b>{revenue}</b></p>
-              <p className={styles.p1}>ETH</p>
-            </div> */}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 
-const NFTcardMobile = ({ id, src, name, price, likes}:any) => {
+const NFTcardMobile = ({ id, src, name, price }:any) => {
   
   const router = useRouter();
 
