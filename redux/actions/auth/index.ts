@@ -41,6 +41,7 @@ export const LoginUser = ( email:string, password: string ) => async(dispatch: D
     dispatch({
         type:USER_LOGIN_LOADING
     })
+
     const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/user/login`,{
         email:email,
         password:password,
@@ -57,7 +58,6 @@ export const LoginUser = ( email:string, password: string ) => async(dispatch: D
     if(response.data.token !== ""){
       return response.data.token
     }
-    // return await response.data.token 
  } catch (error) {
     console.log(error,"error in login user")
     dispatch({

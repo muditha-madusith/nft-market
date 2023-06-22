@@ -84,7 +84,7 @@
 .error{
     color: rgb(206, 44, 44);
     font-weight: 300;
-    text-decoration: underline;
+    font-size: x-small;
 }
 
 /* Responsive Design */
