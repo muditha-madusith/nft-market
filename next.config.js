@@ -3,7 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['drive.google.com']
+    domains: [
+      'drive.google.com','ibb.co',
+      'firebasestorage.googleapis.com'
+    ]
   },
   env:{
     BACKEND_BASE_URL:process.env.BACKEND_BASE_URL

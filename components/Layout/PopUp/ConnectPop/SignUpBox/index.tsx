@@ -1,16 +1,14 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import styles from "./index.module.css";
-import { useState, useEffect, useRef } from "react";
-
-//redux imports
-import { AppState } from "../../../../../redux/store";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import { AppActions } from "../../../../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
 import { RegisterUser } from "../../../../../redux/actions/auth/index";
-
-interface LinkStateProps {}
+import { initializeApp } from "firebase/app";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 interface LinkDispatchProps {
   RegisterUser: (
@@ -27,7 +25,7 @@ interface ComponentsProps {
   setShowConnectPop: any;
 }
 
-type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
+type Props = LinkDispatchProps & ComponentsProps;
 
 const SignUpBox: FunctionComponent<Props> = ({
   setShowSignUpBox,
@@ -36,8 +34,23 @@ const SignUpBox: FunctionComponent<Props> = ({
 }) => {
   const popRef: any = useRef<HTMLDivElement>(null);
 
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8XY4-unn7icu4TBc_q1eHHTW7rG1Yuh0",
+    authDomain: "nft-market-6c792.firebaseapp.com",
+    projectId: "nft-market-6c792",
+    storageBucket: "nft-market-6c792.appspot.com",
+    messagingSenderId: "3749974634",
+    appId: "1:3749974634:web:d1e955416eba89e62c7013",
+    measurementId: "G-TDELBPR48X"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig, 'myUniqueAppName');
+  const storage = getStorage(app);
+
   useEffect(() => {
-    const handleClickOutside: any = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (popRef.current && !popRef.current.contains(event.target as Node)) {
         setShowSignUpBox(false);
         setShowConnectPop(false);
@@ -50,7 +63,7 @@ const SignUpBox: FunctionComponent<Props> = ({
     };
   }, [setShowSignUpBox]);
 
-  const clickLoginBtn: any = () => {
+  const clickLoginBtn = () => {
     setShowSignUpBox(false);
   };
 
@@ -71,16 +84,53 @@ const SignUpBox: FunctionComponent<Props> = ({
     setError("");
   }
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); // prevent page from refreshing
     if (!email || !password || !username || !password2 || !profileUrl) {
-        setError("Please fill all fields with valid informations.");
-        return;
+      setError("Please fill all fields with valid information.");
+      return;
+    } else if (password.length < 8 || password2.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    } else if (password !== password2) {
+      setError("Password and Confirm Password must match.");
+      return;
     } else {
-        RegisterUser(username, email, password, password2, profileUrl);
-        setShowSignUpBox(false);
+      const fileInput = document.getElementById(
+        "profileUrl"
+      ) as HTMLInputElement | null;
+      
+      const file = fileInput?.files?.[0];
+
+      if (file) {
+        const uploadTask = uploadBytesResumable(ref(storage, `profileImages/${file.name}`), file);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot: UploadTaskSnapshot) => {
+            // Handle progress, if needed
+          },
+          (error) => {
+            setError("An error occurred while uploading the file.");
+            console.log(error);
+          },
+          () => {
+            // File uploaded successfully, retrieve the download URL
+            getDownloadURL(ref(storage, `profileImages/${file.name}`))
+              .then((url) => {
+                RegisterUser(username, email, password, password2, url);
+                setShowSignUpBox(false);
+              })
+              .catch((error) => {
+                setError("An error occurred while retrieving the file URL.");
+                console.log(error);
+              });
+          }
+        );
+      } else {
+        setError("Please select a profile image.");
+      }
     }
-    // RegisterUser(username, email, password, password2, profileUrl);
   }
 
   return (
@@ -107,9 +157,6 @@ const SignUpBox: FunctionComponent<Props> = ({
             name="email"
             id="email"
             value={email}
-            // onChange={(e) => {
-            //   setEmail(e.target.value);
-            // }}
             onChange={handleEmailChange}
             className={styles.inp_box}
           />
@@ -121,9 +168,6 @@ const SignUpBox: FunctionComponent<Props> = ({
             name="password"
             id="password"
             value={password}
-            // onChange={(e) => {
-            //   setPassword(e.target.value);
-            // }}
             onChange={handlePasswordChange}
             className={styles.inp_box}
           />
@@ -142,26 +186,19 @@ const SignUpBox: FunctionComponent<Props> = ({
           />
         </div>
         <div className={styles.sect}>
-          <label className={styles.label}>Upload your profile Image-Url</label>
-          <p className={styles.instructions}>
-            Upload your profile to Google drive and create it public. After that
-            copy the image id and upload it like this{" "}
-            <u>"https://drive.google.com/uc?id=YOUR-IMAGE-ID"</u> or any other
-            public image link (if don't have link use this{" "}
-            <u>
-              "https://drive.google.com/uc?id=1fwuIWzc76IShNnJJVw0mnqA0Y1jhKRSK")
-            </u>
-          </p>
-          <input
-            type="text"
-            name="profileUrl"
-            id="profileUrl"
-            value={profileUrl}
-            onChange={(e) => {
-              setProfileUrl(e.target.value);
-            }}
-            className={styles.inp_box}
-          />
+          <label className={styles.label}>Upload your profile Image</label>
+          <div className={styles.profile_inp_box}>
+            <input
+              type="file"
+              name="profileUrl"
+              id="profileUrl"
+              value={profileUrl}
+              onChange={(e) => {
+                setProfileUrl(e.target.value);
+              }}
+              className={styles.input}
+            />
+          </div>
         </div>
         {error && <p className={styles.error}>{error}</p>}
         <div className={styles.btn_div}>
@@ -180,12 +217,10 @@ const SignUpBox: FunctionComponent<Props> = ({
   );
 };
 
-const mapStateToProps = (state: AppState): LinkStateProps => ({});
-
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
   RegisterUser: bindActionCreators(RegisterUser, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpBox);
+export default connect(null, mapDispatchToProps)(SignUpBox);

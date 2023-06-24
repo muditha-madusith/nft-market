@@ -9,6 +9,7 @@ import {
     NFT_CREATE_SUCCESS
 } from "@/redux/types/NftsActionTypes"
 import axios from "axios"
+import { AlertDispatchTypes, SHOW_ALERT } from "@/redux/types/AlertActionType"
 
 
 export const GetAllNfts = () => async(dispatch: Dispatch<NftsDispatchTypes>) => {
@@ -35,7 +36,7 @@ export const GetAllNfts = () => async(dispatch: Dispatch<NftsDispatchTypes>) => 
 }
 
 
-export const CreateNft = (formData: {}, token:string) => async(dispatch: Dispatch<NftsDispatchTypes>)=>{
+export const CreateNft = (formData: {}, token:string) => async(dispatch: Dispatch<NftsDispatchTypes|AlertDispatchTypes>)=>{
     console.log("CreateNft action called")
  try {
     dispatch({
@@ -49,13 +50,21 @@ export const CreateNft = (formData: {}, token:string) => async(dispatch: Dispatc
             Authorization: token
           }
         }
-    );
+        );
 
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "NFT Created", status: "success"}
+        })
     console.log(response.data,"response in CreateNft")
  } catch (error) {
     console.log(error,"error in CreateNft")
     dispatch({
         type:NFT_CREATE_ERROR
+    })
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "NFT create unsuccessful", status: "error"}
     })
  }
 }

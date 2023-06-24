@@ -1,3 +1,4 @@
+import { AlertDispatchTypes } from "../types/AlertActionType";
 import { AuthDispatchTypes } from "../types/AuthActionTypes";
 import { NftsDispatchTypes } from "../types/NftsActionTypes";
 import { SearchNftsDispatchTypes } from "../types/SearchNftActionType";
@@ -12,3 +13,4 @@ export type AppActions =
   | SelectedUserDispatchTypes
   | SelectedNftDispatchTypes
   | SearchNftsDispatchTypes
+  | AlertDispatchTypes

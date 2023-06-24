@@ -15,6 +15,7 @@ export const GetSearchNft = (item_name:string) => async(dispatch: Dispatch<Searc
             type:GET_SEARCHED_NFTS_LOADING
         })
          await axios.get(`${process.env.BACKEND_BASE_URL}/api/nft/nfts/by-name/${item_name}`).then((res)=>{
+            console.log(res.data, "searched NFTs")
             dispatch({
                 type:GET_SEARCHED_NFTS_SUCCESS,
                 payload:res.data

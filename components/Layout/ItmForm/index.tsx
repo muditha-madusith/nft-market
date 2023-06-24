@@ -29,6 +29,7 @@ const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [error, setError] = useState("");
 
   const resetForm = () => {
     setImage('');
@@ -54,10 +55,32 @@ const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
           quantity
         };
 
-
-    CreateNft(formData, token)
-
-    resetForm(); 
+    if (!image && !name&& !description && !price && !quantity) {
+      setError("Please fill all input fields with valid information.")
+    } else if(!image){
+      setError("Image is required.")
+    } else if(!name){
+      setError("Name is required.")
+    } else if(!description){
+      setError("Description is required.")
+    } else if(!price){
+      setError("Price is required.")
+    } else if(!quantity){
+      setError("Quantity is required.")
+    } else if(image[0]!=="h") {
+      setError("Upload image url with given format.")
+    } else if(image[5]!==":") {
+      setError("Upload image url with given format.")
+    }  else if(image[13]!==".") {
+      setError("Upload image url with given format.")
+    } else if(image[23]!=="m") {
+      setError("Upload image url with given format.")
+    }
+    else {
+      CreateNft(formData, token)
+      resetForm(); 
+      setError("");
+    }
   };
 
   return (
@@ -126,6 +149,7 @@ const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
               />
             </div>
           </div>
+          {error && <p className={styles.error}>{error}</p>}
           <div className={styles.btn}>
             <button type="submit" className={styles.sbm_btn}>
               Create Item
