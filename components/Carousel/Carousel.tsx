@@ -39,14 +39,8 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
         const handleResize = () => {
             setWidth(window.innerWidth);
         };
-
-        // Set initial width on component mount
         setWidth(window.innerWidth);
-
-        // Add event listener for window resize
         window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -61,7 +55,7 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
 
     useEffect(() => {
         // Create the cardDetails array from the users data
-        const updatedCardDetails = users.map((user: { _id: any; username: any; profileUrl: any; }, index: number) => ({
+        const updatedCardDetails = users.map((user: { _id: number; username: string; profileUrl: string; }, index: number) => ({
             id: user._id,
             index: index + 1,
             src: user.profileUrl,
@@ -77,7 +71,7 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
             naturalSlideWidth={180}
             naturalSlideHeight={200}
             isIntrinsicHeight={true}
-            totalSlides={width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
+            totalSlides={Array.isArray(cardDetails) &&  width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
         >
             <Slider className={styles.slider}>
                 {cardDetails.map((card) => (
@@ -98,7 +92,7 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
             </Slider>
 
             <Slider className={styles.mobile_slider}>
-                {cardDetails.map((card) => (
+                {cardDetails.length < 0 && cardDetails.map((card) => (
                     <Slide
                         key={card.index}
                         className={styles.m_slide}

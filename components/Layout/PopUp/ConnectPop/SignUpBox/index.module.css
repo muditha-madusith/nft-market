@@ -39,6 +39,21 @@
     outline: none;
     padding: 0 1rem;
 }
+.input[type="file"] {
+    display: inline-block;
+}
+.profile_inp_box{
+    height: 40px;
+    color: white;
+    background-color: #3d3e47;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .btn_div{
     padding: 2rem;
     padding-top: 1rem;

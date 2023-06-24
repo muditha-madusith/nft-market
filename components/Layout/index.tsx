@@ -13,9 +13,13 @@ import { AppActions } from "../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
 import { GetUserDetails } from "../../redux/actions/auth/index"
 import { IAuth } from "../../redux/types/AuthActionTypes"
+import { Alert } from '@/redux/types/AlertActionType';
+import TostMessage from './Common/ToastMessage';
+import { toast } from 'react-toastify';
 
 interface LinkStateProps {
-  auth: IAuth
+  auth: IAuth;
+  alert: Alert;
 }
 
 interface LinkDispatchProps {
@@ -29,7 +33,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { userDetails } }) => {
+const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { userDetails }, alert: {alertMessage} }) => {
 
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
@@ -51,8 +55,20 @@ const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { us
     }
   }, [cookies])
 
+  useEffect(() => {
+    if ( alertMessage?.status === "success" ) {
+      toast.success(alertMessage?.message)
+    }
+    if ( alertMessage?.status === "error" ) {
+      toast.error(alertMessage?.message)
+    }
+  },[alertMessage])
+
   return (
     <div className={styles.mainDiv}>
+      <div>
+        <TostMessage />
+      </div>
       <div className={styles.topNav}>
         <NavIndex />
       </div>
@@ -68,7 +84,8 @@ const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { us
 
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
-  auth: state.auth
+  auth: state.auth,
+  alert: state.alert
 });
 
 const mapDispatchToProps = (

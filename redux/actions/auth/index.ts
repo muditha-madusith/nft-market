@@ -11,9 +11,10 @@ import {AuthDispatchTypes,USER_REGISTER_LOADING,USER_REGISTER_ERROR,USER_LOGIN_L
     USER_GETNFTS_SUCCESS
 } from "../../types/AuthActionTypes"
 import axios from "axios"
+import { AlertDispatchTypes, SHOW_ALERT } from "@/redux/types/AlertActionType"
 
 
-export const RegisterUser = (name:string, email:string, password: string, password2:string, profileUrl:string) => async(dispatch: Dispatch<AuthDispatchTypes>)=>{
+export const RegisterUser = (name:string, email:string, password: string, password2:string, profileUrl:string) => async(dispatch: Dispatch<AuthDispatchTypes|AlertDispatchTypes>)=>{
     console.log("RegisterUser action called")
  try {
     dispatch({
@@ -26,16 +27,24 @@ export const RegisterUser = (name:string, email:string, password: string, passwo
         password2:password2,
         profileUrl:profileUrl
     })
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "User Registration Success", status: "success"}
+    })
     console.log(response.data,"response in register user")
- } catch (error) {
+ } catch (error:any) {
     console.log(error,"error in register user")
     dispatch({
         type:USER_REGISTER_ERROR
     })
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "Error in User Registration", status: "error"}
+    })
  }
 }
 
-export const LoginUser = ( email:string, password: string ) => async(dispatch: Dispatch<AuthDispatchTypes>)=>{
+export const LoginUser = ( email:string, password: string ) => async(dispatch: Dispatch<AuthDispatchTypes|AlertDispatchTypes>)=>{
     console.log("LoginUser action called")
  try {
     dispatch({
@@ -55,13 +64,22 @@ export const LoginUser = ( email:string, password: string ) => async(dispatch: D
         type:USER_LOGIN_SUCCESS,
         payload:response.data
     })
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "User Login Success", status: "success"}
+    })
     if(response.data.token !== ""){
       return response.data.token
     }
+    
  } catch (error) {
-    console.log(error,"error in login user")
+    // console.log(error,"error in login user")
     dispatch({
         type:USER_LOGIN_ERROR
+    })
+    dispatch({
+        type: SHOW_ALERT,
+        payload: { message: "User Login failed", status: "error"}
     })
  }
 }
@@ -114,7 +132,7 @@ export const GetUserNfts = (id:string) => async(dispatch: Dispatch<AuthDispatchT
 }
 
 
-export const LogoutUser = () => async(dispatch: Dispatch<AuthDispatchTypes>) => {
+export const LogoutUser = () => async(dispatch: Dispatch<AuthDispatchTypes|AlertDispatchTypes>) => {
     console.log("LogoutUser action called")
     try {
         dispatch({
@@ -125,10 +143,14 @@ export const LogoutUser = () => async(dispatch: Dispatch<AuthDispatchTypes>) => 
                 type:USER_LOGOUT_SUCCESS,
                 payload:res.data
             })
+            dispatch({
+                type: SHOW_ALERT,
+                payload: { message: "User Logout Success", status: "error"}
+            }) 
         }).catch((error)=>{
             dispatch({
                 type:USER_LOGOUT_ERROR
-            })  
+            }) 
         })
     } catch (error) {
         dispatch({

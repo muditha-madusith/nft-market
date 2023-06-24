@@ -15,6 +15,7 @@ import jwtDecode from 'jwt-decode';
 import { useCookies } from 'react-cookie';
 import { AppActions } from '@/redux/actions/AppActions';
 import { GetUserDetails, LogoutUser } from '@/redux/actions/auth';
+import { GetSearchNft } from '@/redux/actions/searchnfts';
 import { AppState } from '@/redux/store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,10 +23,12 @@ import { ThunkDispatch } from 'redux-thunk';
 
 interface LinkStateProps {
   auth: {};
+  snft: any;
 }
 
 interface LinkDispatchProps {
   LogoutUser:() => any
+  GetSearchNft:(item_name: string) => any
 }
 
 interface ComponentsProps {
@@ -46,11 +49,15 @@ interface searchedNft {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
+const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, snft}) => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<any>(false);
+  const [searchName, setSearchName]: any = useState("");
+
+  const [searchedNfts, setSearchedNfts]: any = useState("")
+
 
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
@@ -105,6 +112,22 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
     }
   };
 
+
+  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
+    setSearchName(e.target.value);
+    GetSearchNft(searchName);
+  }
+
+  useEffect (() => {
+    if(snft){
+      setSearchedNfts(snft);
+    }
+  })
+
+  function handleGetSearchNft() {
+    console.log(searchedNfts)
+  }
+
   return (
     <>
       {showConnectPop && (
@@ -126,12 +149,13 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
           />
         </Link>
         <div className={styles.search_box}>
-          <div className={styles.s_icon} ><SearchIcon /></div>
+          <div className={styles.s_icon} onClick={handleGetSearchNft}><SearchIcon /></div>
           {/* <SearchIcon /> */}
           <Input
             style={{ color: '#fff' }}
             className={styles.s_input}
             placeholder="Search Item Here"
+            onChange={handleSearchInput}
           />
         </div>
         <div>
@@ -198,11 +222,12 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
           />
         </Link>
         <div className={styles.mobile_search_box} style={{ display: display === 'none' ? 'flex' : 'none' }}>
-          <SearchIcon />
+          <div className={styles.s_icon} onClick={handleGetSearchNft}><SearchIcon /></div>
           <Input
             style={{ color: '#fff' }}
             className={styles.mobile_s_input}
             placeholder="Search Item Here"
+            onChange={handleSearchInput}
           />
         </div>
         <div className={styles.humburg} onClick={clickBtn}>
@@ -244,13 +269,15 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth}) => {
 
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
-  auth: state.auth
+  auth: state.auth,
+  snft: state.searchNft.nfts
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
-  LogoutUser: bindActionCreators(LogoutUser, dispatch)
+  LogoutUser: bindActionCreators(LogoutUser, dispatch),
+  GetSearchNft: bindActionCreators(GetSearchNft, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavIndex);

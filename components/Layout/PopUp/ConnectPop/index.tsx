@@ -66,7 +66,12 @@ const ConnectPop: FunctionComponent<Props> = ({
     if (!password) {
       setPasswordError("Please enter Password.");
       return;
-    } else {
+    } 
+    if (password.length < 8) {
+      setPasswordError("Password must be 8 characters");
+      return;
+    }
+    else {
         token = await LoginUser(email, password);
     }
 
