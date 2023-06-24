@@ -5,11 +5,13 @@ import userReducer from "./users";
 import nftReducer from "./nfts";
 import selectedUserReducer from "./selecteduser";
 import selectedNftReducer from "./selectednft";
+import searchNftReducer from "./searchnfts";
 
 export const RootReducer = combineReducers({
   auth:authReducer,
   user: userReducer,
   nft: nftReducer,
   selectedUser: selectedUserReducer,
-  selectedNft: selectedNftReducer
+  selectedNft: selectedNftReducer,
+  searchNft: searchNftReducer
 });
