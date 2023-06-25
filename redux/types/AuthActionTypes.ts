@@ -51,9 +51,6 @@ export type userRegisterError = {
 };
 export type userRegisterSuccess = {
   type: typeof USER_REGISTER_SUCCESS;
-  payload: {
-    token: string;
-  };
 };
 
 //user login

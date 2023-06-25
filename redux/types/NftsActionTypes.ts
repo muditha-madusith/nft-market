@@ -51,15 +51,6 @@ export type nftCreateError = {
 };
 export type nftCreateSuccess = {
   type: typeof NFT_CREATE_SUCCESS;
-  payload: {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    image: string;
-    creator: string;
-    quantity: number;
-  };
 };
 
 

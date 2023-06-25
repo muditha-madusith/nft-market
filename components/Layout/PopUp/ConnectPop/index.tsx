@@ -10,7 +10,9 @@ import { LoginUser } from "@/redux/actions/auth";
 import { AppActions } from "@/redux/actions/AppActions";
 import { useCookies } from "react-cookie";
 
-interface LinkStateProps {}
+interface LinkStateProps {
+  userLoginLoading: boolean;
+}
 
 interface LinkDispatchProps {
   LoginUser: (email: string, password: string) => any;
@@ -27,6 +29,7 @@ const ConnectPop: FunctionComponent<Props> = ({
   setShowConnectPop,
   setIsLoggedIn,
   LoginUser,
+  userLoginLoading
 }) => {
   const [showSignUpBox, setShowSignUpBox] = useState(false);
   const popRef: any = useRef<HTMLDivElement>(null);
@@ -66,13 +69,13 @@ const ConnectPop: FunctionComponent<Props> = ({
     if (!password) {
       setPasswordError("Please enter Password.");
       return;
-    } 
+    }
     if (password.length < 8) {
       setPasswordError("Password must be 8 characters");
       return;
     }
     else {
-        token = await LoginUser(email, password);
+      token = await LoginUser(email, password);
     }
 
     // const token = await LoginUser(email, password);
@@ -131,9 +134,21 @@ const ConnectPop: FunctionComponent<Props> = ({
               {passwordError && <p className={styles.error}>{passwordError}</p>}
             </div>
             <div className={styles.btn_div}>
-              <button type="submit" className={styles.submit_btn}>
+              {/* <button type="submit" className={styles.submit_btn}>
                 Login
-              </button>
+              </button> */}
+              {userLoginLoading ?
+                (
+                  <button className={styles.submit_btn}>
+                    <div className={styles.lds_ellipsis}><div></div><div></div><div></div><div></div></div>
+                  </button>
+                ) :
+                (
+                  <button type="submit" className={styles.submit_btn}>
+                    Login
+                  </button>
+                )
+              }
             </div>
           </form>
           <p className={styles.p}>
@@ -148,7 +163,9 @@ const ConnectPop: FunctionComponent<Props> = ({
   );
 };
 
-const mapStateToProps = (state: AppState): LinkStateProps => ({});
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  userLoginLoading: state.auth.loading
+});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>

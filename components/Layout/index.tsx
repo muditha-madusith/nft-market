@@ -85,7 +85,7 @@ const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { us
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
   auth: state.auth,
-  alert: state.alert
+  alert: state.alert,
 });
 
 const mapDispatchToProps = (

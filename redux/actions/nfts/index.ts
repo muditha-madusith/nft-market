@@ -50,12 +50,15 @@ export const CreateNft = (formData: {}, token:string) => async(dispatch: Dispatc
             Authorization: token
           }
         }
-        );
-
+    );
+    dispatch({
+        type:NFT_CREATE_SUCCESS,
+    })
     dispatch({
         type: SHOW_ALERT,
         payload: { message: "NFT Created", status: "success"}
-        })
+    })
+
     console.log(response.data,"response in CreateNft")
  } catch (error) {
     console.log(error,"error in CreateNft")
