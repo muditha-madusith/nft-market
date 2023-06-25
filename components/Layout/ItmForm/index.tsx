@@ -19,17 +19,19 @@ import {
 import { initializeApp } from "firebase/app";
 
 
-interface LinkStateProps {}
+interface LinkStateProps {
+  nftCreateLoading: boolean;
+}
 
 interface LinkDispatchProps {
   CreateNft: (formData: {}, token: string) => void;
 }
 
-interface ComponentsProps {}
+interface ComponentsProps { }
 
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
-const ItmForm: FunctionComponent<Props> = ({ CreateNft }) => {
+const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading }) => {
   const firebaseConfig = {
     apiKey: "AIzaSyA8XY4-unn7icu4TBc_q1eHHTW7rG1Yuh0",
     authDomain: "nft-market-6c792.firebaseapp.com",
@@ -199,9 +201,18 @@ const ItmForm: FunctionComponent<Props> = ({ CreateNft }) => {
           </div>
           {error && <p className={styles.error}>{error}</p>}
           <div className={styles.btn}>
-            <button type="submit" className={styles.sbm_btn}>
-              Create Item
-            </button>
+            {nftCreateLoading ?
+              (
+                <button className={styles.sbm_btn}>
+                  <div className={styles.lds_ellipsis}><div></div><div></div><div></div><div></div></div>
+                </button>
+              ) :
+              (
+                <button type="submit" className={styles.sbm_btn}>
+                  Create Item
+                </button>
+              )
+            }
           </div>
         </form>
       </div>
@@ -209,7 +220,11 @@ const ItmForm: FunctionComponent<Props> = ({ CreateNft }) => {
   );
 };
 
-const mapStateToProps = (state: AppState): LinkStateProps => ({});
+
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  nftCreateLoading: state.nft.loading
+});
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>

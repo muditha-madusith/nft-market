@@ -13,6 +13,9 @@ import {
   USER_GETNFTS_ERROR,
   USER_GETNFTS_LOADING,
   USER_GETNFTS_SUCCESS,
+  USER_REGISTER_LOADING,
+  USER_REGISTER_SUCCESS,
+  USER_REGISTER_ERROR,
 } from "../../types/AuthActionTypes";
 
 const initialState: IAuth = {
@@ -24,15 +27,31 @@ const initialState: IAuth = {
     email: "",
     profile_pic: "",
   },
-  userNfts: []
+  userNfts: [],
 };
-
 
 const authReducer = (
   state: IAuth = initialState,
   action: AuthDispatchTypes
 ) => {
   switch (action.type) {
+
+    case USER_REGISTER_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case USER_REGISTER_ERROR:
+      return {
+        ...state,
+        loading: false,
+      };
+
 
     case USER_LOGIN_LOADING:
       return {
@@ -50,7 +69,6 @@ const authReducer = (
         loading: false,
         token: action.payload.token,
       };
-
 
     case USER_LOGOUT_LOADING:
       return {
@@ -74,7 +92,6 @@ const authReducer = (
         },
       };
 
-
     case USER_GET_LOADING:
       return {
         ...state,
@@ -97,22 +114,22 @@ const authReducer = (
         },
       };
 
-      case USER_GETNFTS_LOADING:
-        return {
-          ...state,
-          loading: true,
-        };
-      case USER_GETNFTS_ERROR:
-        return {
-          ...state,
-          loading: false,
-        };
-      case USER_GETNFTS_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          userNfts: action.payload
-        };
+    case USER_GETNFTS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case USER_GETNFTS_ERROR:
+      return {
+        ...state,
+        loading: false,
+      };
+    case USER_GETNFTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        userNfts: action.payload,
+      };
     default:
       return state;
   }

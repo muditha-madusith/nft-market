@@ -27,8 +27,8 @@ interface LinkStateProps {
 }
 
 interface LinkDispatchProps {
-  LogoutUser:() => any
-  GetSearchNft:(item_name: string) => any
+  LogoutUser: () => any
+  GetSearchNft: (item_name: string) => any
 }
 
 interface ComponentsProps {
@@ -49,7 +49,7 @@ interface searchedNft {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, snft}) => {
+const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, snft }) => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
@@ -65,7 +65,7 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, sn
 
     const checkTokenExpiration = () => {
       const token = cookies.access_token;
-      
+
       if (token) {
         const decodedToken = jwtDecode(token) as { [key: string]: any };
         const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
@@ -81,7 +81,7 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, sn
         setIsLoggedIn(false);
       }
     }
-    
+
     checkTokenExpiration();
   }, [cookies]);
 
@@ -118,8 +118,8 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, sn
     GetSearchNft(searchName);
   }
 
-  useEffect (() => {
-    if(snft){
+  useEffect(() => {
+    if (snft) {
       setSearchedNfts(snft);
     }
   })
@@ -163,36 +163,36 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, sn
             <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
               <li className={router.asPath === '/' ? styles.activeLink : styles.li}>Explore</li>
             </Link>
-            { isLoggedIn ? 
-            (
-              <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
-            ) :
-             (
-              <li className={styles.notlogedLink}>My Items</li>
-             )
+            {isLoggedIn ?
+              (
+                <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
+              ) :
+              (
+                <li className={styles.notlogedLink} title='Login please'>My Items</li>
+              )
             }
 
-            { isLoggedIn ? 
-            (
-              <li className={styles.li}>OwnNFT's</li>
-            ) :
-             (
-              <li className={styles.notlogedLink}>OwnNFT's</li>
-             )
+            {isLoggedIn ?
+              (
+                <li className={styles.li}>OwnNFT's</li>
+              ) :
+              (
+                <li className={styles.notlogedLink} title='Login please'>OwnNFT's</li>
+              )
             }
           </ul>
         </div>
         <div className={styles.btns}>
           <div>
-            { isLoggedIn ? 
-            (
-            <Link href="/create-item" style={{ textDecoration: 'inherit', padding: 0, margin: 0 }}>
-              <button className={styles.cr_btn}>Create</button>
-            </Link>
-            ) :
-             (
-              <button className={styles.notLogedcr_btn}>Create</button>
-             )
+            {isLoggedIn ?
+              (
+                <Link href="/create-item" style={{ textDecoration: 'inherit', padding: 0, margin: 0 }}>
+                  <button className={styles.cr_btn}>Create</button>
+                </Link>
+              ) :
+              (
+                <button className={styles.notLogedcr_btn} title='Login please'>Create</button>
+              )
             }
           </div>
           <div>
@@ -240,13 +240,38 @@ const NavIndex: FunctionComponent<Props>  = ({LogoutUser, auth, GetSearchNft, sn
         <Link href="/" style={{ color: 'white', textDecoration: 'none', padding: 0, margin: 0 }} >
           <p className={router.asPath === '/' ? styles.activeP1 : styles.p1}>Explore</p>
         </Link>
-        <p className={styles.p1} onClick={navigateToMyItems}>My Items</p>
-        <p className={styles.p1}>OwnNFT's</p>
+        {isLoggedIn ?
+          (
+            <p className={styles.p1} onClick={navigateToMyItems}>My Items</p>
+          ) :
+          (
+            <p className={styles.p1_notlogged}>My Items</p>
+          )
+        }
+
+        {isLoggedIn ?
+          (
+            <p className={styles.p1}>OwnNFT's</p>
+          ) :
+          (
+            <p className={styles.p1_notlogged}>OwnNFT's</p>
+          )
+        }
         <div className={styles.btns1}>
           <div>
-            <Link href="/create-item" style={{ textDecoration: 'inherit' }} >
-              <button className={styles.cr1_btn}>Create</button>
-            </Link>
+            {
+              isLoggedIn ?
+                (
+                  <Link href="/create-item" style={{ textDecoration: 'inherit' }} >
+                    <button className={styles.cr1_btn}>Create</button>
+                  </Link>
+                ) : 
+                (
+                  <Link href="/" style={{ textDecoration: 'inherit' }} >
+                    <button className={styles.cr1_btn_notL}>Create</button>
+                  </Link> 
+                )
+            }
           </div>
           <div>
             {

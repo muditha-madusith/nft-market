@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import {AuthDispatchTypes,USER_REGISTER_LOADING,USER_REGISTER_ERROR,USER_LOGIN_LOADING,USER_LOGIN_ERROR,USER_LOGIN_SUCCESS ,
+import {AuthDispatchTypes,USER_REGISTER_LOADING,USER_REGISTER_ERROR,USER_LOGIN_LOADING,USER_LOGIN_ERROR,USER_LOGIN_SUCCESS,
     USER_GET_LOADING,
     USER_GET_ERROR,
     USER_GET_SUCCESS,
@@ -8,7 +8,8 @@ import {AuthDispatchTypes,USER_REGISTER_LOADING,USER_REGISTER_ERROR,USER_LOGIN_L
     USER_LOGOUT_SUCCESS,
     USER_GETNFTS_ERROR,
     USER_GETNFTS_LOADING,
-    USER_GETNFTS_SUCCESS
+    USER_GETNFTS_SUCCESS,
+    USER_REGISTER_SUCCESS
 } from "../../types/AuthActionTypes"
 import axios from "axios"
 import { AlertDispatchTypes, SHOW_ALERT } from "@/redux/types/AlertActionType"
@@ -18,7 +19,8 @@ export const RegisterUser = (name:string, email:string, password: string, passwo
     console.log("RegisterUser action called")
  try {
     dispatch({
-        type:USER_REGISTER_LOADING
+        type:USER_REGISTER_LOADING,
+        loading: true
     })
     const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/user/register`,{
         username:name,
@@ -28,6 +30,9 @@ export const RegisterUser = (name:string, email:string, password: string, passwo
         profileUrl:profileUrl
     })
     dispatch({
+        type: USER_REGISTER_SUCCESS,
+    })
+    dispatch({
         type: SHOW_ALERT,
         payload: { message: "User Registration Success", status: "success"}
     })
@@ -35,7 +40,8 @@ export const RegisterUser = (name:string, email:string, password: string, passwo
  } catch (error:any) {
     console.log(error,"error in register user")
     dispatch({
-        type:USER_REGISTER_ERROR
+        type:USER_REGISTER_ERROR,
+        loading: false
     })
     dispatch({
         type: SHOW_ALERT,
@@ -145,7 +151,7 @@ export const LogoutUser = () => async(dispatch: Dispatch<AuthDispatchTypes|Alert
             })
             dispatch({
                 type: SHOW_ALERT,
-                payload: { message: "User Logout Success", status: "error"}
+                payload: { message: "User Logout Success", status: "success"}
             }) 
         }).catch((error)=>{
             dispatch({

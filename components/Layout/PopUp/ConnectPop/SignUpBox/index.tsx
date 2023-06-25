@@ -13,8 +13,11 @@ import { AppActions } from "../../../../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
 import { RegisterUser } from "../../../../../redux/actions/auth/index";
 import { initializeApp } from "firebase/app";
+import { AppState } from "@/redux/store";
 
-
+interface LinkStateProps {
+  userCreateLoading: boolean;
+}
 interface LinkDispatchProps {
   RegisterUser: (
     name: string,
@@ -30,12 +33,13 @@ interface ComponentsProps {
   setShowConnectPop: any;
 }
 
-type Props = LinkDispatchProps & ComponentsProps;
+type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 const SignUpBox: FunctionComponent<Props> = ({
   setShowSignUpBox,
   setShowConnectPop,
   RegisterUser,
+  userCreateLoading
 }) => {
   const popRef: any = useRef<HTMLDivElement>(null);
 
@@ -93,8 +97,11 @@ const SignUpBox: FunctionComponent<Props> = ({
     if (!email || !password || !username || !password2 || !profileUrl) {
       setError("Please fill all fields with valid information.");
       return;
-    } else if (password.length < 8 || password2.length < 8) {
-      setError("Password must be at least 8 characters long.");
+    } else if (username.length >= 10) {
+      setError("Only type your firstname");
+      return;
+    }else if (password.length < 8 || password2.length < 8) {
+      setError("Password must be 8 characters long.");
       return;
     } else if (password !== password2) {
       setError("Password and Confirm Password must match.");
@@ -148,8 +155,9 @@ const SignUpBox: FunctionComponent<Props> = ({
           <label className={styles.label}>Name</label>
           <input
             type="text"
-            name="name2"
+            name="name"
             id="name"
+            placeholder="Only type your Firstname."
             value={username}
             onChange={(e) => {
               setUserName(e.target.value);
@@ -163,6 +171,7 @@ const SignUpBox: FunctionComponent<Props> = ({
             type="email"
             name="email"
             id="email"
+            placeholder="example@gmail.com"
             value={email}
             onChange={handleEmailChange}
             className={styles.inp_box}
@@ -174,6 +183,7 @@ const SignUpBox: FunctionComponent<Props> = ({
             type="password"
             name="password"
             id="password"
+            placeholder="Password must be 8 characters long."
             value={password}
             onChange={handlePasswordChange}
             className={styles.inp_box}
@@ -184,6 +194,7 @@ const SignUpBox: FunctionComponent<Props> = ({
           <input
             type="password"
             name="password2"
+            placeholder="Confirm your password"
             id="password2"
             value={password2}
             onChange={(e) => {
@@ -209,9 +220,18 @@ const SignUpBox: FunctionComponent<Props> = ({
         </div>
         {error && <p className={styles.error}>{error}</p>}
         <div className={styles.btn_div}>
-          <button type="submit" className={styles.submit_btn}>
-            Create Account
-          </button>
+          {userCreateLoading ?
+            (
+              <button className={styles.submit_btn}>
+                <div className={styles.lds_ellipsis}><div></div><div></div><div></div><div></div></div>
+              </button>
+            ) :
+            (
+              <button type="submit" className={styles.submit_btn}>
+                Create Item
+              </button>
+            )
+          }
         </div>
       </form>
       <p className={styles.p}>
@@ -224,10 +244,15 @@ const SignUpBox: FunctionComponent<Props> = ({
   );
 };
 
+
+const mapStateToProps = (state: AppState): LinkStateProps => ({
+  userCreateLoading: state.auth.loading
+});
+
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
   RegisterUser: bindActionCreators(RegisterUser, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(SignUpBox);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpBox);
