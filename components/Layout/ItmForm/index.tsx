@@ -1,85 +1,133 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import styles from './index.module.css';
-import { useCookies } from 'react-cookie';
+import React, { FunctionComponent, useEffect, useState } from "react";
+import styles from "./index.module.css";
+import { useCookies } from "react-cookie";
 
-import { AppActions } from '@/redux/actions/AppActions';
-import { AppState } from '@/redux/store';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { CreateNft } from '@/redux/actions/nfts';
+import { AppActions } from "@/redux/actions/AppActions";
+import { AppState } from "@/redux/store";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { ThunkDispatch } from "redux-thunk";
+import { CreateNft } from "@/redux/actions/nfts";
 
-interface LinkStateProps {
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  UploadTaskSnapshot,
+} from "firebase/storage";
+import { initializeApp } from "firebase/app";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-}
+interface LinkStateProps {}
 
 interface LinkDispatchProps {
-  CreateNft: (formData: {}, token: string) => void
+  CreateNft: (formData: {}, token: string) => void;
 }
 
-interface ComponentsProps {
-}
+interface ComponentsProps {}
 
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
-const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
+const ItmForm: FunctionComponent<Props> = ({ CreateNft }) => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyA8XY4-unn7icu4TBc_q1eHHTW7rG1Yuh0",
+    authDomain: "nft-market-6c792.firebaseapp.com",
+    projectId: "nft-market-6c792",
+    storageBucket: "nft-market-6c792.appspot.com",
+    messagingSenderId: "3749974634",
+    appId: "1:3749974634:web:d1e955416eba89e62c7013",
+    measurementId: "G-TDELBPR48X",
+  };
 
-  const [image, setImage] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig, "myUniqueAppName");
+  const storage = getStorage(app);
+
+  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [quantity, setQuantity] = useState("");
   const [error, setError] = useState("");
 
   const resetForm = () => {
-    setImage('');
-    setName('');
-    setDescription('');
-    setPrice('');
-    setQuantity('');
+    setImage("");
+    setName("");
+    setDescription("");
+    setPrice("");
+    setQuantity("");
   };
 
-  const [cookies, setCookie] = useCookies(['access_token']);
+  const [cookies, setCookie] = useCookies(["access_token"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const token = cookies.access_token;
 
-        // Create an object with the form data
-        const formData = {
-          image,
-          name,
-          description,
-          price,
-          quantity
-        };
+    // Create an object with the form data
+    const formData = {
+      image,
+      name,
+      description,
+      price,
+      quantity,
+    };
 
-    if (!image && !name&& !description && !price && !quantity) {
-      setError("Please fill all input fields with valid information.")
-    } else if(!image){
-      setError("Image is required.")
-    } else if(!name){
-      setError("Name is required.")
-    } else if(!description){
-      setError("Description is required.")
-    } else if(!price){
-      setError("Price is required.")
-    } else if(!quantity){
-      setError("Quantity is required.")
-    } else if(image[0]!=="h") {
-      setError("Upload image url with given format.")
-    } else if(image[5]!==":") {
-      setError("Upload image url with given format.")
-    }  else if(image[13]!==".") {
-      setError("Upload image url with given format.")
-    } else if(image[23]!=="m") {
-      setError("Upload image url with given format.")
-    }
-    else {
-      CreateNft(formData, token)
-      resetForm(); 
-      setError("");
+    if (!image && !name && !description && !price && !quantity) {
+      setError("Please fill all input fields with valid information.");
+    } else if (!image) {
+      setError("Image is required.");
+    } else if (!name) {
+      setError("Name is required.");
+    } else if (!description) {
+      setError("Description is required.");
+    } else if (!price) {
+      setError("Price is required.");
+    } else if (!quantity) {
+      setError("Quantity is required.");
+    } else {
+      const fileInput = document.getElementById(
+        "nftImg"
+      ) as HTMLInputElement | null;
+
+      const file = fileInput?.files?.[0];
+
+      if (file) {
+        const uploadTask = uploadBytesResumable(
+          ref(storage, `nftS/${file.name}`),
+          file
+        );
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot: UploadTaskSnapshot) => {
+            // Handle progress, if needed
+          },
+          (error) => {
+            setError("An error occurred while uploading the file.");
+            console.log(error);
+          },
+          () => {
+            // File uploaded successfully, retrieve the download URL
+            getDownloadURL(ref(storage, `nftS/${file.name}`))
+              .then((url) => {
+                formData.image = url;
+                CreateNft(formData, token);
+                resetForm();
+                setError("");
+              })
+              .catch((error) => {
+                setError("An error occurred while retrieving the file URL.");
+                console.log(error);
+              });
+          }
+        );
+      } else {
+        setError("Please select a profile image.");
+      }
     }
   };
 
@@ -90,15 +138,16 @@ const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
           <h3 className={styles.h3}>Create new Item</h3>
           <div className={styles.sect1}>
             <label className={styles.p}>Upload Link</label>
-            <p className={styles.p1}>Upload your NFT to Google drive and create it public. <br /> After that copy the image id and upload it like this "https://drive.google.com/uc?id=YOUR-IMAGE-ID" <br />or any other public image link.</p>
-            <input
-              type="text"
-              name="nftLink"
-              className={styles.namebox}
-              placeholder="Your NFT uploaded link"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-            />
+            <div className={styles.filebox}>
+              <input
+                type="file"
+                name="nftImg"
+                className={styles.input}
+                id="nftImg"
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
+              />
+            </div>
           </div>
           <div className={styles.sect2}>
             <label className={styles.p}>Name</label>
@@ -161,15 +210,12 @@ const ItmForm: FunctionComponent<Props> = ({CreateNft}) => {
   );
 };
 
-
-const mapStateToProps = (state: AppState): LinkStateProps => ({
-
-});
+const mapStateToProps = (state: AppState): LinkStateProps => ({});
 
 const mapDispatchToProps = (
-    dispatch: ThunkDispatch<any, any, AppActions>
+  dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
-  CreateNft: bindActionCreators(CreateNft, dispatch)
+  CreateNft: bindActionCreators(CreateNft, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItmForm);
