@@ -17,8 +17,7 @@ import {
   UploadTaskSnapshot,
 } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import * as dotenv from "dotenv";
-dotenv.config();
+
 
 interface LinkStateProps {}
 

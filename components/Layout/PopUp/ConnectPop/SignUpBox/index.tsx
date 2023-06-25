@@ -13,8 +13,7 @@ import { AppActions } from "../../../../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
 import { RegisterUser } from "../../../../../redux/actions/auth/index";
 import { initializeApp } from "firebase/app";
-import * as dotenv from "dotenv";
-dotenv.config();
+
 
 interface LinkDispatchProps {
   RegisterUser: (
