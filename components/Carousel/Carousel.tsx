@@ -74,7 +74,7 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
             totalSlides={Array.isArray(cardDetails) &&  width > 425 ? cardDetails.length / 4 : cardDetails.length / 2}
         >
             <Slider className={styles.slider}>
-                {cardDetails.map((card) => (
+                {cardDetails.length > 0 &&cardDetails.map((card) => (
                     <Slide
                         key={card.index}
                         className={styles.slide}
@@ -92,7 +92,7 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
             </Slider>
 
             <Slider className={styles.mobile_slider}>
-                {cardDetails.length < 0 && cardDetails.map((card) => (
+                {cardDetails.length > 0 && cardDetails.map((card) => (
                     <Slide
                         key={card.index}
                         className={styles.m_slide}
