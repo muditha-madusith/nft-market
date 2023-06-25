@@ -22,6 +22,7 @@ type NFT = {
 
 interface LinkStateProps {
   nfts: any[];
+  alert: any;
 }
 
 interface LinkDispatchProps {
@@ -34,7 +35,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const Grid: FunctionComponent<Props> = ({GetAllNfts, nfts, }) => {
+const Grid: FunctionComponent<Props> = ({GetAllNfts, nfts, alert}) => {
   
   const [nftsDetails, setNftsDetails] = useState<NFT[]>([]);
   const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
@@ -46,7 +47,7 @@ const Grid: FunctionComponent<Props> = ({GetAllNfts, nfts, }) => {
   useEffect(() => {
     setIsClient(true);
     GetAllNfts();
-  }, []);
+  }, [alert]);
 
   useEffect(() => {
     setNftsDetails(nfts);
@@ -117,6 +118,7 @@ const Grid: FunctionComponent<Props> = ({GetAllNfts, nfts, }) => {
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
   nfts: state.nft.nfts,
+  alert: state.alert.alertMessage
 });
 
 const mapDispatchToProps = (

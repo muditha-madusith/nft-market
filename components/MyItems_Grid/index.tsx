@@ -23,6 +23,7 @@ type NFT = {
 interface LinkStateProps {
   myNfts: any[];
   id: string;
+  alert: any;
 }
 
 interface LinkDispatchProps {
@@ -34,7 +35,7 @@ interface ComponentsProps {
 
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
-const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
+const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts, alert }) => {
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
   const [showLoadMore, setShowLoadMore] = useState(true);
@@ -51,18 +52,14 @@ const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
   }, []);
 
   useEffect(() => {
-    if (nfts.length === 0) {
       GetUserNfts(id);
-    }
-  }, [nfts.length, GetUserNfts, id]);
+  }, [alert]);
 
   useEffect(() => {
-    if (myNfts.length > 0) {
       setNfts(myNfts);
       setVisibleNfts(myNfts.slice(0, 8));
       setShowLoadMore(myNfts.length > 8);
-    }
-  }, [myNfts]);
+  }, [myNfts,alert]);
 
   const handleLoadMore = () => {
     const currentlyVisible = visibleNfts.length;
@@ -116,7 +113,8 @@ const MyItemGrid: FunctionComponent<Props> = ({ id, GetUserNfts, myNfts }) => {
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
   myNfts: state.auth.userNfts,
-  id: state.auth.userDetails.id
+  id: state.auth.userDetails.id,
+  alert: state.alert.alertMessage
 });
 
 const mapDispatchToProps = (
