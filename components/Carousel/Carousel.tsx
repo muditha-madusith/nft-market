@@ -18,6 +18,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 interface LinkStateProps {
     users: any[];
+    alert: any;
 }
 
 interface LinkDispatchProps {
@@ -30,7 +31,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
+const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users, alert }) => {
 
     const [width, setWidth]: any = useState(0);
     const [cardDetails, setCardDetails] = useState<Array<{ id: number; index: number; name: string; src: string; }>>([]);
@@ -48,10 +49,8 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
 
     
     useEffect(() => {
-        if (cardDetails.length === 0) {
             GetAllUsers();
-        }
-    }, []);
+    }, [alert]);
 
     useEffect(() => {
         // Create the cardDetails array from the users data
@@ -122,7 +121,8 @@ const Carousel: FunctionComponent<Props> = ({ GetAllUsers, users }) => {
 
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
-    users: state.user.users
+    users: state.user.users,
+    alert: state.alert.alertMessage
 });
 
 const mapDispatchToProps = (

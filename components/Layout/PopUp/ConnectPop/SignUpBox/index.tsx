@@ -1,6 +1,12 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import styles from "./index.module.css";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  UploadTaskSnapshot,
+} from "firebase/storage";
 import { ThunkDispatch } from "redux-thunk";
 import { connect } from "react-redux";
 import { AppActions } from "../../../../../redux/actions/AppActions";
@@ -34,7 +40,6 @@ const SignUpBox: FunctionComponent<Props> = ({
 }) => {
   const popRef: any = useRef<HTMLDivElement>(null);
 
-  
   const firebaseConfig = {
     apiKey: "AIzaSyA8XY4-unn7icu4TBc_q1eHHTW7rG1Yuh0",
     authDomain: "nft-market-6c792.firebaseapp.com",
@@ -42,11 +47,11 @@ const SignUpBox: FunctionComponent<Props> = ({
     storageBucket: "nft-market-6c792.appspot.com",
     messagingSenderId: "3749974634",
     appId: "1:3749974634:web:d1e955416eba89e62c7013",
-    measurementId: "G-TDELBPR48X"
+    measurementId: "G-TDELBPR48X",
   };
-  
+
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig, 'myUniqueAppName');
+  const app = initializeApp(firebaseConfig, "myUniqueAppName");
   const storage = getStorage(app);
 
   useEffect(() => {
@@ -99,11 +104,14 @@ const SignUpBox: FunctionComponent<Props> = ({
       const fileInput = document.getElementById(
         "profileUrl"
       ) as HTMLInputElement | null;
-      
+
       const file = fileInput?.files?.[0];
 
       if (file) {
-        const uploadTask = uploadBytesResumable(ref(storage, `profileImages/${file.name}`), file);
+        const uploadTask = uploadBytesResumable(
+          ref(storage, `profileImages/${file.name}`),
+          file
+        );
 
         uploadTask.on(
           "state_changed",
