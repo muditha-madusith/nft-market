@@ -119,11 +119,11 @@ const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedN
                                         <p className={styles.p2}>{nftDetails?.name ?? 'Loading..'}</p>
                                     </div>
                                 </div>
-                                <p className={styles.p1}>{nftDetails?.price ?? 'Loading..'} <b>ETH</b></p>
+                                <p className={styles.p1}>{nftDetails?.price ?? 'Loading..'} <b>USD</b></p>
                             </div>
                             <div className={styles.f}>
                                 <p className={styles.p1}>Total</p>
-                                <p className={styles.p1}>{nftDetails?.price ?? 'Loading..'} <b>ETH</b></p>
+                                <p className={styles.p1}>{nftDetails?.price ?? 'Loading..'} <b>USD</b></p>
                             </div>
                         </div>
                         <div className={styles.buttons}>

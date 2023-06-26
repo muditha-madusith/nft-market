@@ -131,7 +131,7 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
                             <>
                                 <p className={styles.p}>{nftDetails.name}</p>
                                 <p className={styles.p1}>
-                                    From <b>{nftDetails.price} ETH</b> - {nftDetails.quantity} of {nftDetails.quantity} available
+                                    From <b>{nftDetails.price} USD</b> - {nftDetails.quantity} of {nftDetails.quantity} available
                                 </p>
                             </>
                         )}
@@ -174,7 +174,7 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
                         <div className={styles.btns}>
                             <div>
                                 <button className={styles.buybtn} onClick={() => setIsOpen(true)}>
-                                    Buy for {nftDetails?.price} ETH
+                                    Buy for {nftDetails?.price} USD
                                 </button>
                             </div>
                             <div>

@@ -3,7 +3,7 @@ import styles from "./index.module.css";
 import { useCookies } from "react-cookie";
 
 import { AppActions } from "@/redux/actions/AppActions";
-import { AppState } from "@/redux/store";
+// import { AppState } from "@/redux/store";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ThunkDispatch } from "redux-thunk";
@@ -17,10 +17,20 @@ import {
   UploadTaskSnapshot,
 } from "firebase/storage";
 import { initializeApp } from "firebase/app";
+import CreateSeller from "../PopUp/CreateSeller";
 
+interface AppState {
+  seller: {
+    seller: string;
+  };
+  nft: {
+    loading: boolean;
+  }
+}
 
 interface LinkStateProps {
   nftCreateLoading: boolean;
+  seller: string;
 }
 
 interface LinkDispatchProps {
@@ -31,7 +41,7 @@ interface ComponentsProps { }
 
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
-const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading }) => {
+const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading, seller }) => {
   const firebaseConfig = {
     apiKey: "AIzaSyA8XY4-unn7icu4TBc_q1eHHTW7rG1Yuh0",
     authDomain: "nft-market-6c792.firebaseapp.com",
@@ -134,6 +144,9 @@ const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading }) => {
 
   return (
     <>
+      {seller === "" &&
+        <CreateSeller />
+      }
       <div className={styles.back}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <h3 className={styles.h3}>Create new Item</h3>
@@ -223,7 +236,8 @@ const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading }) => {
 
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
-  nftCreateLoading: state.nft.loading
+  nftCreateLoading: state.nft.loading,
+  seller: state.seller.seller
 });
 
 const mapDispatchToProps = (

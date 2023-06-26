@@ -15,11 +15,14 @@ import jwtDecode from 'jwt-decode';
 import { useCookies } from 'react-cookie';
 import { AppActions } from '@/redux/actions/AppActions';
 import { GetUserDetails, LogoutUser } from '@/redux/actions/auth';
+import { GetSeller } from '@/redux/actions/seller'
 import { GetSearchNft } from '@/redux/actions/searchnfts';
 import { AppState } from '@/redux/store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+
+
 
 interface LinkStateProps {
   auth: {};
@@ -29,27 +32,28 @@ interface LinkStateProps {
 interface LinkDispatchProps {
   LogoutUser: () => any
   GetSearchNft: (item_name: string) => any
+  GetSeller: (id: string) => any
 }
 
 interface ComponentsProps {
 }
 
 
-interface searchedNft {
-  _id: string;
-  image: string;
-  name: string;
-  price: number;
-  description: string;
-  creator: string;
-  quantity: number;
-}
+// interface searchedNft {
+//   _id: string;
+//   image: string;
+//   name: string;
+//   price: number;
+//   description: string;
+//   creator: string;
+//   quantity: number;
+// }
 
 
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, snft }) => {
+const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, snft, GetSeller }) => {
 
   const [display, setDisplay]: any = useState('none');
   const [showConnectPop, setShowConnectPop]: any = useState(false);
@@ -88,6 +92,7 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
   const handleLogout = () => {
     LogoutUser();
     removeCookie("access_token");
+    GetSeller("");
   };
 
   const clickConnect: any = () => {
@@ -154,7 +159,7 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
           <Input
             style={{ color: '#fff' }}
             className={styles.s_input}
-            placeholder="Search Item Here"
+            placeholder="Search Art Here"
             onChange={handleSearchInput}
           />
         </div>
@@ -165,19 +170,19 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
             </Link>
             {isLoggedIn ?
               (
-                <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Items</li>
+                <li className={router.asPath === '/my-items' ? styles.activeLink : styles.li} onClick={navigateToMyItems}>My Arts</li>
               ) :
               (
-                <li className={styles.notlogedLink} title='Login please'>My Items</li>
+                <li className={styles.notlogedLink} title='Login please'>My Arts</li>
               )
             }
 
             {isLoggedIn ?
               (
-                <li className={styles.li}>OwnNFT's</li>
+                <li className={styles.li}>OwnArt's</li>
               ) :
               (
-                <li className={styles.notlogedLink} title='Login please'>OwnNFT's</li>
+                <li className={styles.notlogedLink} title='Login please'>OwnArt's</li>
               )
             }
           </ul>
@@ -295,14 +300,15 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
   auth: state.auth,
-  snft: state.searchNft.nfts
+  snft: state.searchNft.nfts,
 });
 
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
   LogoutUser: bindActionCreators(LogoutUser, dispatch),
-  GetSearchNft: bindActionCreators(GetSearchNft, dispatch)
+  GetSearchNft: bindActionCreators(GetSearchNft, dispatch),
+  GetSeller: bindActionCreators(GetSeller, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavIndex);

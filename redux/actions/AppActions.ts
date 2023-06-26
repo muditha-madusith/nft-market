@@ -4,6 +4,7 @@ import { NftsDispatchTypes } from "../types/NftsActionTypes";
 import { SearchNftsDispatchTypes } from "../types/SearchNftActionType";
 import { SelectedNftDispatchTypes } from "../types/SelectedNftActionType";
 import { SelectedUserDispatchTypes } from "../types/SelectedUserActionTypes";
+import { SellerDispatchTypes } from "../types/SellerActionType";
 import { UsersDispatchTypes } from "../types/UsersActionTypes";
 
 export type AppActions =
@@ -14,3 +15,4 @@ export type AppActions =
   | SelectedNftDispatchTypes
   | SearchNftsDispatchTypes
   | AlertDispatchTypes
+  | SellerDispatchTypes

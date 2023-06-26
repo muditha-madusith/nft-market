@@ -32,7 +32,7 @@ const NFTcardMobile = ({ id, src, name, price }:any) => {
           <div className={styles.price_likes}>
             <div className={styles.price}>
               <p className={styles.p1}><b>{price}</b></p>
-              <p className={styles.p1}>ETH</p>
+              <p className={styles.p1}>USD</p>
             </div>
           </div>
         </div>

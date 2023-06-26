@@ -7,6 +7,7 @@ import selectedUserReducer from "./selecteduser";
 import selectedNftReducer from "./selectednft";
 import searchNftReducer from "./searchnfts";
 import alertReducer from "./alert";
+import sellerReducer from "./seller";
 
 export const RootReducer = combineReducers({
   auth:authReducer,
@@ -15,5 +16,6 @@ export const RootReducer = combineReducers({
   selectedUser: selectedUserReducer,
   selectedNft: selectedNftReducer,
   searchNft: searchNftReducer,
-  alert: alertReducer
+  alert: alertReducer,
+  seller: sellerReducer
 });
