@@ -228,7 +228,7 @@ const SignUpBox: FunctionComponent<Props> = ({
             ) :
             (
               <button type="submit" className={styles.submit_btn}>
-                Create Item
+                Register
               </button>
             )
           }

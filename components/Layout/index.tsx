@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { AppActions } from "../../redux/actions/AppActions";
 import { bindActionCreators } from "redux";
 import { GetUserDetails } from "../../redux/actions/auth/index"
+import { GetSeller } from "../../redux/actions/seller/index"
 import { IAuth } from "../../redux/types/AuthActionTypes"
 import { Alert } from '@/redux/types/AlertActionType';
 import TostMessage from './Common/ToastMessage';
@@ -23,7 +24,8 @@ interface LinkStateProps {
 }
 
 interface LinkDispatchProps {
-  GetUserDetails: (id: string) => void
+  GetUserDetails: (id: string) => void,
+  GetSeller: (id: string) => void
 }
 
 interface ComponentsProps {
@@ -33,7 +35,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { userDetails }, alert: {alertMessage} }) => {
+const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { userDetails }, alert: {alertMessage}, GetSeller }) => {
 
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
@@ -45,6 +47,7 @@ const Layout: FunctionComponent<Props> = ({ children, GetUserDetails, auth: { us
     if (decoded_jwt.id) {
       //get user details action
       GetUserDetails(decoded_jwt.id)
+      GetSeller(decoded_jwt.id)
     }
   }
 
@@ -91,7 +94,8 @@ const mapStateToProps = (state: AppState): LinkStateProps => ({
 const mapDispatchToProps = (
   dispatch: ThunkDispatch<any, any, AppActions>
 ): LinkDispatchProps => ({
-  GetUserDetails: bindActionCreators(GetUserDetails, dispatch)
+  GetUserDetails: bindActionCreators(GetUserDetails, dispatch),
+  GetSeller: bindActionCreators(GetSeller, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);
