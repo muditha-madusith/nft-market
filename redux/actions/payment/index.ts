@@ -45,7 +45,6 @@ export const CreatePayment = (userData: {}, id: string) => async(dispatch: Dispa
      }
 }
 
-
 export const GetBoughtItems = ( id: string) => async(dispatch: Dispatch<PaymentDispatchTypes|AlertDispatchTypes>)=>{
     console.log("GetBoughtItems action called.")
 
