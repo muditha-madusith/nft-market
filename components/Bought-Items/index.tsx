@@ -4,7 +4,7 @@ import { GetUserNfts } from '@/redux/actions/auth';
 import NFTcardDesktop from '../Cards/NFTcardDesktop';
 import NFTcardMobile from '../Cards/NFTcardMobile';
 import { AppActions } from '@/redux/actions/AppActions';
-import { AppState } from '@/redux/store';
+// import { AppState } from '@/redux/store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -20,10 +20,21 @@ type NFT = {
   _id: string;
 };
 
+interface AppState {
+  auth: {
+    userDetails: {
+      id: string;
+    };
+  };
+  payment: {
+    nftS: []; // Add the 'nftS' property here
+  };
+}
+
 
 interface LinkStateProps {
   id: string;
-  bought_nftS: []
+  nftS: []
 }
 
 interface LinkDispatchProps {
@@ -36,7 +47,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const BoughtItems: FunctionComponent<Props> = ({ id, GetBoughtItems, bought_nftS  }) => {
+const BoughtItems: FunctionComponent<Props> = ({ id, GetBoughtItems, nftS  }) => {
 
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [visibleNfts, setVisibleNfts] = useState<NFT[]>([]);
@@ -58,10 +69,10 @@ const BoughtItems: FunctionComponent<Props> = ({ id, GetBoughtItems, bought_nftS
   }, []);
 
   useEffect(() => {
-      setNfts(bought_nftS);
-      setVisibleNfts(bought_nftS.slice(0, 8));
-      setShowLoadMore(bought_nftS.length > 8);
-  }, [bought_nftS]);
+      setNfts(nftS);
+      setVisibleNfts(nftS.slice(0, 8));
+      setShowLoadMore(nftS.length > 8);
+  }, [nftS]);
 
   const handleLoadMore = () => {
     const currentlyVisible = visibleNfts.length;
@@ -120,7 +131,7 @@ const BoughtItems: FunctionComponent<Props> = ({ id, GetBoughtItems, bought_nftS
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
   id: state.auth.userDetails.id,
-  bought_nftS: state.payment.nftS,
+  nftS: state.payment.nftS,
 });
 
 const mapDispatchToProps = (
