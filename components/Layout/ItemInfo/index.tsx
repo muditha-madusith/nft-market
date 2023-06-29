@@ -35,6 +35,7 @@ interface CreatorDetails {
 interface LinkStateProps {
     snftD: any;
     susrD: any;
+    logedUser: string;
 }
 
 interface LinkDispatchProps {
@@ -48,7 +49,7 @@ interface ComponentsProps {
 type Props = LinkStateProps & LinkDispatchProps & ComponentsProps;
 
 
-const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelectedUserDetails, snftD, susrD }) => {
+const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelectedUserDetails, snftD, susrD, logedUser }) => {
 
     const [isOpen, setIsOpen]: any = useState(false);
     const [detailsOpen, setDetailsOpen]: any = useState(true);
@@ -86,25 +87,38 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
 
     const [nftDetails, setNftDetails] = useState<NftDetails | null>(null);
     const [creatorDetails, setCreatorDetails] = useState<CreatorDetails | null>(null);
+    const [error, setError] = useState("");
 
     const creatorId = nftDetails?.creator;
 
     useEffect(() => {
         GetSelectedNftDetails(id);
-    },[]);
+    }, []);
 
     useEffect(() => {
         setNftDetails(snftD);
-    },[snftD]);
+    }, [snftD]);
 
     useEffect(() => {
         GetSelectedUserDetails(snftD.creator)
-    },[snftD])
+    }, [snftD])
 
     useEffect(() => {
         setCreatorDetails(susrD);
-    },[susrD])
+    }, [susrD])
 
+
+    let creator;
+
+    if (snftD.creator === logedUser) {
+        creator = true;
+    } else if(snftD.quantity <= 0) {
+        creator = true;
+    } else if (logedUser === "") {
+        creator = true;
+    } else {
+        creator = false;
+    }
 
     return (
         <>
@@ -131,7 +145,7 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
                             <>
                                 <p className={styles.p}>{nftDetails.name}</p>
                                 <p className={styles.p1}>
-                                    From <b>{nftDetails.price} USD</b> - {nftDetails.quantity} of {nftDetails.quantity} available
+                                    From <b>{nftDetails.price} USD</b> - {nftDetails.quantity} available
                                 </p>
                             </>
                         )}
@@ -173,9 +187,18 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
 
                         <div className={styles.btns}>
                             <div>
-                                <button className={styles.buybtn} onClick={() => setIsOpen(true)}>
-                                    Buy for {nftDetails?.price} USD
-                                </button>
+                                {creator ?
+                                    (
+                                        <button className={styles.buybtn} title='Can`t buy item'>
+                                            Buy for {nftDetails?.price} USD
+                                        </button>
+                                    ) :
+                                    (
+                                        <button className={styles.buybtn} onClick={() => setIsOpen(true)}>
+                                            Buy for {nftDetails?.price} USD
+                                        </button>
+                                    )
+                                }
                             </div>
                             <div>
                                 <button className={styles.ofrbtn}>Make Offer</button>
@@ -192,7 +215,8 @@ const ItemInfo: FunctionComponent<Props> = ({ GetSelectedNftDetails, GetSelected
 
 const mapStateToProps = (state: AppState): LinkStateProps => ({
     snftD: state.selectedNft.nftDetails,
-    susrD: state.selectedUser.userDetails
+    susrD: state.selectedUser.userDetails,
+    logedUser: state.auth.userDetails.id
 });
 
 const mapDispatchToProps = (

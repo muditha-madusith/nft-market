@@ -14,6 +14,8 @@
     "@firebase/storage": "^0.11.2",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.5",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.1",
     "@trendyol-js/react-carousel": "^3.0.2",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",
@@ -45,6 +47,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
     "state-pool": "^0.10.0",
+    "stripe": "^12.10.0",
     "typescript": "5.0.4"
   },
   "devDependencies": {
