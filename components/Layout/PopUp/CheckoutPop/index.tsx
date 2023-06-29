@@ -14,6 +14,7 @@ import { AppState } from '@/redux/store';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import Link from 'next/link';
 
 
 interface NftDetails {
@@ -52,18 +53,23 @@ const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedN
 
     const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
 
+    const router = useRouter()
+
     const handleClick: any = () => {
         setPaymentSuccess(true);
         toast.success('Payment Success!', {
             position: toast.POSITION.TOP_RIGHT,
         })
+        // router.push({
+        //     pathname: '/buy',
+        //     query: { id: snftD.id, price: snftD.price },
+        // });
     }
 
     const handleCancel: any = () => {
         setIsOpen(!isOpen)
     }
 
-    const router = useRouter();
     const { id }: any = router.query;
 
     const [nftDetails, setNftDetails] = useState<NftDetails | null>(null);
@@ -73,19 +79,19 @@ const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedN
 
     useEffect(() => {
         GetSelectedNftDetails(id);
-    },[]);
+    }, []);
 
     useEffect(() => {
         setNftDetails(snftD);
-    },[snftD]);
+    }, [snftD]);
 
     useEffect(() => {
         GetSelectedUserDetails(snftD.creator)
-    },[snftD])
+    }, [snftD])
 
     useEffect(() => {
         setCreatorDetails(susrD);
-    },[snftD])
+    }, [snftD])
 
     return (
         <>
@@ -113,7 +119,7 @@ const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedN
                             </div>
                             <div className={styles.b}>
                                 <div className={styles.img_name}>
-                                    <Image src={nftDetails?.image ?? ''} alt='NFT' className={styles.img} width={200} height={200}/>
+                                    <Image src={nftDetails?.image ?? ''} alt='NFT' className={styles.img} width={200} height={200} />
                                     <div className={styles.b1}>
                                         <p className={styles.p1}>{creatorDetails?.name ?? 'Loading..'}</p>
                                         <p className={styles.p2}>{nftDetails?.name ?? 'Loading..'}</p>
@@ -128,8 +134,14 @@ const CheckoutPop: FunctionComponent<Props> = ({ setIsOpen, isOpen, GetSelectedN
                         </div>
                         <div className={styles.buttons}>
                             <div>
-                                <button className={styles.co_btn}
-                                    onClick={handleClick}>Checkout</button>
+                                <button className={styles.co_btn} onClick={handleClick}>
+                                    Checkout
+                                </button>
+                                {/* <Link href='/buy'>
+                                <button className={styles.co_btn}>
+                                    Checkout
+                                </button>
+                                </Link> */}
                             </div>
                             <div>
                                 <button className={styles.ca_btn}

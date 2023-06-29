@@ -197,7 +197,7 @@ const ItmForm: FunctionComponent<Props> = ({ CreateNft, nftCreateLoading, seller
                   onChange={(e) => setPrice(e.target.value)}
                 />
                 <select id="cars" name="cars" className={styles.selector}>
-                  <option value="volvo">ETH</option>
+                  <option value="volvo">USD</option>
                 </select>
               </div>
             </div>

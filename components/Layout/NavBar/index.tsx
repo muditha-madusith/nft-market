@@ -112,8 +112,12 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
   const navigateToMyItems = () => {
     if (isLoggedIn) {
       router.push('/my-items');
-    } else {
-      alert("To view Your items login first..")
+    }
+  };
+
+  const navigateToOwnArts = () => {
+    if (isLoggedIn) {
+      router.push('/own-arts');
     }
   };
 
@@ -179,7 +183,7 @@ const NavIndex: FunctionComponent<Props> = ({ LogoutUser, auth, GetSearchNft, sn
 
             {isLoggedIn ?
               (
-                <li className={styles.li}>OwnArt's</li>
+                <li className={styles.li} >OwnArt's</li>
               ) :
               (
                 <li className={styles.notlogedLink} title='Login please'>OwnArt's</li>

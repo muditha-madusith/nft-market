@@ -8,7 +8,7 @@ export const GET_SELLER_ERROR = "GET_SELLER_ERROR";
 
 
 export interface Seller {
-    loading: false;
+    loading: boolean;
     seller: string;
     bankName: string;
     accountNumber: number;

@@ -1,0 +1,68 @@
+.main{
+    padding-top: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #24252D;
+    color: #fff;
+    gap: 2rem;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(4, .5fr); 
+    align-items: center;
+    justify-content: center;
+}
+.card {
+    height: auto;
+    padding: 0;
+}
+.load_button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.lm_btn{
+    width: 300px;
+    height: 40px;
+    color: #C91CC3;
+    border: 1px solid #C91CC3;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+/* Screen larger than 600px? 2 column */
+@media (max-width: 1024px) {
+    .wrapper { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+  }
+  
+/* Screen larger than 900px? 3 columns */
+@media (max-width: 900px) {
+    .wrapper { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 612px) {
+    .wrapper { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 479px) {
+    .wrapper { 
+        grid-template-columns: repeat(2, 0fr); 
+        width: 310px;
+        grid-gap: .5rem;
+    }
+}
