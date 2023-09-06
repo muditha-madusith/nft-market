@@ -36,3 +36,4 @@ The Next.js Marketplace project will be built using the following technologies:
 
 * The Next.js Marketplace project is built for educational and skill-enhancement purposes.
 * Inspiration and guidance may be taken from various online tutorials, documentation, and open-source projects. Proper attribution will be provided wherever applicable.
+* 
